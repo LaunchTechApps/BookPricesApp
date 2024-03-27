@@ -1,17 +1,27 @@
+using BookPricesApp;
+
 namespace BookPrices;
 
 public partial class BookPrices : Form
 {
-    private List<Panel> _panelList = new();
-    private List<Label> _tabList = new();
-
-    int index = 0;
+    private ViewModel _viewmodel;
     public BookPrices()
     {
         InitializeComponent();
-        _panelList.AddRange(new List<Panel>() { amazon_pnl, ebay_pnl });
-        _tabList.AddRange(new List<Label>() { amazon_tb, ebay_tb });
-        _panelList[0].BringToFront();
+        _viewmodel = new ViewModel(
+            new Dictionary<BookExchange, Panel>
+            {
+                { BookExchange.Amazon, amazon_pnl },
+                { BookExchange.Ebay, ebay_pnl },
+            },
+            new Dictionary<BookExchange, Label>
+            {
+                { BookExchange.Amazon, amazon_tab },
+                { BookExchange.Ebay, ebay_tab }
+            }
+        );
+
+        _viewmodel.SetActiveTab(BookExchange.Amazon);
     }
 
     private void BookPrices_Load(object sender, EventArgs e)
@@ -21,15 +31,11 @@ public partial class BookPrices : Form
 
     private void amazon_tb_Click(object sender, EventArgs e)
     {
-        _tabList.ForEach(t => t.BackColor = Color.FromName("Control"));
-        _tabList[0].BackColor = Color.FromName("ActiveBorder");
-        _panelList[0].BringToFront();
+        _viewmodel.SetActiveTab(BookExchange.Amazon);
     }
 
     private void ebay_tb_Click(object sender, EventArgs e)
     {
-        _tabList.ForEach(t => t.BackColor = Color.FromName("Control"));
-        _tabList[1].BackColor = Color.FromName("ActiveBorder");
-        _panelList[1].BringToFront();
+        _viewmodel.SetActiveTab(BookExchange.Ebay);
     }
 }

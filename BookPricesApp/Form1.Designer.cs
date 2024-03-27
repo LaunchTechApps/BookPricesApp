@@ -28,13 +28,16 @@ partial class BookPrices
     /// </summary>
     private void InitializeComponent()
     {
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookPrices));
         version_lbl = new Label();
         amazon_pnl = new Panel();
-        amazon_lbl = new Label();
-        amazon_tb = new Label();
-        ebay_tb = new Label();
-        ebay_lbl = new Label();
+        progressBar1 = new ProgressBar();
+        amazon_title = new Label();
+        amazon_tab = new Label();
+        ebay_tab = new Label();
+        ebay_title = new Label();
         ebay_pnl = new Panel();
+        ebay_progress = new ProgressBar();
         label2 = new Label();
         amazon_pnl.SuspendLayout();
         ebay_pnl.SuspendLayout();
@@ -52,64 +55,80 @@ partial class BookPrices
         // amazon_pnl
         // 
         amazon_pnl.BorderStyle = BorderStyle.FixedSingle;
-        amazon_pnl.Controls.Add(amazon_lbl);
+        amazon_pnl.Controls.Add(progressBar1);
+        amazon_pnl.Controls.Add(amazon_title);
         amazon_pnl.Location = new Point(42, 50);
         amazon_pnl.Name = "amazon_pnl";
         amazon_pnl.Size = new Size(492, 519);
         amazon_pnl.TabIndex = 6;
         // 
-        // amazon_lbl
+        // progressBar1
         // 
-        amazon_lbl.AutoSize = true;
-        amazon_lbl.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-        amazon_lbl.Location = new Point(181, 17);
-        amazon_lbl.Name = "amazon_lbl";
-        amazon_lbl.Size = new Size(85, 25);
-        amazon_lbl.TabIndex = 0;
-        amazon_lbl.Text = "Amazon";
+        progressBar1.Location = new Point(124, 45);
+        progressBar1.Name = "progressBar1";
+        progressBar1.Size = new Size(225, 29);
+        progressBar1.TabIndex = 2;
         // 
-        // amazon_tb
+        // amazon_title
         // 
-        amazon_tb.AutoSize = true;
-        amazon_tb.BorderStyle = BorderStyle.FixedSingle;
-        amazon_tb.Location = new Point(42, 24);
-        amazon_tb.Name = "amazon_tb";
-        amazon_tb.Padding = new Padding(3);
-        amazon_tb.Size = new Size(77, 23);
-        amazon_tb.TabIndex = 8;
-        amazon_tb.Text = "   Amazon   ";
-        amazon_tb.Click += amazon_tb_Click;
+        amazon_title.AutoSize = true;
+        amazon_title.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+        amazon_title.Location = new Point(202, 17);
+        amazon_title.Name = "amazon_title";
+        amazon_title.Size = new Size(85, 25);
+        amazon_title.TabIndex = 0;
+        amazon_title.Text = "Amazon";
         // 
-        // ebay_tb
+        // amazon_tab
         // 
-        ebay_tb.AutoSize = true;
-        ebay_tb.BorderStyle = BorderStyle.FixedSingle;
-        ebay_tb.Location = new Point(125, 24);
-        ebay_tb.Name = "ebay_tb";
-        ebay_tb.Padding = new Padding(3);
-        ebay_tb.Size = new Size(70, 23);
-        ebay_tb.TabIndex = 9;
-        ebay_tb.Text = "     Ebay     ";
-        ebay_tb.Click += ebay_tb_Click;
+        amazon_tab.AutoSize = true;
+        amazon_tab.BorderStyle = BorderStyle.FixedSingle;
+        amazon_tab.Location = new Point(42, 24);
+        amazon_tab.Name = "amazon_tab";
+        amazon_tab.Padding = new Padding(3);
+        amazon_tab.Size = new Size(77, 23);
+        amazon_tab.TabIndex = 8;
+        amazon_tab.Text = "   Amazon   ";
+        amazon_tab.Click += amazon_tb_Click;
         // 
-        // ebay_lbl
+        // ebay_tab
         // 
-        ebay_lbl.AutoSize = true;
-        ebay_lbl.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-        ebay_lbl.Location = new Point(212, 17);
-        ebay_lbl.Name = "ebay_lbl";
-        ebay_lbl.Size = new Size(54, 25);
-        ebay_lbl.TabIndex = 0;
-        ebay_lbl.Text = "Ebay";
+        ebay_tab.AutoSize = true;
+        ebay_tab.BorderStyle = BorderStyle.FixedSingle;
+        ebay_tab.Location = new Point(125, 24);
+        ebay_tab.Name = "ebay_tab";
+        ebay_tab.Padding = new Padding(3);
+        ebay_tab.Size = new Size(70, 23);
+        ebay_tab.TabIndex = 9;
+        ebay_tab.Text = "     Ebay     ";
+        ebay_tab.Click += ebay_tb_Click;
+        // 
+        // ebay_title
+        // 
+        ebay_title.AutoSize = true;
+        ebay_title.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+        ebay_title.Location = new Point(212, 17);
+        ebay_title.Name = "ebay_title";
+        ebay_title.Size = new Size(54, 25);
+        ebay_title.TabIndex = 0;
+        ebay_title.Text = "Ebay";
         // 
         // ebay_pnl
         // 
         ebay_pnl.BorderStyle = BorderStyle.FixedSingle;
-        ebay_pnl.Controls.Add(ebay_lbl);
+        ebay_pnl.Controls.Add(ebay_progress);
+        ebay_pnl.Controls.Add(ebay_title);
         ebay_pnl.Location = new Point(42, 50);
         ebay_pnl.Name = "ebay_pnl";
         ebay_pnl.Size = new Size(492, 519);
         ebay_pnl.TabIndex = 11;
+        // 
+        // ebay_progress
+        // 
+        ebay_progress.Location = new Point(124, 45);
+        ebay_progress.Name = "ebay_progress";
+        ebay_progress.Size = new Size(225, 29);
+        ebay_progress.TabIndex = 1;
         // 
         // label2
         // 
@@ -125,12 +144,13 @@ partial class BookPrices
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(584, 636);
-        Controls.Add(ebay_pnl);
         Controls.Add(label2);
-        Controls.Add(ebay_tb);
-        Controls.Add(amazon_tb);
-        Controls.Add(amazon_pnl);
+        Controls.Add(ebay_tab);
+        Controls.Add(amazon_tab);
         Controls.Add(version_lbl);
+        Controls.Add(amazon_pnl);
+        Controls.Add(ebay_pnl);
+        Icon = (Icon)resources.GetObject("$this.Icon");
         MaximizeBox = false;
         MaximumSize = new Size(600, 675);
         MinimumSize = new Size(600, 675);
@@ -146,12 +166,14 @@ partial class BookPrices
 
     #endregion
     private Label version_lbl;
-    private Label amazon_tb;
+    private Label amazon_tab;
     private Panel amazon_pnl;
     private Label label3;
-    private Label ebay_tb;
-    private Label amazon_lbl;
-    private Label ebay_lbl;
+    private Label ebay_tab;
+    private Label amazon_title;
+    private Label ebay_title;
     private Panel ebay_pnl;
     private Label label2;
+    private ProgressBar ebay_progress;
+    private ProgressBar progressBar1;
 }

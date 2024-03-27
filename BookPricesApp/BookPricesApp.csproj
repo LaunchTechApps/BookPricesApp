@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <SelfContained>true</SelfContained>
+    <ApplicationIcon>book_prices_logo.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="book_prices_logo.ico" />
+  </ItemGroup>
 
 </Project>
