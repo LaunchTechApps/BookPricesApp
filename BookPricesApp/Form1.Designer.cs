@@ -31,7 +31,10 @@ partial class BookPrices
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookPrices));
         version_lbl = new Label();
         amazon_pnl = new Panel();
-        progressBar1 = new ProgressBar();
+        amazon_main_btn = new Button();
+        amazon_text_box = new TextBox();
+        amazon_filepicker = new Button();
+        amazon_progress = new ProgressBar();
         amazon_title = new Label();
         amazon_tab = new Label();
         ebay_tab = new Label();
@@ -39,6 +42,7 @@ partial class BookPrices
         ebay_pnl = new Panel();
         ebay_progress = new ProgressBar();
         label2 = new Label();
+        filePicker = new OpenFileDialog();
         amazon_pnl.SuspendLayout();
         ebay_pnl.SuspendLayout();
         SuspendLayout();
@@ -55,19 +59,50 @@ partial class BookPrices
         // amazon_pnl
         // 
         amazon_pnl.BorderStyle = BorderStyle.FixedSingle;
-        amazon_pnl.Controls.Add(progressBar1);
+        amazon_pnl.Controls.Add(amazon_main_btn);
+        amazon_pnl.Controls.Add(amazon_text_box);
+        amazon_pnl.Controls.Add(amazon_filepicker);
+        amazon_pnl.Controls.Add(amazon_progress);
         amazon_pnl.Controls.Add(amazon_title);
         amazon_pnl.Location = new Point(42, 50);
         amazon_pnl.Name = "amazon_pnl";
         amazon_pnl.Size = new Size(492, 519);
         amazon_pnl.TabIndex = 6;
         // 
-        // progressBar1
+        // amazon_main_btn
         // 
-        progressBar1.Location = new Point(124, 45);
-        progressBar1.Name = "progressBar1";
-        progressBar1.Size = new Size(225, 29);
-        progressBar1.TabIndex = 2;
+        amazon_main_btn.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+        amazon_main_btn.Location = new Point(159, 410);
+        amazon_main_btn.Name = "amazon_main_btn";
+        amazon_main_btn.Size = new Size(167, 53);
+        amazon_main_btn.TabIndex = 14;
+        amazon_main_btn.Text = "Start";
+        amazon_main_btn.UseVisualStyleBackColor = true;
+        amazon_main_btn.Click += amazon_btn_Click;
+        // 
+        // amazon_text_box
+        // 
+        amazon_text_box.Location = new Point(159, 229);
+        amazon_text_box.Name = "amazon_text_box";
+        amazon_text_box.Size = new Size(250, 23);
+        amazon_text_box.TabIndex = 13;
+        // 
+        // amazon_filepicker
+        // 
+        amazon_filepicker.Location = new Point(82, 229);
+        amazon_filepicker.Name = "amazon_filepicker";
+        amazon_filepicker.Size = new Size(75, 23);
+        amazon_filepicker.TabIndex = 12;
+        amazon_filepicker.Text = "Select";
+        amazon_filepicker.UseVisualStyleBackColor = true;
+        amazon_filepicker.Click += amazon_filepicker_Click;
+        // 
+        // amazon_progress
+        // 
+        amazon_progress.Location = new Point(124, 45);
+        amazon_progress.Name = "amazon_progress";
+        amazon_progress.Size = new Size(225, 29);
+        amazon_progress.TabIndex = 2;
         // 
         // amazon_title
         // 
@@ -175,5 +210,9 @@ partial class BookPrices
     private Panel ebay_pnl;
     private Label label2;
     private ProgressBar ebay_progress;
-    private ProgressBar progressBar1;
+    private ProgressBar amazon_progress;
+    private OpenFileDialog filePicker;
+    private Button amazon_filepicker;
+    private TextBox amazon_text_box;
+    private Button amazon_main_btn;
 }

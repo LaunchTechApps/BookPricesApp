@@ -1,2 +1,2 @@
 ﻿## Build Project
-from .csproj directory run `& .\scripts\build.ps1`
+from .csproj directory run `& .\Scripts\build.ps1`
