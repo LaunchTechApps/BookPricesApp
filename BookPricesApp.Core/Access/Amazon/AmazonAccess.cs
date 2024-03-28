@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookPricesApp.Domain.Config;
-internal class AmazonConfig
+namespace BookPricesApp.Core.Access.Amazon;
+
+public interface IAmazonAccess { }
+public class AmazonAccess : IAmazonAccess
 {
-    public string BaseUrl { get; set; } = string.Empty;
 }
