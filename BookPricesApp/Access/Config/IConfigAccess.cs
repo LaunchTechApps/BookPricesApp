@@ -4,8 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookPricesApp.Utils.Config;
-internal class AmazonConfig
+namespace BookPricesApp.Access.Config;
+internal class IConfigAccess
 {
-    public string BaseUrl { get; set; }
 }

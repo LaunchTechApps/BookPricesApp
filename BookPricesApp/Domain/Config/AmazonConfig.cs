@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookPricesApp.Domain.Types;
-public enum BookExchange
+namespace BookPricesApp.Domain.Config;
+internal class AmazonConfig
 {
-    Amazon,
-    Ebay,
+    public string BaseUrl { get; set; }
 }

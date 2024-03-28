@@ -11,6 +11,8 @@ public class SelectGroup
     public BookExchange? Exchange { get; set; }
     public Button? SelectButton { get; set; }
     public Button? MainButton { get; set; }
+    public Label? Tab { get; set; }
+    public Panel? Panel { get; set; }
     public TextBox? SelectTextBox { get; set; }
     public ProgressBar? ProgressBar { get; set; }
 }

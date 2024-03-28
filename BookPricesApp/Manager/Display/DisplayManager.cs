@@ -1,49 +1,62 @@
 ﻿using BookPricesApp.Access.Amazon;
 using BookPricesApp.Domain.Types;
-using BookPricesApp.Engine.Exchange;
 using BookPricesApp.Manager.App;
-using BookPricesApp.Utils.Config;
 using BookPricesApp.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using BookPricesApp.Manager.Display.Models;
+using BookPricesApp.Manager.Display.Events;
+using BookPricesApp.Engine;
+using BookPricesApp.Access.Config;
 
 namespace BookPricesApp.Manager.Display;
 public class DisplayManager
 {
-    private Dictionary<BookExchange, Panel> _panelDic = new();
-    private Dictionary<BookExchange, Label> _tabDic = new();
     private List<SelectGroup> _selectGroup = new();
     private ServiceProvider _serviceProvider;
-    public DisplayManager(Dictionary<BookExchange, Panel> paneDic,
-        Dictionary<BookExchange, Label> tabDic,
-        List<SelectGroup> selectGroup)
+    private BookExchange _activeExchange = BookExchange.Amazon;
+    public DisplayManager(List<SelectGroup> selectGroup)
     {
-        _panelDic = paneDic;
-        _tabDic = tabDic;
         _selectGroup = selectGroup;
 
         var services = new ServiceCollection();
-        services.AddSingleton(new AppConfig());
+        services.AddSingleton<IConfigAccess, ConfigAccess>();
         services.AddSingleton<IAppManager, AppManager>();
-        services.AddSingleton<IExchangeEngine, ExchangeEngine>();
+        services.AddSingleton<AmazonEngine>();
         services.AddSingleton<IAmazonAccess, AmazonAccess>();
-        services.AddSingleton(new EventBus());
+        services.AddSingleton<EventBus>();
 
         _serviceProvider = services.BuildServiceProvider();
-    }
-    public void SetActiveTab(BookExchange exchange)
-    {
-        _tabDic.Values.ToList().ForEach(t => t.BackColor = Color.FromName("Control"));
-        _tabDic[exchange].BackColor = Color.FromName("ActiveBorder");
-        _panelDic[exchange].BringToFront();
+
+        setupEventBusListener();
     }
 
-    internal void FilePickerSelect(OpenFileDialog filePicker, BookExchange exchange)
+    public void SetActiveTab(BookExchange exchange)
     {
-        var group = _selectGroup.FirstOrDefault(g => Equals(exchange, g.Exchange));
+        _activeExchange = exchange;
+        _selectGroup.ForEach(g => 
+        { 
+            if (g.Tab != null) 
+            {
+                g.Tab.BackColor = Color.FromName("Control"); 
+            }
+        });
+        
+        var group = _selectGroup.First(g => g.Exchange == exchange);
+        if (group.Tab != null && group.Panel != null)
+        {
+            group.Tab.BackColor = Color.FromName("ActiveBorder");
+            group.Tab.BringToFront();
+            group.Panel.BringToFront();
+        }
+    }
+
+    public void FilePickerSelect(OpenFileDialog filePicker)
+    {
+        var group = _selectGroup.FirstOrDefault(g => _activeExchange == g.Exchange);
+        // make sure to save the file path to config json file
         if (group == null || group.SelectTextBox == null)
         {
-            MessageBox.Show("unable to find " + exchange);
+            MessageBox.Show("unable to find " + _activeExchange.ToString());
             return;
         }
 
@@ -56,30 +69,75 @@ public class DisplayManager
         }
     }
 
-    public void Start(BookExchange exchange)
+    public void SubmitMainButton()
     {
-        switch (exchange)
+        var group = _selectGroup.First(g =>  _activeExchange == g.Exchange);
+        string filePath = string.Empty;
+        if (group.SelectTextBox != null && string.IsNullOrEmpty(group.SelectTextBox.Text))
         {
-            case BookExchange.Amazon:
-                _serviceProvider.GetService<IExchangeEngine>()?.Run(BookExchange.Amazon);
-                break;
-            default:
-                MessageBox.Show("Unable to find process for " + exchange);
-                break;
+            MessageBox.Show("No file selected for " + group.Exchange.ToString());
+            return;
         }
+        else
+        {
+            filePath = group.SelectTextBox?.Text.Trim() ?? "";
+        }
+
+        if (!File.Exists(filePath))
+        {
+            MessageBox.Show("File not found: " + filePath);
+            return;
+        }
+
+        var isbnArray = File.ReadAllLines(filePath)
+            .Select(s => s.Trim())
+            .ToArray();
+
+        var firstISBN = isbnArray.FirstOrDefault() ?? "";
+        if (!ISBNValidator.IsValidISBN(firstISBN))
+        {
+            MessageBox.Show("Fisrt line was an invalid ISBN: " + firstISBN);
+            return;
+        }
+
+        _serviceProvider.GetService<IAppManager>()?.SubmitMainEvent(_activeExchange);
     }
 
-    public void Stop(BookExchange exchange)
+    private void setupEventBusListener()
     {
-        switch (exchange)
-        {
-            case BookExchange.Amazon:
-                _serviceProvider.GetService<IExchangeEngine>()?.Stop(BookExchange.Amazon);
+        var bus = _serviceProvider.GetService<EventBus>();
 
-                break;
-            default:
-                MessageBox.Show("Unable to find process for " + exchange);
-                break;
-        }
+        bus?.OnEvent((ProgressEvent e) =>
+        {
+            var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
+            if (group?.ProgressBar != null)
+            {
+                group.ProgressBar.Invoke(p => p.Value = e.Count);
+            }
+        });
+
+        bus?.OnEvent((StartEvent e) =>
+        {
+            var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
+            if (group?.MainButton != null)
+            {
+                group.MainButton.Invoke(p => p.Text = "Stop");
+                group.MainButton.Invoke(p => p.BackColor = Color.FromArgb(255, 192, 192));
+            }
+        });
+
+        bus?.OnEvent((StopEvent e) =>
+        {
+            var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
+            if (group?.MainButton != null)
+            {
+                group.MainButton.Invoke(p => p.Text = "Start");
+                group.MainButton.Invoke(p => p.BackColor = Color.FromArgb(192, 255, 192));
+            }
+            if (group?.ProgressBar != null)
+            {
+                group.ProgressBar.Invoke(p => p.Value = 0);
+            }
+        });
     }
 }
