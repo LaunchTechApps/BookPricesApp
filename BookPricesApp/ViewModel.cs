@@ -1,20 +1,22 @@
-﻿using BookPricesApp.Access.Amazon;
-using BookPricesApp.Domain.Types;
-using BookPricesApp.Manager.App;
-using BookPricesApp.Utils;
-using Microsoft.Extensions.DependencyInjection;
-using BookPricesApp.Manager.Display.Models;
-using BookPricesApp.Manager.Display.Events;
-using BookPricesApp.Engine;
-using BookPricesApp.Access.Config;
+﻿using Microsoft.Extensions.DependencyInjection;
+using BookPricesApp.GUI.Models;
+using BookPricesApp.GUI.Utils;
+using BookPricesApp.GUI.Validators;
+using BookPricesApp.Core.Domain.Types;
+using BookPricesApp.Core.Access.Config;
+using BookPricesApp.Core.Manager.App;
+using BookPricesApp.Core.Engine;
+using BookPricesApp.Core.Access.Amazon;
+using BookPricesApp.Core.Domain.Events;
+using BookPricesApp.Core.Utils;
 
-namespace BookPricesApp.Manager.Display;
-public class DisplayManager
+namespace BookPricesApp.GUI;
+public class ViewModel
 {
     private List<SelectGroup> _selectGroup = new();
     private ServiceProvider _serviceProvider;
     private BookExchange _activeExchange = BookExchange.Amazon;
-    public DisplayManager(List<SelectGroup> selectGroup)
+    public ViewModel(List<SelectGroup> selectGroup)
     {
         _selectGroup = selectGroup;
 
@@ -33,14 +35,14 @@ public class DisplayManager
     public void SetActiveTab(BookExchange exchange)
     {
         _activeExchange = exchange;
-        _selectGroup.ForEach(g => 
-        { 
-            if (g.Tab != null) 
+        _selectGroup.ForEach(g =>
+        {
+            if (g.Tab != null)
             {
-                g.Tab.BackColor = Color.FromName("Control"); 
+                g.Tab.BackColor = Color.FromName("Control");
             }
         });
-        
+
         var group = _selectGroup.First(g => g.Exchange == exchange);
         if (group.Tab != null && group.Panel != null)
         {
@@ -71,7 +73,7 @@ public class DisplayManager
 
     public void SubmitMainButton()
     {
-        var group = _selectGroup.First(g =>  _activeExchange == g.Exchange);
+        var group = _selectGroup.First(g => _activeExchange == g.Exchange);
         string filePath = string.Empty;
         if (group.SelectTextBox != null && string.IsNullOrEmpty(group.SelectTextBox.Text))
         {

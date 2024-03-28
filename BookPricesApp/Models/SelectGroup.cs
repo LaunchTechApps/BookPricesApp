@@ -1,14 +1,9 @@
-﻿using BookPricesApp.Domain.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookPricesApp.Core.Domain.Types;
 
-namespace BookPricesApp.Manager.Display.Models;
+namespace BookPricesApp.GUI.Models;
 public class SelectGroup
 {
-    public BookExchange? Exchange { get; set; }
+    public BookExchange Exchange { get; set; } = BookExchange.Unknown;
     public Button? SelectButton { get; set; }
     public Button? MainButton { get; set; }
     public Label? Tab { get; set; }

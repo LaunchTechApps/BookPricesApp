@@ -3,7 +3,7 @@
 namespace BookPricesApp.Core.Domain.Events;
 public class EventBase
 {
-    public BookExchange Exchange { get; set; }
+    public BookExchange Exchange { get; set; } = BookExchange.Unknown;
 }
 public class ProgressEvent : EventBase
 {

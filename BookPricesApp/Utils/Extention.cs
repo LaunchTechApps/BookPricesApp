@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookPricesApp.Utils;
+namespace BookPricesApp.GUI.Utils;
 public static class Extension
 {
     public static void Invoke<TControlType>(this TControlType control, Action<TControlType> del)

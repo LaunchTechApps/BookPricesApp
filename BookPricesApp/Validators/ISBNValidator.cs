@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookPricesApp.Manager.Display;
+namespace BookPricesApp.GUI.Validators;
 public class ISBNValidator
 {
     public static bool IsValidISBN(string isbn)
@@ -62,7 +62,7 @@ public class ISBNValidator
                 return false;
             }
 
-            checksum += (i % 2 == 0) ? int.Parse(isbn[i].ToString()) : 3 * int.Parse(isbn[i].ToString());
+            checksum += i % 2 == 0 ? int.Parse(isbn[i].ToString()) : 3 * int.Parse(isbn[i].ToString());
         }
 
         if (!char.IsDigit(isbn[12]))

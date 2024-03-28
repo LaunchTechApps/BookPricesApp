@@ -9,4 +9,5 @@ public enum BookExchange
 {
     Amazon,
     Ebay,
+    Unknown
 }

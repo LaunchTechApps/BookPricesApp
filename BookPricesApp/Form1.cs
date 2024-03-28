@@ -1,18 +1,17 @@
-using BookPricesApp;
-using BookPricesApp.Domain.Types;
-using BookPricesApp.Manager.Display;
-using BookPricesApp.Manager.Display.Models;
+using BookPricesApp.Core.Domain.Types;
+using BookPricesApp.GUI;
+using BookPricesApp.GUI.Models;
 
 namespace BookPrices;
 
 public partial class BookPrices : Form
 {
-    private DisplayManager _displayManager;
+    private ViewModel _vm;
     public BookPrices()
     {
         InitializeComponent();
 
-        _displayManager = new DisplayManager(
+        _vm = new ViewModel(
              new List<SelectGroup>
              {
                  new SelectGroup
@@ -41,7 +40,7 @@ public partial class BookPrices : Form
         version_lbl.Text = "0.0.0";
         version_lbl.Refresh();
 
-        _displayManager.SetActiveTab(BookExchange.Amazon);
+        _vm.SetActiveTab(BookExchange.Amazon);
     }
 
     private void BookPrices_Load(object sender, EventArgs e) { }
@@ -49,15 +48,15 @@ public partial class BookPrices : Form
 
     private void amazon_main_btn_Click(object sender, EventArgs e)
     {
-        _displayManager.SubmitMainButton();
+        _vm.SubmitMainButton();
     }
     private void amazon_select_btn_Click(object sender, EventArgs e)
     {
-        _displayManager.FilePickerSelect(filePicker);
+        _vm.FilePickerSelect(filePicker);
     }
     private void amazon_tab_Click(object sender, EventArgs e)
     {
-        _displayManager.SetActiveTab(BookExchange.Amazon);
+        _vm.SetActiveTab(BookExchange.Amazon);
     }
 
 
@@ -68,10 +67,10 @@ public partial class BookPrices : Form
     }
     private void ebay_select_btn_Click(object sender, EventArgs e)
     {
-        _displayManager.FilePickerSelect(filePicker);
+        _vm.FilePickerSelect(filePicker);
     }
     private void ebay_tab_Click(object sender, EventArgs e)
     {
-        _displayManager.SetActiveTab(BookExchange.Ebay);
+        _vm.SetActiveTab(BookExchange.Ebay);
     }
 }
