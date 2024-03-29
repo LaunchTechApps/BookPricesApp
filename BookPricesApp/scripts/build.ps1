@@ -19,7 +19,7 @@ function SetShortcut {
 
 function CreateShortcut {
     $currentDirectory = Get-Location
-    $exePath = "$currentDirectory\bin\App\BookPrices\BookPricesApp.exe"
+    $exePath = "$currentDirectory\bin\App\BookPrices\BookPricesApp.GUI.exe"
     $shortcutPath = "$currentDirectory\bin\App\BookPrices.lnk"
 
     $WshShell = New-Object -comObject WScript.Shell

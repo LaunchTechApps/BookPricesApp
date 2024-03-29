@@ -1,9 +1,9 @@
 using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.GUI;
 using BookPricesApp.GUI.Models;
+using BookPricesApp.GUI.Utils;
 
 namespace BookPrices;
-
 public partial class BookPrices : Form
 {
     private ViewModel _vm;
@@ -62,7 +62,7 @@ public partial class BookPrices : Form
 
     private void ebay_main_btn_Click(object sender, EventArgs e)
     {
-        MessageBox.Show("Coming soon!");
+        MessageBoxQueue.Add("Coming soon!");
         //_displayManager.SubmitMainButton();
     }
     private void ebay_select_btn_Click(object sender, EventArgs e)

@@ -1,14 +1,14 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using BookPricesApp.GUI.Models;
 using BookPricesApp.GUI.Utils;
-using BookPricesApp.GUI.Validators;
 using BookPricesApp.Core.Domain.Types;
-using BookPricesApp.Core.Access.Config;
 using BookPricesApp.Core.Manager.App;
 using BookPricesApp.Core.Engine;
 using BookPricesApp.Core.Access.Amazon;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Utils;
+using BookPricesApp.Core.Domain.Config;
+using BookPricesApp.Core.Access.FlatFile;
 
 namespace BookPricesApp.GUI;
 public class ViewModel
@@ -16,20 +16,30 @@ public class ViewModel
     private List<SelectGroup> _selectGroup = new();
     private ServiceProvider _serviceProvider;
     private BookExchange _activeExchange = BookExchange.Amazon;
+    private EventBus _bus;
+    private AppConfig _appConfig;
     public ViewModel(List<SelectGroup> selectGroup)
     {
         _selectGroup = selectGroup;
 
+        _bus = new EventBus();
+        var flatFileAccess = new FlatFileAccess(_bus);
+        _appConfig = flatFileAccess.GetAppConfig().Data!;
+
         var services = new ServiceCollection();
-        services.AddSingleton<IConfigAccess, ConfigAccess>();
+
+        services.AddSingleton(_bus);
+        services.AddSingleton<IFlatFileAccess>(flatFileAccess);
+        services.AddSingleton(_appConfig);
         services.AddSingleton<IAppManager, AppManager>();
         services.AddSingleton<AmazonEngine>();
-        services.AddSingleton<IAmazonAccess, AmazonAccess>();
-        services.AddSingleton<EventBus>();
+        services.AddSingleton<EngineProvider>();
+        services.AddSingleton<AmazonAccess>();
 
         _serviceProvider = services.BuildServiceProvider();
 
-        setupEventBusListener();
+        setupEventBus();
+        setupSavedFilePaths();
     }
 
     public void SetActiveTab(BookExchange exchange)
@@ -55,10 +65,9 @@ public class ViewModel
     public void FilePickerSelect(OpenFileDialog filePicker)
     {
         var group = _selectGroup.FirstOrDefault(g => _activeExchange == g.Exchange);
-        // make sure to save the file path to config json file
         if (group == null || group.SelectTextBox == null)
         {
-            MessageBox.Show("unable to find " + _activeExchange.ToString());
+            MessageBoxQueue.Add($"unable to find {_activeExchange}");
             return;
         }
 
@@ -74,42 +83,49 @@ public class ViewModel
     public void SubmitMainButton()
     {
         var group = _selectGroup.First(g => _activeExchange == g.Exchange);
-        string filePath = string.Empty;
+        string isbnFilePath = string.Empty;
+        // TODO: this should be done in the manager and the display manager should just have to show message boxes
         if (group.SelectTextBox != null && string.IsNullOrEmpty(group.SelectTextBox.Text))
         {
-            MessageBox.Show("No file selected for " + group.Exchange.ToString());
+            MessageBoxQueue.Add($"No file selected for {group.Exchange}");
             return;
         }
         else
         {
-            filePath = group.SelectTextBox?.Text.Trim() ?? "";
+            isbnFilePath = group.SelectTextBox?.Text.Trim() ?? "";
         }
 
-        if (!File.Exists(filePath))
-        {
-            MessageBox.Show("File not found: " + filePath);
-            return;
-        }
-
-        var isbnArray = File.ReadAllLines(filePath)
-            .Select(s => s.Trim())
-            .ToArray();
-
-        var firstISBN = isbnArray.FirstOrDefault() ?? "";
-        if (!ISBNValidator.IsValidISBN(firstISBN))
-        {
-            MessageBox.Show("Fisrt line was an invalid ISBN: " + firstISBN);
-            return;
-        }
-
-        _serviceProvider.GetService<IAppManager>()?.SubmitMainEvent(_activeExchange);
+        _serviceProvider.GetService<IAppManager>()?.SubmitMainEvent(_activeExchange, isbnFilePath);
     }
 
-    private void setupEventBusListener()
+    private void setupSavedFilePaths()
     {
-        var bus = _serviceProvider.GetService<EventBus>();
+        var amazonGroup = _selectGroup.FirstOrDefault(g => g.Exchange == BookExchange.Amazon);
+        if (amazonGroup != null)
+        {
+            if (amazonGroup.SelectTextBox != null && !string.IsNullOrEmpty(_appConfig.Amazon.IsbnFilePath))
+            {
+                amazonGroup.SelectTextBox.Text = _appConfig.Amazon.IsbnFilePath;
+                amazonGroup.SelectTextBox.Refresh();
+            }
+            return;
+        }
 
-        bus?.OnEvent((ProgressEvent e) =>
+        var ebayGroup = _selectGroup.FirstOrDefault(g => g.Exchange == BookExchange.Ebay);
+        if (ebayGroup != null)
+        {
+            if (ebayGroup.SelectTextBox != null && !string.IsNullOrEmpty(_appConfig.Ebay.IsbnFilePath))
+            {
+                ebayGroup.SelectTextBox.Text = _appConfig.Amazon.IsbnFilePath;
+                ebayGroup.SelectTextBox.Refresh();
+            }
+            return;
+        }
+    }
+
+    private void setupEventBus()
+    {
+        _bus?.OnEvent((ProgressEvent e) =>
         {
             var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
             if (group?.ProgressBar != null)
@@ -118,7 +134,7 @@ public class ViewModel
             }
         });
 
-        bus?.OnEvent((StartEvent e) =>
+        _bus?.OnEvent((StartEvent e) =>
         {
             var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
             if (group?.MainButton != null)
@@ -128,7 +144,7 @@ public class ViewModel
             }
         });
 
-        bus?.OnEvent((StopEvent e) =>
+        _bus?.OnEvent((StopEvent e) =>
         {
             var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
             if (group?.MainButton != null)
@@ -140,6 +156,21 @@ public class ViewModel
             {
                 group.ProgressBar.Invoke(p => p.Value = 0);
             }
+        });
+
+        _bus?.OnEvent((StopRequestEvent e) =>
+        {
+            var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
+            if (group?.MainButton != null)
+            {
+                group.MainButton.Invoke(p => p.Text = "Stopping");
+                group.MainButton.Invoke(p => p.BackColor = Color.FromArgb(255, 255, 150));
+            }
+        });
+
+        _bus?.OnEvent((AlertEvent e) =>
+        {
+            MessageBoxQueue.Add(e.Message);
         });
     }
 }

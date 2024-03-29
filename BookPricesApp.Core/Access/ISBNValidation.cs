@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookPricesApp.GUI.Validators;
-public class ISBNValidator
+namespace BookPricesApp.Core.Access;
+public class ISBNValidation
 {
     public static bool IsValidISBN(string isbn)
     {
@@ -75,4 +75,3 @@ public class ISBNValidator
         return checksum % 10 == 0;
     }
 }
-

@@ -398,3 +398,7 @@ config.json
 
 # JetBrains Rider
 *.sln.iml
+
+*.csv
+*.xlsx
+*.xls
