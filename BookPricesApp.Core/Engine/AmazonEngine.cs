@@ -72,7 +72,8 @@ public class AmazonEngine : IExchangeEngine
         var lookupResult = _flatFileAccess.GetLookupListFor(BookExchange.Amazon);
         if (lookupResult.Ex != null)
         {
-            // handle exception
+            publishErrorAndStop(lookupResult.Ex);
+            return;
         }
         if (lookupResult.Data == null)
         {
@@ -99,7 +100,8 @@ public class AmazonEngine : IExchangeEngine
 
         if (newLookupsResult.Ex != null)
         {
-            // handle exception should return here
+            publishErrorAndStop(newLookupsResult.Ex);
+            return;
         }
         if (newLookupsResult.Data == null)
         {
@@ -116,7 +118,13 @@ public class AmazonEngine : IExchangeEngine
 
         // need to save the combined to the lookup file
 
-        //var outputList = await _amazonAccess.GetDataByLookup(lookupResult.Data);
+        var outputList = await _amazonAccess.GetDataByLookup(lookupResult.Data);
+
+        if (outputList.Ex != null)
+        {
+            publishErrorAndStop(outputList.Ex);
+            return;
+        }
 
 
         var booksDataTable = new DataTable();
@@ -124,6 +132,13 @@ public class AmazonEngine : IExchangeEngine
         _engineState = EngineState.NotRunning;
         // get 
         // TODO: every minute, print out a new excel file
+    }
+
+    private void publishErrorAndStop(Exception ex)
+    {
+        _bus.Publish(new ErrorEvent { Message = ex.ToErrorMessage() });
+        _bus.Publish(new StopEvent { Exchange = BookExchange.Amazon });
+        _engineState = EngineState.NotRunning;
     }
 
     private void progress()

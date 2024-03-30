@@ -48,7 +48,6 @@ public class AmazonAccess : IAmazonAccess
         {
             _bus?.Publish(new ErrorEvent
             {
-                Title = "AmazonAccess.GetRefresToken",
                 Message = response.ErrorMessage ?? "no error message given"
             });
         }
@@ -61,7 +60,14 @@ public class AmazonAccess : IAmazonAccess
 
     public async Task<Option<List<ExportModel>>> GetDataByLookup(List<AmazonLookup> withLookup)
     {
-        throw new NotImplementedException();
+        try
+        {
+            throw new NotImplementedException();
+        }
+        catch (Exception ex)
+        {
+            return new Option<List<ExportModel>> { Ex = ex };
+        }
     }
 
     public async Task<Option<List<AmazonLookup>>> GetLookupsFor(List<string> isbnList)

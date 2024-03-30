@@ -53,3 +53,11 @@ public static class DateTimeExtensions
         return offset.ToUnixTimeSeconds();
     }
 }
+
+public static class ExceptionExtensions
+{
+    public static string ToErrorMessage(this Exception ex)
+    {
+        return $"MESSAGE:{ex.Message}\nSTACKTRACE:${ex.StackTrace}";
+    }
+}

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BookPricesApp.GUI.Utils;
 public static class Extension
 {
-    public static void Invoke<TControlType>(this TControlType control, Action<TControlType> del)
+    public static void Call<TControlType>(this TControlType control, Action<TControlType> del)
         where TControlType : Control
     {
         if (control.InvokeRequired)

@@ -84,7 +84,6 @@ public class ViewModel
     {
         var group = _selectGroup.First(g => _activeExchange == g.Exchange);
         string isbnFilePath = string.Empty;
-        // TODO: this should be done in the manager and the display manager should just have to show message boxes
         if (group.SelectTextBox != null && string.IsNullOrEmpty(group.SelectTextBox.Text))
         {
             MessageBoxQueue.Add($"No file selected for {group.Exchange}");
@@ -130,7 +129,7 @@ public class ViewModel
             var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
             if (group?.ProgressBar != null)
             {
-                group.ProgressBar.Invoke(p => p.Value = e.Percent);
+                group.ProgressBar.Call(p => p.Value = e.Percent);
             }
         });
 
@@ -139,8 +138,8 @@ public class ViewModel
             var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
             if (group?.MainButton != null)
             {
-                group.MainButton.Invoke(p => p.Text = "Stop");
-                group.MainButton.Invoke(p => p.BackColor = Color.FromArgb(255, 192, 192));
+                group.MainButton.Call(p => p.Text = "Stop");
+                group.MainButton.Call(p => p.BackColor = Color.FromArgb(255, 192, 192));
             }
         });
 
@@ -149,12 +148,12 @@ public class ViewModel
             var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
             if (group?.MainButton != null)
             {
-                group.MainButton.Invoke(p => p.Text = "Start");
-                group.MainButton.Invoke(p => p.BackColor = Color.FromArgb(192, 255, 192));
+                group.MainButton.Call(p => p.Text = "Start");
+                group.MainButton.Call(p => p.BackColor = Color.FromArgb(192, 255, 192));
             }
             if (group?.ProgressBar != null)
             {
-                group.ProgressBar.Invoke(p => p.Value = 0);
+                group.ProgressBar.Call(p => p.Value = 0);
             }
         });
 
@@ -163,8 +162,8 @@ public class ViewModel
             var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
             if (group?.MainButton != null)
             {
-                group.MainButton.Invoke(p => p.Text = "Stopping");
-                group.MainButton.Invoke(p => p.BackColor = Color.FromArgb(255, 255, 150));
+                group.MainButton.Call(p => p.Text = "Stopping");
+                group.MainButton.Call(p => p.BackColor = Color.FromArgb(255, 255, 150));
             }
         });
 
@@ -175,12 +174,28 @@ public class ViewModel
 
         _bus?.OnEvent((ErrorEvent e) =>
         {
-            MessageBoxQueue.Add(e.Message);
+            handelErrorEvent(e);
         });
     }
 
-    public void CloseErrorModel()
+    private ErrorModal _errodModel = new ErrorModal();
+    private void handelErrorEvent(ErrorEvent e)
     {
-        throw new NotImplementedException();
+
+        if (_errodModel.IsDisposed)
+        {
+            _errodModel = new ErrorModal();
+        }
+
+        if (_errodModel.Created)
+        {
+            _errodModel.AppendError(e.Message);
+        }
+        else
+        {
+            _errodModel.ClearError();
+            _errodModel.AppendError(e.Message);
+            _errodModel.Call(m => m.ShowDialog());
+        }
     }
 }
