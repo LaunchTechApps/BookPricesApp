@@ -172,5 +172,15 @@ public class ViewModel
         {
             MessageBoxQueue.Add(e.Message);
         });
+
+        _bus?.OnEvent((ErrorEvent e) =>
+        {
+            MessageBoxQueue.Add(e.Message);
+        });
+    }
+
+    public void CloseErrorModel()
+    {
+        throw new NotImplementedException();
     }
 }

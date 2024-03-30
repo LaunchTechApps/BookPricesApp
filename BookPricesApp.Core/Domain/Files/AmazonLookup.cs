@@ -11,5 +11,5 @@ public class AmazonLookup
     public string? ASIN { get; set; }
     public string? LastUsed { get; set; }
     public string? Error { get; set; }
-    public bool HasLookup => ASIN != null;
+    public bool HasLookup() => ASIN != null;
 }

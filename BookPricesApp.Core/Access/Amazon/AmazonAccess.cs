@@ -76,6 +76,8 @@ public class AmazonAccess : IAmazonAccess
         foreach (var isbn in isbnList)
         {
             var lookup = await getLookupFor(isbn);
+            //Thread.Sleep(500);
+
             if (lookup.Ex != null)
             {
                 result.Add(new AmazonLookup
@@ -89,7 +91,6 @@ public class AmazonAccess : IAmazonAccess
             {
                 lookup.Data?.ForEach(result.Add);
             }
-            Thread.Sleep(500);
             
             _bus.Publish(new ProgressEvent
             {

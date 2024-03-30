@@ -39,6 +39,7 @@ public class AppManager : IAppManager
         }
 
         var isbnList = File.ReadAllLines(isbnFilePath)
+            .Where(s => !string.IsNullOrEmpty(s))
             .Select(s => s.Trim())
             .ToList();
 

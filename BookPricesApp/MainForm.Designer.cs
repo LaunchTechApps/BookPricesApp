@@ -1,6 +1,6 @@
 ﻿namespace BookPrices;
 
-partial class BookPrices
+partial class MainForm
 {
     /// <summary>
     ///  Required designer variable.
@@ -28,7 +28,7 @@ partial class BookPrices
     /// </summary>
     private void InitializeComponent()
     {
-        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BookPrices));
+        System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
         amazon_pnl = new Panel();
         amazon_main_btn = new Button();
         amazon_text_box = new TextBox();
@@ -205,10 +205,10 @@ partial class BookPrices
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(584, 636);
+        Controls.Add(amazon_pnl);
         Controls.Add(version_lbl);
         Controls.Add(ebay_tab);
         Controls.Add(amazon_tab);
-        Controls.Add(amazon_pnl);
         Controls.Add(ebay_pnl);
         Icon = (Icon)resources.GetObject("$this.Icon");
         MaximizeBox = false;

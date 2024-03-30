@@ -68,8 +68,6 @@ public class AmazonEngine : IExchangeEngine
     private async Task run(List<string> isbnList)
     {
         _bus.Publish(new StartEvent { Exchange = BookExchange.Amazon });
-        //new Thread(progress).Start();
-        //return;
         
         var lookupResult = _flatFileAccess.GetLookupListFor(BookExchange.Amazon);
         if (lookupResult.Ex != null)
@@ -122,6 +120,8 @@ public class AmazonEngine : IExchangeEngine
 
 
         var booksDataTable = new DataTable();
+        _bus.Publish(new StopEvent { Exchange = BookExchange.Amazon });
+        _engineState = EngineState.NotRunning;
         // get 
         // TODO: every minute, print out a new excel file
     }

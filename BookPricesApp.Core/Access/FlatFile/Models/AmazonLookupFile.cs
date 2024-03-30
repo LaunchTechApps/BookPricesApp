@@ -20,7 +20,7 @@ public class AmazonLookupFile
 
     private string _filePath => $"{_folderPath}\\AmazonLookup.csv";
 
-    internal Option Append(List<AmazonLookup> books)
+    public Option Append(List<AmazonLookup> books)
     {
         try
         {
@@ -55,14 +55,14 @@ public class AmazonLookupFile
         return new();
     }
 
-    internal Option<List<AmazonLookup>> GetLookupList()
+    public Option<List<AmazonLookup>> GetLookupList()
     {
         try
         {
             lock (_fileLock)
             {
                 var data = new List<AmazonLookup>();
-                foreach(var book in MiniExcel.Query<AmazonLookup>(_folderPath, excelType: ExcelType.CSV))
+                foreach(var book in MiniExcel.Query<AmazonLookup>(_filePath, excelType: ExcelType.CSV))
                 {
                     data.Add(new AmazonLookup
                     {
