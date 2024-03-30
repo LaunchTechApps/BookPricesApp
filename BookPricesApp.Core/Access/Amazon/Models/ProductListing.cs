@@ -8,120 +8,119 @@ namespace BookPricesApp.Core.Access.Amazon.Models;
 
 public class ProductListing
 {
-    public int matchingProductCount { get; set; }
-    public Searchrefinement[] searchRefinements { get; set; }
-    public Refinements refinements { get; set; }
+    public int MatchingProductCount { get; set; }
+    public SearchRefinement[]? SearchRefinements { get; set; }
+    public Refinements? Refinements { get; set; }
     public int numberOfPages { get; set; }
-    public Product[] products { get; set; }
+    public Product[]? Products { get; set; }
 }
 
 public class Refinements
 {
-    public Category[] categories { get; set; }
-    public object[] subCategories { get; set; }
-    public Availabilityoption[] availabilityOptions { get; set; }
-    public object[] deliveryDayOptions { get; set; }
-    public object[] eligibleForFreeShippingOptions { get; set; }
-    public object[] primeEligible { get; set; }
+    public Category[]? Categories { get; set; }
+    public object[]? SubCategories { get; set; }
+    public AvailabilityOption[]? AvailabilityOptions { get; set; }
+    public object[]? DeliveryDayOptions { get; set; }
+    public object[]? EligibleForFreeShippingOptions { get; set; }
+    public object[]? PrimeEligible { get; set; }
 }
 
 public class Category
 {
-    public string displayName { get; set; }
-    public string id { get; set; }
+    public string? DisplayName { get; set; }
+    public string? Id { get; set; }
 }
 
-public class Availabilityoption
+public class AvailabilityOption
 {
-    public string displayName { get; set; }
-    public string id { get; set; }
+    public string? DisplayName { get; set; }
+    public string? Id { get; set; }
 }
 
-public class Searchrefinement
+public class SearchRefinement
 {
-    public string selectionType { get; set; }
-    public string displayValue { get; set; }
-    public Refinementvalue[] refinementValues { get; set; }
+    public string? SelectionType { get; set; }
+    public string? DisplayValue { get; set; }
+    public RefinementValue[]? RefinementValues { get; set; }
 }
 
-public class Refinementvalue
+public class RefinementValue
 {
-    public string displayName { get; set; }
-    public string searchRefinementValue { get; set; }
+    public string? DisplayName { get; set; }
+    public string? SearchRefinementValue { get; set; }
 }
 
 public class Product
 {
-    public string asin { get; set; }
-    public string asinType { get; set; }
-    public string signedProductId { get; set; }
-    public Includeddatatypes includedDataTypes { get; set; }
-    public object[] features { get; set; }
-    public object[] editorialReviews { get; set; }
-    public Taxonomy[] taxonomies { get; set; }
-    public string title { get; set; }
-    public string url { get; set; }
-    public object format { get; set; }
-    public Bookinformation bookInformation { get; set; }
-    public object[] byLine { get; set; }
-    public Mediainformation mediaInformation { get; set; }
-    public Productoverview productOverview { get; set; }
-    public Productdetails productDetails { get; set; }
-    public Productvariations productVariations { get; set; }
-    public Customerreviewssummary customerReviewsSummary { get; set; }
-    public object productDescription { get; set; }
-    public object[] upcValues { get; set; }
-    public object[] eanValues { get; set; }
+    public string? Asin { get; set; }
+    public string? AsinType { get; set; }
+    public string? SignedProductId { get; set; }
+    public IncludedDataTypes? IncludedDataTypes { get; set; }
+    public object[]? Features { get; set; }
+    public object[]? EditorialReviews { get; set; }
+    public Taxonomy[]? Taxonomies { get; set; }
+    public string? Title { get; set; }
+    public string? Url { get; set; }
+    public object? Format { get; set; }
+    public BookInformation? BookInformation { get; set; }
+    public object[]? ByLine { get; set; }
+    public MediaInformation? MediaInformation { get; set; }
+    public ProductOverview? ProductOverview { get; set; }
+    public ProductDetails? ProductDetails { get; set; }
+    public ProductVariations? ProductVariations { get; set; }
+    public CustomerReviewsSummary? CustomerReviewsSummary { get; set; }
+    public object? ProductDescription { get; set; }
+    public object[]? UpcValues { get; set; }
+    public object[]? EanValues { get; set; }
 }
 
-public class Includeddatatypes
+public class IncludedDataTypes
 {
-    public object[] OFFERS { get; set; }
+    public object[]? OFFERS { get; set; }
 }
 
-public class Bookinformation
+public class BookInformation
 {
-    public Isbn isbn { get; set; }
-    public object publicationDate { get; set; }
-    public object publishedLanguage { get; set; }
+    public Isbn? Isbn { get; set; }
+    public object? PublicationDate { get; set; }
+    public object? PublishedLanguage { get; set; }
 }
 
 public class Isbn
 {
-    public object isbn10 { get; set; }
-    public object isbn13 { get; set; }
+    public object? Isbn10 { get; set; }
+    public object? Isbn13 { get; set; }
 }
 
-public class Mediainformation
+public class MediaInformation
 {
-    public object[] editions { get; set; }
-    public object[] mediaFormats { get; set; }
+    public object[]? Editions { get; set; }
+    public object[]? MediaFormats { get; set; }
 }
 
-public class Productoverview
-{
-}
-
-public class Productdetails
+public class ProductOverview
 {
 }
 
-public class Productvariations
+public class ProductDetails
 {
-    public object[] dimensions { get; set; }
-    public object[] variations { get; set; }
 }
 
-public class Customerreviewssummary
+public class ProductVariations
 {
-    public object numberOfReviews { get; set; }
-    public object starRating { get; set; }
+    public object[]? Dimensions { get; set; }
+    public object[]? Variations { get; set; }
+}
+
+public class CustomerReviewsSummary
+{
+    public object? NumberOfReviews { get; set; }
+    public object? StarRating { get; set; }
 }
 
 public class Taxonomy
 {
-    public string taxonomyCode { get; set; }
-    public string title { get; set; }
-    public string type { get; set; }
+    public string? TaxonomyCode { get; set; }
+    public string? Title { get; set; }
+    public string? Type { get; set; }
 }
-

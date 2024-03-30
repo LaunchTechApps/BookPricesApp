@@ -7,7 +7,7 @@ public class ExchangeEvent
 }
 public class ProgressEvent : ExchangeEvent
 {
-    public int Count { get; set; }
+    public int Percent { get; set; }
 }
 
 public class StartEvent : ExchangeEvent { }

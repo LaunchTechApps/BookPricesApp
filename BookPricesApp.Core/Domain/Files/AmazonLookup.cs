@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BookPricesApp.Core.Domain;
-public class BookLookup
+public class AmazonLookup
 {
-    public string Exchange { get; set; } = string.Empty;
     public string ISBN13 { get; set; } = string.Empty;
-    public string? ExchangeId { get; set; }
+    public string? ASIN { get; set; }
     public string? LastUsed { get; set; }
-    public bool HasLookup => ExchangeId != null;
+    public string? Error { get; set; }
+    public bool HasLookup => ASIN != null;
 }

@@ -6,6 +6,7 @@ using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Engine.Models;
 using BookPricesApp.Core.Utils;
 using System.Data;
+using System.Linq;
 
 namespace BookPricesApp.Core.Engine;
 
@@ -77,56 +78,52 @@ public class AmazonEngine : IExchangeEngine
         }
         if (lookupResult.Data == null)
         {
-            lookupResult.Data = new List<BookLookup>();
+            lookupResult.Data = new List<AmazonLookup>();
         }
 
-        var combinedList =  combine(lookupResult.Data, isbnList);
-        var withLookup = combinedList.Where(b => b.HasLookup).ToList();
-        var noLookup = combinedList.Where(b => !b.HasLookup).ToList();
+        var noLookup = new List<string>();
+        {
+            var lookupDictionary = lookupResult.Data
+                .Select(l => l.ISBN13)
+                .Distinct()
+                .ToDictionary(key => key, value => true);
+            foreach (var book in isbnList)
+            {
+                if (!lookupDictionary.ContainsKey(book))
+                {
+                    noLookup.Add(book);
+                }
+            }
+        }
 
-        var hasLookupList = await _amazonAccess.GetDataByLookup(withLookup);
-        var noLookupList = await _amazonAccess.GetDataByKeyWords(noLookup);
+        await _amazonAccess.SetRefresToken();
+        var newLookupsResult = await _amazonAccess.GetLookupsFor(noLookup);
 
-        var combined = new List<ExportModel>();
-        combined.AddRange(hasLookupList.Data!);
-        combined.AddRange(noLookupList.Data!);
+        if (newLookupsResult.Ex != null)
+        {
+            // handle exception should return here
+        }
+        if (newLookupsResult.Data == null)
+        {
+            newLookupsResult.Data = new List<AmazonLookup>();
+        }
+        else
+        {
+            _flatFileAccess.LookupAppend(newLookupsResult.Data);
+        }
+
+        var combined = new List<AmazonLookup>();
+        combined.AddRange(lookupResult.Data);
+        combined.AddRange(newLookupsResult.Data);
+
+        // need to save the combined to the lookup file
+
+        //var outputList = await _amazonAccess.GetDataByLookup(lookupResult.Data);
+
 
         var booksDataTable = new DataTable();
-
         // get 
         // TODO: every minute, print out a new excel file
-    }
-
-    private DataTable combine(List<ExportModel> hasLookupList, List<ExportModel> noLookupList)
-    {
-
-        return new DataTable();
-    }
-
-    private List<BookLookup> combine(List<BookLookup> lookup, List<string> isbnList)
-    {
-        var preventDupes = new Dictionary<string, bool>();
-        var result = new List<BookLookup>();
-        foreach (var isbn in isbnList)
-        {
-            if (preventDupes.ContainsKey(isbn)) { continue; }
-            preventDupes.Add(isbn, true);
-
-            var isbnLookup = lookup.FirstOrDefault(l => l.ISBN13 == isbn);
-            if (isbnLookup != null)
-            {
-                result.Add(isbnLookup);
-            }
-            else
-            {
-                result.Add(new BookLookup 
-                { 
-                    Exchange = $"{BookExchange.Amazon}", 
-                    ISBN13 =  isbn 
-                });
-            }
-        }
-        return result;
     }
 
     private void progress()
@@ -150,7 +147,7 @@ public class AmazonEngine : IExchangeEngine
 
             _bus.Publish(new ProgressEvent
             {
-                Count = count,
+                Percent = count,
                 Exchange = BookExchange.Amazon
             });
         }

@@ -13,38 +13,60 @@ public interface IFlatFileAccess
     Option<AppConfig> GetAppConfig(string? path = null);
     Option CreateNewOutput(string path);
     Option OutputAppend(DataTable books);
-    Option LookupAppend(List<BookLookup> books);
-    Option<List<BookLookup>> GetLookupListFor(BookExchange amazon);
+    Option LookupAppend(List<AmazonLookup> books);
+    Option<List<AmazonLookup>> GetLookupListFor(BookExchange amazon);
 }
 
 public class FlatFileAccess : IFlatFileAccess
 {
-    private string _lookupPath => $"{Directory.GetCurrentDirectory()}\\Domain\\Files\\BookLookup.csv";
-
     private OutputFile _outputFile = new();
     private ConfigFile _configFile = new();
-    private LookupFile _lookup;
+    private AmazonLookupFile _amazonLookup;
 
     public FlatFileAccess(EventBus bus)
     {
-        _lookup = new LookupFile(_lookupPath);
+        _amazonLookup = new AmazonLookupFile();
     }
 
     public Option SaveAppConfig() =>
         _configFile.SaveAppConfig();
 
-    public Option<AppConfig> GetAppConfig(string? path = null) => 
+    public Option<AppConfig> GetAppConfig(string? path = null) =>
         _configFile.GetAppConfig(path);
 
-    public Option CreateNewOutput(string path) => 
+    public Option CreateNewOutput(string path) =>
         _outputFile.CreateNewExport(path);
 
-    public Option OutputAppend(DataTable books) => 
+    public Option OutputAppend(DataTable books) =>
         _outputFile.Append(books);
 
-    public Option LookupAppend(List<BookLookup> books) => 
-        _lookup.Append(books);
+    public Option LookupAppend(List<AmazonLookup> books) =>
+        _amazonLookup.Append(books);
 
-    public Option<List<BookLookup>> GetLookupListFor(BookExchange exchange) => 
-        _lookup.GetLookupListFor(exchange);
+    public Option<List<AmazonLookup>> GetLookupListFor(BookExchange exchange)
+    {
+        switch (exchange)
+        {
+            case BookExchange.Amazon:
+                return _amazonLookup.GetLookupList();
+            case BookExchange.Ebay:
+                {
+                    var message = "Ebay Lookups not created yet.";
+                    var ex = new Exception(message);
+                    return new Option<List<AmazonLookup>>(ex);
+                }
+            case BookExchange.Unknown:
+                {
+                    var message = "FlatFileAccess.GetLookupListFor 'Uknown' Selected";
+                    var ex = new Exception(message);
+                    return new Option<List<AmazonLookup>>(ex);
+                }
+            default:
+                {
+                    var message = "FlatFileAccess.GetLookupListFor 'default' Selected";
+                    var ex = new Exception(message);
+                    return new Option<List<AmazonLookup>>(ex);
+                }
+        }
+    }
 }

@@ -74,7 +74,7 @@ public class BasicTests
     {
         var db = new FlatFileAccess(new EventBus());
         var config = db.GetAppConfig().Data!;
-        var amazonAccess = new AmazonAccess(config);
+        var amazonAccess = new AmazonAccess(config, new EventBus());
         await amazonAccess.SetRefresToken();
         var test2 = "";
     }
@@ -92,9 +92,9 @@ public class BasicTests
     {
         var db = new FlatFileAccess(new EventBus());
         var config = db.GetAppConfig().Data!;
-        var amazonAccess = new AmazonAccess(config);
+        var amazonAccess = new AmazonAccess(config, new EventBus());
         await amazonAccess.SetRefresToken();
-        var test1 = await amazonAccess.GetDataByKeyWords(new List<BookLookup>());
+        var test1 = await amazonAccess.GetLookupsFor(new List<string>());
         var test2 = "";
     }
 }

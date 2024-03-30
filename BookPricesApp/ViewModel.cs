@@ -130,7 +130,7 @@ public class ViewModel
             var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
             if (group?.ProgressBar != null)
             {
-                group.ProgressBar.Invoke(p => p.Value = e.Count);
+                group.ProgressBar.Invoke(p => p.Value = e.Percent);
             }
         });
 

@@ -4,6 +4,8 @@ using BookPricesApp.GUI.Models;
 using BookPricesApp.GUI.Utils;
 
 namespace BookPrices;
+// TODO: create a file in S3 and use that file for these look ups.
+//    - each exchange gets its own lookup file - csv
 public partial class BookPrices : Form
 {
     private ViewModel _vm;

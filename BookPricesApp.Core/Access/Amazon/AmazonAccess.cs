@@ -1,7 +1,10 @@
-﻿using BookPricesApp.Core.Domain;
+﻿using BookPricesApp.Core.Access.Amazon.Models;
+using BookPricesApp.Core.Domain;
 using BookPricesApp.Core.Domain.Config;
 using BookPricesApp.Core.Domain.Events;
+using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Utils;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
 using System.Data;
@@ -15,14 +18,8 @@ public class AmazonAccess : IAmazonAccess
 {
     private AmazonConfig _config;
     private string _email;
-    private EventBus? _bus;
+    private EventBus _bus;
     private string? _accessToken;
-
-    public AmazonAccess(AppConfig appConfig)
-    {
-        _config = appConfig.Amazon;
-        _email = appConfig.Email;
-    }
 
     public AmazonAccess(AppConfig appConfig, EventBus bus)
     {
@@ -60,34 +57,93 @@ public class AmazonAccess : IAmazonAccess
             var responseObject = JObject.Parse(response.Content);
             _accessToken = responseObject["access_token"]?.ToString();
         }
-
-        var test2 = "";
     }
 
-    public async Task<Option<List<ExportModel>>> GetDataByLookup(List<BookLookup> withLookup)
+    public async Task<Option<List<ExportModel>>> GetDataByLookup(List<AmazonLookup> withLookup)
     {
         throw new NotImplementedException();
     }
 
-    public async Task<Option<List<ExportModel>>> GetDataByKeyWords(List<BookLookup> noLookup)
+    public async Task<Option<List<AmazonLookup>>> GetLookupsFor(List<string> isbnList)
     {
         if (_accessToken == null)
         {
             var ex = new Exception("_accessToken was found null");
-            return new Option<List<ExportModel>> { Ex = ex };
+            return new Option<List<AmazonLookup>> { Ex = ex };
+        }
+        var result = new List<AmazonLookup>();
+        var progress = new ProgressCounter(isbnList.Count);
+        foreach (var isbn in isbnList)
+        {
+            var lookup = await getLookupFor(isbn);
+            if (lookup.Ex != null)
+            {
+                result.Add(new AmazonLookup
+                {
+                    ISBN13 = isbn,
+                    LastUsed = DateTime.UtcNow.ToIso8601(),
+                    Error = lookup.Ex.Message
+                });
+            }
+            else
+            {
+                lookup.Data?.ForEach(result.Add);
+            }
+            Thread.Sleep(500);
+            
+            _bus.Publish(new ProgressEvent
+            {
+                Percent = progress.Increment(),
+                Exchange = BookExchange.Amazon
+            });
         }
 
-        var path = "/products/2020-08-26/products";
-        var query = "?locale=en_US&productRegion=US&facets=OFFERS&keywords=9780000248022";
-        var client = new RestClient(new RestClientOptions("https://na.business-api.amazon.com")
-        {
-            MaxTimeout = -1,
-        });
-        var request = new RestRequest($"{path}{query}", Method.Get);
-        request.AddHeader("x-amz-access-token", _accessToken);
-        request.AddHeader("x-amz-user-email", _email);
-        var response = await client.ExecuteAsync(request);
+        return new Option<List<AmazonLookup>> { Data = result };
+    }
 
-        return new Option<List<ExportModel>> { Data = new List<ExportModel>() { } };
+    private async Task<Option<List<AmazonLookup>>> getLookupFor(string isbn)
+    {
+        var result = new List<AmazonLookup>();
+        try
+        {
+            var path = "/products/2020-08-26/products";
+            var query = $"?locale=en_US&productRegion=US&facets=OFFERS&keywords={isbn}";
+            var client = new RestClient(new RestClientOptions(_config.BaseUrl)
+            {
+                MaxTimeout = -1,
+            });
+            var request = new RestRequest($"{path}{query}", Method.Get);
+            request.AddHeader("x-amz-access-token", _accessToken!);
+            request.AddHeader("x-amz-user-email", _email);
+            var response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessStatusCode)
+            {
+                return new Option<List<AmazonLookup>> { Ex = new Exception(response.ErrorMessage) };
+            }
+            else if (response.Content == null)
+            {
+                var message = "response.Content in AmazonAccess.GetDataByKeyWords was found null";
+                return new Option<List<AmazonLookup>> { Ex = new Exception(message) };
+            }
+            else
+            {
+                var content = JsonConvert.DeserializeObject<ProductListing>(response.Content);
+                foreach (var item in content?.Products ?? Array.Empty<Product>())
+                {
+                    result.Add(new AmazonLookup
+                    {
+                        ISBN13 = isbn,
+                        ASIN = item.Asin,
+                        LastUsed = DateTime.Now.ToIso8601(),
+                    });
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            return new Option<List<AmazonLookup>> { Ex = ex };
+        }
+
+        return new Option<List<AmazonLookup>> { Data = result };
     }
 }
