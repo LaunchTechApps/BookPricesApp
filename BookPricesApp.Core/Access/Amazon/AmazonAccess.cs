@@ -102,18 +102,18 @@ public class AmazonAccess : IAmazonAccess
         {
             var lookup = await getLookupFor(isbn);
 
-            if (lookup.Ex != null)
+            if (lookup.Error != null)
             {
                 result.Add(new AmazonLookup
                 {
                     ISBN13 = isbn,
                     LastUsed = DateTime.UtcNow.ToIso8601(),
-                    Error = lookup.Ex.Message
+                    Error = lookup.Error.Message
                 });
             }
             else
             {
-                lookup.Data?.ForEach(result.Add);
+                lookup.Value?.ForEach(result.Add);
             }
             
             _bus.Publish(new ProgressEvent
@@ -195,7 +195,55 @@ public class AmazonAccess : IAmazonAccess
     }
 
 
-    private async Task<Option<List<AmazonLookup>>> getLookupFor(string isbn)
+    //private async Task<Option<List<AmazonLookup>>> getLookupFor(string isbn)
+    //{
+    //    var result = new List<AmazonLookup>();
+    //    try
+    //    {
+    //        var path = "/products/2020-08-26/products";
+    //        var query = $"?locale=en_US&productRegion=US&facets=OFFERS&keywords={isbn}";
+    //        var client = new RestClient(new RestClientOptions(_config.BaseUrl)
+    //        {
+    //            MaxTimeout = -1,
+    //        });
+    //        var request = new RestRequest($"{path}{query}", Method.Get);
+    //        request.AddHeader("x-amz-access-token", _accessToken!);
+    //        request.AddHeader("x-amz-user-email", _email);
+    //        var response = await client.ExecuteAsync(request);
+    //        if (!response.IsSuccessStatusCode)
+    //        {
+    //            return new Option<List<AmazonLookup>> { Ex = new Exception(response.ErrorMessage) };
+    //        }
+    //        else if (response.Content == null)
+    //        {
+    //            var message = "response.Content in AmazonAccess.GetDataByKeyWords was found null";
+    //            return new Option<List<AmazonLookup>> { Ex = new Exception(message) };
+    //        }
+    //        else
+    //        {
+    //            var content = JsonConvert.DeserializeObject<ProductListing>(response.Content);
+    //            foreach (var item in content?.Products ?? Array.Empty<Product>())
+    //            {
+    //                result.Add(new AmazonLookup
+    //                {
+    //                    ISBN13 = isbn,
+    //                    ASIN = item.Asin,
+    //                    Title = item.Title,
+    //                    URL = item.Url,
+    //                    LastUsed = DateTime.Now.ToIso8601(),
+    //                });
+    //            }
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        return new Option<List<AmazonLookup>> { Ex = ex };
+    //    }
+
+    //    return new Option<List<AmazonLookup>> { Data = result };
+    //}
+
+    private async Task<Result<List<AmazonLookup>, Exception>> getLookupFor(string isbn)
     {
         var result = new List<AmazonLookup>();
         try
@@ -212,12 +260,12 @@ public class AmazonAccess : IAmazonAccess
             var response = await client.ExecuteAsync(request);
             if (!response.IsSuccessStatusCode)
             {
-                return new Option<List<AmazonLookup>> { Ex = new Exception(response.ErrorMessage) };
+                return new Exception(response.ErrorMessage);
             }
             else if (response.Content == null)
             {
                 var message = "response.Content in AmazonAccess.GetDataByKeyWords was found null";
-                return new Option<List<AmazonLookup>> { Ex = new Exception(message) };
+                return new Exception(message);
             }
             else
             {
@@ -237,9 +285,9 @@ public class AmazonAccess : IAmazonAccess
         }
         catch (Exception ex)
         {
-            return new Option<List<AmazonLookup>> { Ex = ex };
+            return ex;
         }
 
-        return new Option<List<AmazonLookup>> { Data = result };
+        return result;
     }
 }

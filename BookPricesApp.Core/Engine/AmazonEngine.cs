@@ -135,6 +135,7 @@ public class AmazonEngine : IExchangeEngine
         }
         else if (outputList.Data != null)
         {
+            // these should return errors if they have any
             _db.ExecuteQuery("DROP TABLE IF EXISTS [Output]");
             _db.ExecuteQuery(Tables.CreateOutputTable);
             _db.InsertAmazonOutput(outputList.Data);

@@ -39,3 +39,30 @@ public class OptionTask<T> : Task<T>
         Ex = ex;
     }
 }
+
+
+
+public readonly struct Result<TValue, TError>
+{
+    public readonly TValue? Value;
+    public readonly TError? Error;
+
+    private Result(TValue value)
+    {
+        Value = value;
+        Error = default;
+    }
+
+    private Result(TError error)
+    {
+        Error = error;
+        Value = default;
+    }
+
+    public static implicit operator Result<TValue, TError>(TValue value) => new(value);
+    public static implicit operator Result<TValue, TError>(TError error) => error;
+}
+
+// Convert Option to Result type
+// Create a quick demo version that works for Chris
+// Create a label that says the status of the progress bar
