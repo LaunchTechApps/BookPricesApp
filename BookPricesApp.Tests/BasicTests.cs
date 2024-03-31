@@ -1,8 +1,6 @@
-﻿using BookPricesApp.Core.Access.Amazon;
-using BookPricesApp.Core.Access.FlatFile;
-using BookPricesApp.Core.Domain;
-using BookPricesApp.Core.Domain.Export;
-using BookPricesApp.Core.Utils;
+﻿using BookPricesApp.Core.Access.FlatFile;
+using BookPricesApp.Domain;
+using BookPricesApp.Domain.Files;
 using System.Data;
 
 namespace BookPricesApp.Tests;
@@ -11,29 +9,7 @@ public class BasicTests
     [Fact]
     public void Test1()
     {
-        var db = new FlatFileAccess(new EventBus());
-        var config = db.GetAppConfig().Data!;
-
-        var firstVersion = "0.0.0";
-        config.Version = firstVersion;
-        db.SaveAppConfig();
-        config = db.GetAppConfig().Data!;
-        Assert.True(config.Version == firstVersion);
-
-        var secondVersion = "0.0.1";
-        config.Version = secondVersion;
-        db.SaveAppConfig();
-        config = db.GetAppConfig().Data!;
-        Assert.True(config.Version == secondVersion);
-    }
-
-    [Fact]
-    public void Test2()
-    {
-        var db = new FlatFileAccess(new EventBus());
-        var path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        path += "\\example.xlsx";
-        db.CreateNewOutput(path);
+        var db = new FlatFileAccess(new Config());
 
         DataTable dt = new DataTable();
 
@@ -67,34 +43,5 @@ public class BasicTests
         }
 
         db.OutputAppend(dt);
-    }
-
-    [Fact]
-    public async Task Test3()
-    {
-        var db = new FlatFileAccess(new EventBus());
-        var config = db.GetAppConfig().Data!;
-        var amazonAccess = new AmazonAccess(config, new EventBus());
-        await amazonAccess.SetRefresToken();
-        var test2 = "";
-    }
-
-    [Fact]
-    public void Test4()
-    {
-        var db = new FlatFileAccess(new EventBus());
-        var test1 = db.GetLookupListFor(Core.Domain.Types.BookExchange.Amazon);
-        var test2 = "";
-    }
-
-    [Fact]
-    public async Task Test5()
-    {
-        var db = new FlatFileAccess(new EventBus());
-        var config = db.GetAppConfig().Data!;
-        var amazonAccess = new AmazonAccess(config, new EventBus());
-        await amazonAccess.SetRefresToken();
-        var test1 = await amazonAccess.GetLookupsFor(new List<string>());
-        var test2 = "";
     }
 }

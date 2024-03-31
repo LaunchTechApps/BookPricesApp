@@ -1,10 +1,11 @@
 ﻿using BookPricesApp.Core.Access;
 using BookPricesApp.Core.Access.FlatFile;
-using BookPricesApp.Core.Domain.Config;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Engine;
 using BookPricesApp.Core.Utils;
+using BookPricesApp.Domain;
+using BookPricesApp.Repo;
 
 namespace BookPricesApp.Core.Manager.App;
 
@@ -17,16 +18,19 @@ public class AppManager : IAppManager
 {
     private EngineProvider _engineProvider { get; set; }
     private EventBus _bus;
-    private AppConfig _config;
+    private Config _config;
     private IFlatFileAccess _flatFileAccess;
+    private BookPriceRepo _db;
     public AppManager(
-        EngineProvider engineProvider, 
+        EngineProvider engineProvider,
+        BookPriceRepo db,
         EventBus bus, 
-        AppConfig config,
+        Config config,
         IFlatFileAccess flatFileAccess)
     {
         _engineProvider = engineProvider;
         _bus = bus;
+        _db = db;
         _config = config;
         _flatFileAccess = flatFileAccess;
     }
@@ -53,13 +57,11 @@ public class AppManager : IAppManager
         switch (exchange)
         {
             case BookExchange.Amazon:
-                _config.Amazon.IsbnFilePath = isbnFilePath;
-                _flatFileAccess.SaveAppConfig();
+                _db.SaveIsbnFilePath(BookExchange.Amazon, isbnFilePath);
                 _engineProvider.Amazon.Run(isbnList);
                 break;
             case BookExchange.Ebay:
-                //_config.Ebay.IsbnFilePath = isbnFilePath;
-                //_flatFileAccess.SaveAppConfig();
+                // TODO: save isbn path here
                 _bus.Publish(new AlertEvent($"Ebay not implemented yet"));
                 break;
             default:

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookPricesApp.Core.Domain.Export;
+namespace BookPricesApp.Domain.Files;
 public class COL
 {
     public const string ISBN = "ISBN";

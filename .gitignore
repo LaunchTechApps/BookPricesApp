@@ -402,3 +402,4 @@ config.json
 *.csv
 *.xlsx
 *.xls
+BookPricesApp.Core/Config.cs

@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookPricesApp.Core\BookPricesApp.Core.csproj" />
+    <ProjectReference Include="..\BookPricesApp.Repo\BookPricesApp.Repo.csproj" />
   </ItemGroup>
 
 </Project>

@@ -5,6 +5,9 @@ using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Engine.Models;
 using BookPricesApp.Core.Utils;
+using BookPricesApp.Domain.Files;
+using BookPricesApp.Repo;
+using BookPricesApp.Repo.Migrations;
 using System.Data;
 using System.Linq;
 
@@ -24,12 +27,18 @@ public class AmazonEngine : IExchangeEngine
     private IFlatFileAccess _flatFileAccess;
     private EngineState _engineState = EngineState.NotRunning;
     private AmazonAccess _amazonAccess;
+    private BookPriceRepo _db;
 
-    public AmazonEngine(EventBus bus, AmazonAccess amazonAccess, IFlatFileAccess flatFileAccess)
+    public AmazonEngine(
+        EventBus bus, 
+        AmazonAccess amazonAccess, 
+        IFlatFileAccess flatFileAccess,
+        BookPriceRepo db)
     {
         _bus = bus;
         _amazonAccess = amazonAccess;
         _flatFileAccess = flatFileAccess;
+        _db = db;
     }
 
     public Option Run(List<string> isbnList)
@@ -68,8 +77,8 @@ public class AmazonEngine : IExchangeEngine
     private async Task run(List<string> isbnList)
     {
         _bus.Publish(new StartEvent { Exchange = BookExchange.Amazon });
-        
-        var lookupResult = _flatFileAccess.GetLookupListFor(BookExchange.Amazon);
+
+        var lookupResult = _db.GetAmazonLookup();
         if (lookupResult.Ex != null)
         {
             publishErrorAndStop(lookupResult.Ex);
@@ -109,7 +118,7 @@ public class AmazonEngine : IExchangeEngine
         }
         else
         {
-            _flatFileAccess.LookupAppend(newLookupsResult.Data);
+            _db.InsertAmazonLookup(newLookupsResult.Data);
         }
 
         var combined = new List<AmazonLookup>();
@@ -118,20 +127,29 @@ public class AmazonEngine : IExchangeEngine
 
         // need to save the combined to the lookup file
 
-        var outputList = await _amazonAccess.GetDataByLookup(lookupResult.Data);
+        var outputList = await _amazonAccess.GetDataByLookup(combined);
 
-        if (outputList.Ex != null)
+        if (outputList.Ex != null) 
         {
-            publishErrorAndStop(outputList.Ex);
-            return;
+            // what do we do here?
         }
+        else if (outputList.Data != null)
+        {
+            _db.ExecuteQuery("DROP TABLE IF EXISTS [Output]");
+            _db.ExecuteQuery(Tables.CreateOutputTable);
+            _db.InsertAmazonOutput(outputList.Data);
+        }
+        
+        //if (outputList.Ex != null)
+        //{
+        //    publishErrorAndStop(outputList.Ex);
+        //    return;
+        //}
 
 
         var booksDataTable = new DataTable();
         _bus.Publish(new StopEvent { Exchange = BookExchange.Amazon });
         _engineState = EngineState.NotRunning;
-        // get 
-        // TODO: every minute, print out a new excel file
     }
 
     private void publishErrorAndStop(Exception ex)

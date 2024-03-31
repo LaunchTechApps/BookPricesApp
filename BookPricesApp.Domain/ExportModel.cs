@@ -12,8 +12,8 @@ public class ExportModel
     public string Title { get; set; } = string.Empty;
     public string Seller { get; set; } = string.Empty;
     public string Location { get; set; } = string.Empty;
-    public decimal ShippingPrice { get; set; }
-    public decimal Price { get; set; }
+    public string ShippingPrice { get; set; } = string.Empty;
+    public string Price { get; set; } = string.Empty;
     public string Condition { get; set; } = string.Empty;
     public string ItemUrl { get; set; } = string.Empty;
     public string Source { get; set; } = string.Empty;

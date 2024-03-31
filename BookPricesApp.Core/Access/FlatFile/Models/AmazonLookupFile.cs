@@ -1,6 +1,6 @@
 ﻿using BookPricesApp.Core.Domain;
-using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Utils;
+using BookPricesApp.Domain.Files;
 using MiniExcelLibs;
 
 namespace BookPricesApp.Core.Access.FlatFile.Models;

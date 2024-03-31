@@ -7,30 +7,44 @@ using BookPricesApp.Core.Engine;
 using BookPricesApp.Core.Access.Amazon;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Utils;
-using BookPricesApp.Core.Domain.Config;
 using BookPricesApp.Core.Access.FlatFile;
+using Newtonsoft.Json;
+using BookPricesApp.Repo;
+using BookPricesApp.Domain;
+using BookPricesApp.Repo.Migrations;
 
 namespace BookPricesApp.GUI;
 public class ViewModel
 {
     private List<SelectGroup> _selectGroup = new();
-    private ServiceProvider _serviceProvider;
+    private ServiceProvider? _serviceProvider;
     private BookExchange _activeExchange = BookExchange.Amazon;
-    private EventBus _bus;
-    private AppConfig _appConfig;
+    private EventBus _bus = new();
+    private Config _config = new();
+    private BookPriceRepo _db = new();
     public ViewModel(List<SelectGroup> selectGroup)
     {
         _selectGroup = selectGroup;
 
-        _bus = new EventBus();
-        var flatFileAccess = new FlatFileAccess(_bus);
-        _appConfig = flatFileAccess.GetAppConfig().Data!;
+        var path = $"{Directory.GetCurrentDirectory()}\\Config.json";
+        var json = File.ReadAllText(path);
+
+        if (string.IsNullOrEmpty(json))
+        {
+            var msg = "Config file was not found or was empyt.";
+            MessageBox.Show(msg);
+            return;
+        }
+
+        _config = JsonConvert.DeserializeObject<Config>(json)!;
+        new MigrationStartup().InitDB();
 
         var services = new ServiceCollection();
 
         services.AddSingleton(_bus);
-        services.AddSingleton<IFlatFileAccess>(flatFileAccess);
-        services.AddSingleton(_appConfig);
+        services.AddSingleton(_config);
+        services.AddSingleton(_db);
+        services.AddSingleton<IFlatFileAccess, FlatFileAccess>();
         services.AddSingleton<IAppManager, AppManager>();
         services.AddSingleton<AmazonEngine>();
         services.AddSingleton<EngineProvider>();
@@ -94,7 +108,7 @@ public class ViewModel
             isbnFilePath = group.SelectTextBox?.Text.Trim() ?? "";
         }
 
-        _serviceProvider.GetService<IAppManager>()?.SubmitMainEvent(_activeExchange, isbnFilePath);
+        _serviceProvider?.GetService<IAppManager>()?.SubmitMainEvent(_activeExchange, isbnFilePath);
     }
 
     private void setupSavedFilePaths()
@@ -102,9 +116,9 @@ public class ViewModel
         var amazonGroup = _selectGroup.FirstOrDefault(g => g.Exchange == BookExchange.Amazon);
         if (amazonGroup != null)
         {
-            if (amazonGroup.SelectTextBox != null && !string.IsNullOrEmpty(_appConfig.Amazon.IsbnFilePath))
+            if (amazonGroup.SelectTextBox != null && string.IsNullOrEmpty(amazonGroup.SelectTextBox.Text))
             {
-                amazonGroup.SelectTextBox.Text = _appConfig.Amazon.IsbnFilePath;
+                amazonGroup.SelectTextBox.Text = _db.GetIsbnFilePath(BookExchange.Amazon).Data;
                 amazonGroup.SelectTextBox.Refresh();
             }
             return;
@@ -113,9 +127,9 @@ public class ViewModel
         var ebayGroup = _selectGroup.FirstOrDefault(g => g.Exchange == BookExchange.Ebay);
         if (ebayGroup != null)
         {
-            if (ebayGroup.SelectTextBox != null && !string.IsNullOrEmpty(_appConfig.Ebay.IsbnFilePath))
+            if (ebayGroup.SelectTextBox != null && string.IsNullOrEmpty(ebayGroup.SelectTextBox.Text))
             {
-                ebayGroup.SelectTextBox.Text = _appConfig.Amazon.IsbnFilePath;
+                ebayGroup.SelectTextBox.Text = _db.GetIsbnFilePath(BookExchange.Ebay).Data;
                 ebayGroup.SelectTextBox.Refresh();
             }
             return;

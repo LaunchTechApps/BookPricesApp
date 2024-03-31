@@ -1,15 +1,13 @@
 ﻿using BookPricesApp.Core.Access.Amazon.Models;
 using BookPricesApp.Core.Domain;
-using BookPricesApp.Core.Domain.Config;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Utils;
+using BookPricesApp.Domain;
+using BookPricesApp.Domain.Files;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
-using System.Data;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace BookPricesApp.Core.Access.Amazon;
 
@@ -21,11 +19,11 @@ public class AmazonAccess : IAmazonAccess
     private EventBus _bus;
     private string? _accessToken;
 
-    public AmazonAccess(AppConfig appConfig, EventBus bus)
+    public AmazonAccess(Config config, EventBus bus)
     {
-        _config = appConfig.Amazon;
+        _config = config.Amazon;
         _bus = bus;
-        _email = appConfig.Email;
+        _email = config.Email;
     }
 
     public async Task SetRefresToken()
@@ -58,16 +56,37 @@ public class AmazonAccess : IAmazonAccess
         }
     }
 
-    public async Task<Option<List<ExportModel>>> GetDataByLookup(List<AmazonLookup> withLookup)
+    public async Task<Option<List<ExportModel>>> GetDataByLookup(List<AmazonLookup> lookups)
     {
+        var result = new List<ExportModel>();
         try
         {
-            throw new NotImplementedException();
+            var progress = new ProgressCounter(lookups.Count);
+            foreach (var lookup in lookups)
+            {
+                var exports = await getExportFor(lookup);
+                if (exports.Ex != null)
+                {
+                    // what do we do here?
+                    var test = "";
+                }
+                else if (exports.Data != null)
+                {
+                    result.AddRange(exports.Data);
+                }
+                _bus.Publish(new ProgressEvent
+                {
+                    Percent = progress.Increment(),
+                    Exchange = BookExchange.Amazon
+                });
+            }
+            result = result.Select(s => { s.Source = "Amazon"; return s; }).ToList();
         }
         catch (Exception ex)
         {
-            return new Option<List<ExportModel>> { Ex = ex };
+            return new Option<List<ExportModel>>(ex);
         }
+        return new Option<List<ExportModel>> { Data = result };
     }
 
     public async Task<Option<List<AmazonLookup>>> GetLookupsFor(List<string> isbnList)
@@ -82,7 +101,6 @@ public class AmazonAccess : IAmazonAccess
         foreach (var isbn in isbnList)
         {
             var lookup = await getLookupFor(isbn);
-            //Thread.Sleep(500);
 
             if (lookup.Ex != null)
             {
@@ -107,6 +125,75 @@ public class AmazonAccess : IAmazonAccess
 
         return new Option<List<AmazonLookup>> { Data = result };
     }
+    private async Task<Option<List<ExportModel>>> getExportFor(AmazonLookup lookup)
+    {
+        var result = new List<ExportModel>();
+        try
+        {
+            var path = "/products/2020-08-26/products";
+            var query = $"/{lookup.ASIN}/offers?locale=en_US&productRegion=US";
+            var client = new RestClient(new RestClientOptions(_config.BaseUrl)
+            {
+                MaxTimeout = -1,
+            });
+            var request = new RestRequest($"{path}{query}", Method.Get);
+            request.AddHeader("x-amz-access-token", _accessToken!);
+            request.AddHeader("x-amz-user-email", _email);
+            var response = await client.ExecuteAsync(request);
+            if (!response.IsSuccessStatusCode)
+            {
+                return new Option<List<ExportModel>> { Ex = new Exception(response.ErrorMessage) };
+            }
+            else if (response.Content == null)
+            {
+                var message = "response.Content in AmazonAccess.GetDataByKeyWords was found null";
+                return new Option<List<ExportModel>> { Ex = new Exception(message) };
+            }
+            else
+            {
+                var content = JsonConvert.DeserializeObject<ProductOffers>(response.Content);
+                var fo = content?.FeaturedOffer;
+                if (fo != null)
+                {
+                    result.Add(new ExportModel
+                    {
+                        ISBN = lookup.ISBN13,
+                        ItemId = lookup.ASIN ?? "",
+                        Title = lookup.Title ?? "",
+                        ItemUrl = lookup.URL ?? "",
+                        Condition = $"{fo.Condition.ConditionValue}-{fo.Condition.SubCondition}",
+                        Seller = fo.Merchant.Name ?? "",
+                        Location = "US",
+                        ShippingPrice = fo.DeliveryInformation ?? "",
+                        Price =fo.Price.Value.Amount.ToString(),
+                    });
+                }
+
+                foreach (var item in content?.Offers ?? Array.Empty<Offer>())
+                {
+                    result.Add(new ExportModel
+                    {
+                        ISBN = lookup.ISBN13,
+                        ItemId = lookup.ASIN ?? "",
+                        Title = lookup.Title ?? "",
+                        ItemUrl = lookup.URL ?? "",
+                        Condition = $"{item.Condition.ConditionValue}-{item.Condition.SubCondition}",
+                        Seller = item.Merchant.Name ?? "",
+                        Location = "US",
+                        ShippingPrice = item.DeliveryInformation ?? "",
+                        Price = item.Price.Value.Amount.ToString(),
+                    });
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            return new Option<List<ExportModel>> { Ex = ex };
+        }
+
+        return new Option<List<ExportModel>> { Data = result };
+    }
+
 
     private async Task<Option<List<AmazonLookup>>> getLookupFor(string isbn)
     {
@@ -141,6 +228,8 @@ public class AmazonAccess : IAmazonAccess
                     {
                         ISBN13 = isbn,
                         ASIN = item.Asin,
+                        Title = item.Title,
+                        URL = item.Url,
                         LastUsed = DateTime.Now.ToIso8601(),
                     });
                 }
