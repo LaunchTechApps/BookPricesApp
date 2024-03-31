@@ -5,15 +5,19 @@ using System.Data.SQLite;
 namespace BookPricesApp.Repo.Migrations;
 public class MigrationStartup
 {
-    public Option InitDB()
+    public Result<int, Exception> InitDB()
     {
         try
         {
-            string filePath = Config.DBFilePath;
 
-            if (!File.Exists(filePath))
+            if (!Directory.Exists(Config.DBFolderPath))
             {
-                SQLiteConnection.CreateFile(filePath);
+                Directory.CreateDirectory(Config.DBFolderPath);
+            }
+
+            if (!File.Exists(Config.DBFilePath))
+            {
+                SQLiteConnection.CreateFile(Config.DBFilePath);
             }
 
             var tables = new Tables();
@@ -34,8 +38,8 @@ public class MigrationStartup
         }
         catch (Exception ex)
         {
-            return new Option { Ex = ex };
+            return ex ;
         }
-        return new();
+        return 0;
     }
 }

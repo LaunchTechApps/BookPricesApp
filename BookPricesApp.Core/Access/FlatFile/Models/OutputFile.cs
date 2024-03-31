@@ -6,45 +6,45 @@ using System.Data;
 
 namespace BookPricesApp.Core.Access.FlatFile.Models;
 
-public class OutputFile
-{
-    private string _path = string.Empty;
-    private readonly OpenXmlConfiguration _exportConfig = new OpenXmlConfiguration
-    {
-        TableStyles = TableStyles.None,
-    };
+//public class OutputFile
+//{
+//    private string _path = string.Empty;
 
-    public Option CreateNewExport(string path)
-    {
-        _path = path;
-        return new();
-    }
+//    private readonly OpenXmlConfiguration _exportConfig = new OpenXmlConfiguration
+//    {
+//        TableStyles = TableStyles.None,
+//    };
 
-    private bool _exporting = false;
-    public Option Append(DataTable books)
-    {
-        if (_exporting)
-        {
-            return new();
-        }
+//    public void CreateNewExport(string path)
+//    {
+//        _path = path;
+//    }
 
-        _exporting = true;
+//    private bool _exporting = false;
+//    public Result<int, Exception> Append(DataTable books)
+//    {
+//        if (_exporting)
+//        {
+//            return new();
+//        }
 
-        try
-        {
-            if (File.Exists(_path))
-            {
-                File.Delete(_path);
-            }
+//        _exporting = true;
 
-            MiniExcel.SaveAs(_path, books, configuration: _exportConfig);
-        }
-        catch (Exception ex)
-        {
-            return new Option { Ex = ex };
-        }
+//        try
+//        {
+//            if (File.Exists(_path))
+//            {
+//                File.Delete(_path);
+//            }
 
-        _exporting = false;
-        return new();
-    }
-}
+//            MiniExcel.SaveAs(_path, books, configuration: _exportConfig);
+//        }
+//        catch (Exception ex)
+//        {
+//            return ex;
+//        }
+
+//        _exporting = false;
+//        return 0;
+//    }
+//}

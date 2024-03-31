@@ -4,12 +4,13 @@ using BookPricesApp.Core.Utils;
 using BookPricesApp.Domain.Files;
 using Dapper;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SQLite;
 
 namespace BookPricesApp.Repo;
 public class BookPriceRepo
 {
-    public Option InsertAmazonLookup(List<AmazonLookup> list)
+    public Result<int, Exception> InsertAmazonLookup(List<AmazonLookup> list)
     {
 		try
 		{
@@ -29,12 +30,12 @@ public class BookPriceRepo
         }
 		catch (Exception ex)
 		{
-			return new(ex);
+			return ex;
 		}
-        return new();
+        return 0;
     }
 
-    public Option<List<AmazonLookup>> GetAmazonLookup()
+    public Result<List<AmazonLookup>, Exception> GetAmazonLookup()
     {
         try
         {
@@ -45,16 +46,16 @@ public class BookPriceRepo
                 con.Open();
                 var lookupData = con.Query<AmazonLookup>(selectQuery).ToList();
                 con.Close();
-                return new Option<List<AmazonLookup>> { Data = lookupData };
+                return  lookupData;
             }
         }
         catch (Exception ex)
         {
-            return new(ex);
+            return ex;
         }
     }
 
-    public Option ExecuteQuery(string query)
+    public Result<int, Exception> ExecuteQuery(string query)
     {
         try
         {
@@ -68,12 +69,12 @@ public class BookPriceRepo
         }
         catch (Exception ex)
         {
-            return new(ex);
+            return ex;
         }
-        return new();
+        return 0;
     }
 
-    public Option SaveIsbnFilePath(BookExchange exchange, string path)
+    public Result<int, Exception> SaveIsbnFilePath(BookExchange exchange, string path)
     {
         try
         {
@@ -91,12 +92,12 @@ public class BookPriceRepo
         }
         catch (Exception ex)
         {
-            return new(ex);
+            return ex;
         }
-        return new();
+        return 0;
     }
 
-    public Option<string> GetIsbnFilePath(BookExchange exchange)
+    public Result<string, Exception> GetIsbnFilePath(BookExchange exchange)
     {
         try
         {
@@ -110,16 +111,16 @@ public class BookPriceRepo
                 con.Execute(query, item);
                 var path = con.Query<string>(query, item).FirstOrDefault();
                 con.Close();
-                return new Option<string> { Data = path ?? "" };
+                return  path ?? "";
             }
         }
         catch (Exception ex)
         {
-            return new(ex);
+            return ex;
         }
     }
 
-    public Option InsertAmazonOutput(List<ExportModel> list)
+    public Result<int, Exception> InsertAmazonOutput(List<ExportModel> list)
     {
         try
         {
@@ -141,8 +142,40 @@ public class BookPriceRepo
         }
         catch (Exception ex)
         {
-            return new(ex);
+            return ex;
         }
-        return new();
+
+        return 0;
+    }
+
+    public Result<List<ExportModel>, Exception> GetExportFor(BookExchange exchange)
+    {
+        try
+        {
+            switch (exchange)
+            {
+                case BookExchange.Amazon:
+
+                    lock (Global.LockObject)
+                    {
+                        string query = @"SELECT * FROM Output";
+                        using var con = new SQLiteConnection(Global.CS);
+                        con.Open();
+                        var item = new { Exchange = $"{exchange}" };
+                        con.Execute(query, item);
+                        var path = con.Query<ExportModel>(query, item).ToList();
+                        con.Close();
+                        return path;
+                    }
+                case BookExchange.Ebay:
+                    throw new NotImplementedException("Ebay export not implemented");
+                default:
+                    throw new Exception("Uknown exchange");
+            }
+        }
+        catch (Exception ex)
+        {
+            return ex;
+        }
     }
 }

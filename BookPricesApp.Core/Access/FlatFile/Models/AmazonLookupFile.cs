@@ -20,7 +20,7 @@ public class AmazonLookupFile
 
     private string _filePath => $"{_folderPath}\\AmazonLookup.csv";
 
-    public Option Append(List<AmazonLookup> books)
+    public Result<int, Exception> Append(List<AmazonLookup> books)
     {
         try
         {
@@ -50,36 +50,33 @@ public class AmazonLookupFile
         }
         catch (Exception ex)
         {
-            return new Option(ex);
+            return ex;
         }
-        return new();
+        return 0;
     }
 
-    public Option<List<AmazonLookup>> GetLookupList()
+    public Result<List<AmazonLookup>, Exception> GetLookupList()
     {
         try
         {
             lock (_fileLock)
             {
-                var data = new List<AmazonLookup>();
+                var result = new List<AmazonLookup>();
                 foreach(var book in MiniExcel.Query<AmazonLookup>(_filePath, excelType: ExcelType.CSV))
                 {
-                    data.Add(new AmazonLookup
+                    result.Add(new AmazonLookup
                     {
                         ISBN13 = book.ISBN13,
                         ASIN = book.ASIN,
                         LastUsed = book.LastUsed
                     });
                 }
-                return new Option<List<AmazonLookup>>()
-                {
-                    Data = data
-                };
+                return result;
             }
         }
         catch (Exception ex)
         {
-            return new Option<List<AmazonLookup>>(ex);
+            return ex;
         }
     }
 }

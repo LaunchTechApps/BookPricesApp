@@ -25,6 +25,7 @@ public partial class MainForm : Form
                      MainButton = amazon_main_btn,
                      Panel = amazon_pnl,
                      Tab = amazon_tab,
+                     StatusLabel = amazon_status_lbl
                  },
                  new SelectGroup
                  {

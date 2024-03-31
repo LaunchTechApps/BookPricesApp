@@ -16,6 +16,12 @@ public class StopEvent : ExchangeEvent { }
 
 public class StopRequestEvent : ExchangeEvent { }
 
+public class StatusLabelChangeEvent : ExchangeEvent 
+{
+    public string Status { get; set; } = string.Empty;
+}
+
+
 public class AlertEvent 
 { 
     public string Message { get; set; } = string.Empty;

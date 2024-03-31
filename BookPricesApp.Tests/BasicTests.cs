@@ -9,7 +9,7 @@ public class BasicTests
     [Fact]
     public void Test1()
     {
-        var db = new FlatFileAccess(new Config());
+        var db = new FlatFileAccess();
 
         DataTable dt = new DataTable();
 
@@ -41,7 +41,5 @@ public class BasicTests
 
             dt.Rows.Add(row);
         }
-
-        db.OutputAppend(dt);
     }
 }

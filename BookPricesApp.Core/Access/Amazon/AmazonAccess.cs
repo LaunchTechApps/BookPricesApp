@@ -26,37 +26,45 @@ public class AmazonAccess : IAmazonAccess
         _email = config.Email;
     }
 
-    public async Task SetRefresToken()
+    public async Task<Result<int, Exception>> SetRefresToken()
     {
-        var options = new RestClientOptions("https://api.amazon.com")
+        try
         {
-            MaxTimeout = -1,
-        };
-
-        var client = new RestClient(options);
-        var request = new RestRequest("/auth/O2/token", Method.Post);
-        request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-        request.AddParameter("grant_type", _config.ApiAccess.GrantType);
-        request.AddParameter("refresh_token", _config.ApiAccess.RefreshToken);
-        request.AddParameter("client_id", _config.ApiAccess.ClientId);
-        request.AddParameter("client_secret", _config.ApiAccess.ClientSecret);
-        var response = await client.ExecuteAsync(request);
-
-        if (!response.IsSuccessStatusCode)
-        {
-            _bus?.Publish(new ErrorEvent
+            var options = new RestClientOptions("https://api.amazon.com")
             {
-                Message = response.ErrorMessage ?? "no error message given"
-            });
+                MaxTimeout = -1,
+            };
+
+            var client = new RestClient(options);
+            var request = new RestRequest("/auth/O2/token", Method.Post);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("grant_type", _config.ApiAccess.GrantType);
+            request.AddParameter("refresh_token", _config.ApiAccess.RefreshToken);
+            request.AddParameter("client_id", _config.ApiAccess.ClientId);
+            request.AddParameter("client_secret", _config.ApiAccess.ClientSecret);
+            var response = await client.ExecuteAsync(request);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _bus?.Publish(new ErrorEvent
+                {
+                    Message = response.ErrorMessage ?? "no error message given"
+                });
+            }
+            else if (response.Content != null)
+            {
+                var responseObject = JObject.Parse(response.Content);
+                _accessToken = responseObject["access_token"]?.ToString();
+            }
         }
-        else if (response.Content != null)
+        catch (Exception ex)
         {
-            var responseObject = JObject.Parse(response.Content);
-            _accessToken = responseObject["access_token"]?.ToString();
+            return ex;
         }
+        return 0;
     }
 
-    public async Task<Option<List<ExportModel>>> GetDataByLookup(List<AmazonLookup> lookups)
+    public async Task<Result<List<ExportModel>, Exception>> GetDataByLookup(List<AmazonLookup> lookups)
     {
         var result = new List<ExportModel>();
         try
@@ -65,14 +73,14 @@ public class AmazonAccess : IAmazonAccess
             foreach (var lookup in lookups)
             {
                 var exports = await getExportFor(lookup);
-                if (exports.Ex != null)
+                if (exports.Error != null)
                 {
                     // what do we do here?
                     var test = "";
                 }
-                else if (exports.Data != null)
+                else if (exports.Value != null)
                 {
-                    result.AddRange(exports.Data);
+                    result.AddRange(exports.Value);
                 }
                 _bus.Publish(new ProgressEvent
                 {
@@ -84,18 +92,20 @@ public class AmazonAccess : IAmazonAccess
         }
         catch (Exception ex)
         {
-            return new Option<List<ExportModel>>(ex);
+            return ex;
         }
-        return new Option<List<ExportModel>> { Data = result };
+
+        return result;
     }
 
-    public async Task<Option<List<AmazonLookup>>> GetLookupsFor(List<string> isbnList)
+    public async Task<Result<List<AmazonLookup>, Exception>> GetLookupsFor(List<string> isbnList)
     {
         if (_accessToken == null)
         {
             var ex = new Exception("_accessToken was found null");
-            return new Option<List<AmazonLookup>> { Ex = ex };
+            return ex;
         }
+
         var result = new List<AmazonLookup>();
         var progress = new ProgressCounter(isbnList.Count);
         foreach (var isbn in isbnList)
@@ -123,9 +133,9 @@ public class AmazonAccess : IAmazonAccess
             });
         }
 
-        return new Option<List<AmazonLookup>> { Data = result };
+        return result;
     }
-    private async Task<Option<List<ExportModel>>> getExportFor(AmazonLookup lookup)
+    private async Task<Result<List<ExportModel>, Exception>> getExportFor(AmazonLookup lookup)
     {
         var result = new List<ExportModel>();
         try
@@ -142,12 +152,12 @@ public class AmazonAccess : IAmazonAccess
             var response = await client.ExecuteAsync(request);
             if (!response.IsSuccessStatusCode)
             {
-                return new Option<List<ExportModel>> { Ex = new Exception(response.ErrorMessage) };
+                return new Exception(response.ErrorMessage);
             }
             else if (response.Content == null)
             {
                 var message = "response.Content in AmazonAccess.GetDataByKeyWords was found null";
-                return new Option<List<ExportModel>> { Ex = new Exception(message) };
+                return new Exception(message);
             }
             else
             {
@@ -188,60 +198,11 @@ public class AmazonAccess : IAmazonAccess
         }
         catch (Exception ex)
         {
-            return new Option<List<ExportModel>> { Ex = ex };
+            return ex;
         }
 
-        return new Option<List<ExportModel>> { Data = result };
+        return result;
     }
-
-
-    //private async Task<Option<List<AmazonLookup>>> getLookupFor(string isbn)
-    //{
-    //    var result = new List<AmazonLookup>();
-    //    try
-    //    {
-    //        var path = "/products/2020-08-26/products";
-    //        var query = $"?locale=en_US&productRegion=US&facets=OFFERS&keywords={isbn}";
-    //        var client = new RestClient(new RestClientOptions(_config.BaseUrl)
-    //        {
-    //            MaxTimeout = -1,
-    //        });
-    //        var request = new RestRequest($"{path}{query}", Method.Get);
-    //        request.AddHeader("x-amz-access-token", _accessToken!);
-    //        request.AddHeader("x-amz-user-email", _email);
-    //        var response = await client.ExecuteAsync(request);
-    //        if (!response.IsSuccessStatusCode)
-    //        {
-    //            return new Option<List<AmazonLookup>> { Ex = new Exception(response.ErrorMessage) };
-    //        }
-    //        else if (response.Content == null)
-    //        {
-    //            var message = "response.Content in AmazonAccess.GetDataByKeyWords was found null";
-    //            return new Option<List<AmazonLookup>> { Ex = new Exception(message) };
-    //        }
-    //        else
-    //        {
-    //            var content = JsonConvert.DeserializeObject<ProductListing>(response.Content);
-    //            foreach (var item in content?.Products ?? Array.Empty<Product>())
-    //            {
-    //                result.Add(new AmazonLookup
-    //                {
-    //                    ISBN13 = isbn,
-    //                    ASIN = item.Asin,
-    //                    Title = item.Title,
-    //                    URL = item.Url,
-    //                    LastUsed = DateTime.Now.ToIso8601(),
-    //                });
-    //            }
-    //        }
-    //    }
-    //    catch (Exception ex)
-    //    {
-    //        return new Option<List<AmazonLookup>> { Ex = ex };
-    //    }
-
-    //    return new Option<List<AmazonLookup>> { Data = result };
-    //}
 
     private async Task<Result<List<AmazonLookup>, Exception>> getLookupFor(string isbn)
     {

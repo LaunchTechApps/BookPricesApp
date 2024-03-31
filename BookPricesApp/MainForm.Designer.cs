@@ -45,6 +45,7 @@ partial class MainForm
         ebay_progress = new ProgressBar();
         version_lbl = new Label();
         filePicker = new OpenFileDialog();
+        amazon_status_lbl = new Label();
         amazon_pnl.SuspendLayout();
         ebay_pnl.SuspendLayout();
         SuspendLayout();
@@ -52,6 +53,7 @@ partial class MainForm
         // amazon_pnl
         // 
         amazon_pnl.BorderStyle = BorderStyle.FixedSingle;
+        amazon_pnl.Controls.Add(amazon_status_lbl);
         amazon_pnl.Controls.Add(amazon_main_btn);
         amazon_pnl.Controls.Add(amazon_text_box);
         amazon_pnl.Controls.Add(amazon_select_btn);
@@ -200,7 +202,17 @@ partial class MainForm
         version_lbl.TabIndex = 10;
         version_lbl.Text = "...";
         // 
-        // BookPrices
+        // amazon_status_lbl
+        // 
+        amazon_status_lbl.AutoSize = true;
+        amazon_status_lbl.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+        amazon_status_lbl.Location = new Point(124, 77);
+        amazon_status_lbl.Name = "amazon_status_lbl";
+        amazon_status_lbl.Size = new Size(17, 17);
+        amazon_status_lbl.TabIndex = 15;
+        amazon_status_lbl.Text = "...";
+        // 
+        // MainForm
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
@@ -214,7 +226,7 @@ partial class MainForm
         MaximizeBox = false;
         MaximumSize = new Size(600, 675);
         MinimumSize = new Size(600, 675);
-        Name = "BookPrices";
+        Name = "MainForm";
         Text = "Book Prices";
         amazon_pnl.ResumeLayout(false);
         amazon_pnl.PerformLayout();
@@ -243,4 +255,5 @@ partial class MainForm
     private Button ebay_main_btn;
     private TextBox ebay_text_box;
     private Button ebay_select_btn;
+    private Label amazon_status_lbl;
 }

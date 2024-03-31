@@ -118,7 +118,7 @@ public class ViewModel
         {
             if (amazonGroup.SelectTextBox != null && string.IsNullOrEmpty(amazonGroup.SelectTextBox.Text))
             {
-                amazonGroup.SelectTextBox.Text = _db.GetIsbnFilePath(BookExchange.Amazon).Data;
+                amazonGroup.SelectTextBox.Text = _db.GetIsbnFilePath(BookExchange.Amazon).Value;
                 amazonGroup.SelectTextBox.Refresh();
             }
             return;
@@ -129,7 +129,7 @@ public class ViewModel
         {
             if (ebayGroup.SelectTextBox != null && string.IsNullOrEmpty(ebayGroup.SelectTextBox.Text))
             {
-                ebayGroup.SelectTextBox.Text = _db.GetIsbnFilePath(BookExchange.Ebay).Data;
+                ebayGroup.SelectTextBox.Text = _db.GetIsbnFilePath(BookExchange.Ebay).Value;
                 ebayGroup.SelectTextBox.Refresh();
             }
             return;
@@ -178,6 +178,16 @@ public class ViewModel
             {
                 group.MainButton.Call(p => p.Text = "Stopping");
                 group.MainButton.Call(p => p.BackColor = Color.FromArgb(255, 255, 150));
+            }
+        });
+
+        _bus?.OnEvent((StatusLabelChangeEvent e) =>
+        {
+            var group = _selectGroup.FirstOrDefault(g => g.Exchange == e.Exchange);
+            if (group?.MainButton != null)
+            {
+                group.StatusLabel?.Call(t => t.Text = e.Status);
+                group.StatusLabel?.Call(t => t.Refresh());
             }
         });
 

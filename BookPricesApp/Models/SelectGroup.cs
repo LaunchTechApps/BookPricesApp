@@ -10,4 +10,5 @@ public class SelectGroup
     public Panel? Panel { get; set; }
     public TextBox? SelectTextBox { get; set; }
     public ProgressBar? ProgressBar { get; set; }
+    public Label? StatusLabel { get; set; }
 }

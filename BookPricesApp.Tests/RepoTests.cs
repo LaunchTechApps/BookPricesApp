@@ -10,7 +10,7 @@ public class RepoTests
     public void Test1()
     {
         var result = new MigrationStartup().InitDB();
-        Assert.Null(result.Ex);
+        Assert.Null(result.Error);
     }
 
     [Fact]
