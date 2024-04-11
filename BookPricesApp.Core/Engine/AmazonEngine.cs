@@ -1,4 +1,5 @@
 ﻿using BookPricesApp.Core.Access.Amazon;
+using BookPricesApp.Core.Access.DB;
 using BookPricesApp.Core.Access.FlatFile;
 using BookPricesApp.Core.Domain;
 using BookPricesApp.Core.Domain.Events;
@@ -6,10 +7,7 @@ using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Engine.Models;
 using BookPricesApp.Core.Utils;
 using BookPricesApp.Domain.Files;
-using BookPricesApp.Repo;
-using BookPricesApp.Repo.Migrations;
 using System.Data;
-using System.Linq;
 
 namespace BookPricesApp.Core.Engine;
 
@@ -27,13 +25,13 @@ public class AmazonEngine : IExchangeEngine
     private IFlatFileAccess _flatFileAccess;
     private EngineState _engineState = EngineState.NotRunning;
     private AmazonAccess _amazonAccess;
-    private BookPriceRepo _db;
+    private DBAccess _db;
 
     public AmazonEngine(
         EventBus bus, 
         AmazonAccess amazonAccess, 
         IFlatFileAccess flatFileAccess,
-        BookPriceRepo db)
+        DBAccess db)
     {
         _bus = bus;
         _amazonAccess = amazonAccess;
@@ -144,7 +142,7 @@ public class AmazonEngine : IExchangeEngine
         {
             // TODO: if any of the below methods error, they need to be handled
             _db.ExecuteQuery("DROP TABLE IF EXISTS [Output]");
-            _db.ExecuteQuery(Tables.CreateOutputTable);
+            _db.ExecuteQuery(Migrations.CreateOutputTable);
             _db.InsertAmazonOutput(outputList.Value);
         }
         else if (outputList.Value == null)

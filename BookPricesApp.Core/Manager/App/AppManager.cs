@@ -1,11 +1,11 @@
 ﻿using BookPricesApp.Core.Access;
+using BookPricesApp.Core.Access.DB;
 using BookPricesApp.Core.Access.FlatFile;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Engine;
 using BookPricesApp.Core.Utils;
 using BookPricesApp.Domain;
-using BookPricesApp.Repo;
 
 namespace BookPricesApp.Core.Manager.App;
 
@@ -20,10 +20,10 @@ public class AppManager : IAppManager
     private EventBus _bus;
     private Config _config;
     private IFlatFileAccess _flatFileAccess;
-    private BookPriceRepo _db;
+    private DBAccess _db;
     public AppManager(
         EngineProvider engineProvider,
-        BookPriceRepo db,
+        DBAccess db,
         EventBus bus, 
         Config config,
         IFlatFileAccess flatFileAccess)

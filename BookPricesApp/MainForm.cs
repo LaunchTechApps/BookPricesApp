@@ -4,8 +4,9 @@ using BookPricesApp.GUI.Models;
 using BookPricesApp.GUI.Utils;
 
 namespace BookPrices;
-// TODO: create a file in S3 and use that file for these look ups.
-//    - each exchange gets its own lookup file - csv
+// TODO: No more exporting - delete the MiniExcel library
+// TODO: Remove all Exchange Data from the Output table that we are running instead of dropping the table.
+// TOOD: Create an amazon table that replaces the output table - each exchange will get its own table
 public partial class MainForm : Form
 {
     private ViewModel _vm;

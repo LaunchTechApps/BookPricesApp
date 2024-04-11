@@ -11,7 +11,7 @@ public class AmazonLookup
     public string? ASIN { get; set; }
     public string? Title { get; set; }
     public string? URL { get; set; }
-    public string? LastUsed { get; set; }
+    public DateTime LastUsed { get; set; }
     public string? Error { get; set; }
     public bool HasLookup() => ASIN != null;
 }

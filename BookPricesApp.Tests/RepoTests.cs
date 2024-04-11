@@ -1,6 +1,5 @@
-﻿using BookPricesApp.Domain.Files;
-using BookPricesApp.Repo;
-using BookPricesApp.Repo.Migrations;
+﻿using BookPricesApp.Core.Access.DB;
+using BookPricesApp.Domain.Files;
 
 namespace BookPricesApp.Tests;
 
@@ -9,32 +8,32 @@ public class RepoTests
     [Fact]
     public void Test1()
     {
-        var result = new MigrationStartup().InitDB();
+        var result = new DBAccess().InitDB();
         Assert.Null(result.Error);
     }
 
     [Fact]
     public void Test2()
     {
-        var db = new BookPriceRepo();
-        var test = db.InsertAmazonLookup(new List<AmazonLookup>
+        var db = new DBAccess();
+        var result = db.InsertAmazonLookup(new List<AmazonLookup>
         {
             new AmazonLookup
             {
                 ISBN13 = "Test",
                 ASIN = "Test",
                 Error = "Test",
-                LastUsed = "Test",
+                LastUsed = DateTime.Now,
             }
         });
-        var test2 = "";
+        Assert.Null(result.Error);
     }
 
     [Fact]
     public void Test3()
     {
-        var db = new BookPriceRepo();
-        var test = db.GetAmazonLookup();
-        var test2 = "";
+        var db = new DBAccess();
+        var result = db.GetAmazonLookup();
+        Assert.Null(result.Error);
     }
 }

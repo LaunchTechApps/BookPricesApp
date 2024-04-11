@@ -9,9 +9,8 @@ using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Utils;
 using BookPricesApp.Core.Access.FlatFile;
 using Newtonsoft.Json;
-using BookPricesApp.Repo;
 using BookPricesApp.Domain;
-using BookPricesApp.Repo.Migrations;
+using BookPricesApp.Core.Access.DB;
 
 namespace BookPricesApp.GUI;
 public class ViewModel
@@ -21,7 +20,7 @@ public class ViewModel
     private BookExchange _activeExchange = BookExchange.Amazon;
     private EventBus _bus = new();
     private Config _config = new();
-    private BookPriceRepo _db = new();
+    private DBAccess _db = new();
     public ViewModel(List<SelectGroup> selectGroup)
     {
         _selectGroup = selectGroup;
@@ -37,7 +36,7 @@ public class ViewModel
         }
 
         _config = JsonConvert.DeserializeObject<Config>(json)!;
-        new MigrationStartup().InitDB();
+        _db.InitDB();
 
         var services = new ServiceCollection();
 

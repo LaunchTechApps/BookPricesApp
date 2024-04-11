@@ -117,7 +117,7 @@ public class AmazonAccess : IAmazonAccess
                 result.Add(new AmazonLookup
                 {
                     ISBN13 = isbn,
-                    LastUsed = DateTime.UtcNow.ToIso8601(),
+                    LastUsed = DateTime.Now,
                     Error = lookup.Error.Message
                 });
             }
@@ -239,7 +239,7 @@ public class AmazonAccess : IAmazonAccess
                         ASIN = item.Asin,
                         Title = item.Title,
                         URL = item.Url,
-                        LastUsed = DateTime.Now.ToIso8601(),
+                        LastUsed = DateTime.Now,
                     });
                 }
             }
