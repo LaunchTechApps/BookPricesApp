@@ -403,3 +403,5 @@ config.json
 *.xlsx
 *.xls
 BookPricesApp.Core/Config.cs
+
+appsettings.json

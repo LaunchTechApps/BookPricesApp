@@ -1,10 +1,9 @@
 ﻿using BookPricesApp.Core.Access.Amazon.Models;
 using BookPricesApp.Core.Domain;
 using BookPricesApp.Core.Domain.Events;
-using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Utils;
-using BookPricesApp.Domain;
 using BookPricesApp.Domain.Files;
+using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -14,19 +13,46 @@ namespace BookPricesApp.Core.Access.Amazon;
 public interface IAmazonAccess { }
 public class AmazonAccess : IAmazonAccess
 {
-    private AmazonConfig _config;
-    private string _email;
+    private IConfiguration _config;
     private EventBus _bus;
     private string? _accessToken;
 
-    public AmazonAccess(Config config, EventBus bus)
+    public AmazonAccess(IConfiguration config, EventBus bus)
     {
-        _config = config.Amazon;
+        _config = config;
         _bus = bus;
-        _email = config.Email;
     }
 
-    public async Task<Result<int, Exception>> SetRefresToken()
+    private bool _runningRefreshToken = false;
+    public async Task<Result<Success, Exception>> StartRefreshTokenInterval()
+    {
+        try
+        {
+            void refreshTheRefreshToken()
+            {
+                if (_runningRefreshToken)
+                {
+                    return;
+                }
+                _runningRefreshToken = true;
+                while (_runningRefreshToken)
+                {
+                    Thread.Sleep(Duration.Minutes(58));
+                    _ = setRefresToken();
+                }
+            }
+
+            new Thread(refreshTheRefreshToken).Start();
+            await setRefresToken();
+        }
+        catch (Exception ex)
+        {
+            return ex;
+        }
+        return Success.Result;
+    }
+
+    private async Task<Result<int, Exception>> setRefresToken()
     {
         try
         {
@@ -37,11 +63,11 @@ public class AmazonAccess : IAmazonAccess
 
             var client = new RestClient(options);
             var request = new RestRequest("/auth/O2/token", Method.Post);
-            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddParameter("grant_type", _config.ApiAccess.GrantType);
-            request.AddParameter("refresh_token", _config.ApiAccess.RefreshToken);
-            request.AddParameter("client_id", _config.ApiAccess.ClientId);
-            request.AddParameter("client_secret", _config.ApiAccess.ClientSecret);
+            var test = _config.GetSection("amazon:apiAccess")["grantType"];
+            request.AddParameter("grant_type", _config.GetSection("amazon:apiAccess")["grantType"]);
+            request.AddParameter("refresh_token", _config.GetSection("amazon:apiAccess")["refreshToken"]);
+            request.AddParameter("client_id", _config.GetSection("amazon:apiAccess")["clientId"]);
+            request.AddParameter("client_secret", _config.GetSection("amazon:apiAccess")["clientSecret"]);
             var response = await client.ExecuteAsync(request);
 
             if (!response.IsSuccessStatusCode)
@@ -64,91 +90,21 @@ public class AmazonAccess : IAmazonAccess
         return 0;
     }
 
-    public async Task<Result<List<ExportModel>, Exception>> GetDataByLookup(List<AmazonLookup> lookups)
-    {
-        var result = new List<ExportModel>();
-        try
-        {
-            var progress = new ProgressCounter(lookups.Count);
-            foreach (var lookup in lookups)
-            {
-                var exports = await getExportFor(lookup);
-                if (exports.Error != null)
-                {
-                    // what do we do here?
-                    var test = "";
-                }
-                else if (exports.Value != null)
-                {
-                    result.AddRange(exports.Value);
-                }
-                _bus.Publish(new ProgressEvent
-                {
-                    Percent = progress.Increment(),
-                    Exchange = BookExchange.Amazon
-                });
-            }
-            result = result.Select(s => { s.Source = "Amazon"; return s; }).ToList();
-        }
-        catch (Exception ex)
-        {
-            return ex;
-        }
-
-        return result;
-    }
-
-    public async Task<Result<List<AmazonLookup>, Exception>> GetLookupsFor(List<string> isbnList)
-    {
-        if (_accessToken == null)
-        {
-            var ex = new Exception("_accessToken was found null");
-            return ex;
-        }
-
-        var result = new List<AmazonLookup>();
-        var progress = new ProgressCounter(isbnList.Count);
-        foreach (var isbn in isbnList)
-        {
-            var lookup = await getLookupFor(isbn);
-
-            if (lookup.Error != null)
-            {
-                result.Add(new AmazonLookup
-                {
-                    ISBN13 = isbn,
-                    LastUsed = DateTime.Now,
-                    Error = lookup.Error.Message
-                });
-            }
-            else
-            {
-                lookup.Value?.ForEach(result.Add);
-            }
-            
-            _bus.Publish(new ProgressEvent
-            {
-                Percent = progress.Increment(),
-                Exchange = BookExchange.Amazon
-            });
-        }
-
-        return result;
-    }
-    private async Task<Result<List<ExportModel>, Exception>> getExportFor(AmazonLookup lookup)
+    public async Task<Result<List<ExportModel>, Exception>> GetDataByLookup(AmazonLookup lookup)
     {
         var result = new List<ExportModel>();
         try
         {
             var path = "/products/2020-08-26/products";
             var query = $"/{lookup.ASIN}/offers?locale=en_US&productRegion=US";
-            var client = new RestClient(new RestClientOptions(_config.BaseUrl)
+            var baseUrl = _config.GetSection("amazon")["baseUrl"]!;
+            var client = new RestClient(new RestClientOptions(baseUrl)
             {
                 MaxTimeout = -1,
             });
             var request = new RestRequest($"{path}{query}", Method.Get);
             request.AddHeader("x-amz-access-token", _accessToken!);
-            request.AddHeader("x-amz-user-email", _email);
+            request.AddHeader("x-amz-user-email", _config.GetSection("email").Value!);
             var response = await client.ExecuteAsync(request);
             if (!response.IsSuccessStatusCode)
             {
@@ -175,7 +131,7 @@ public class AmazonAccess : IAmazonAccess
                         Seller = fo.Merchant.Name ?? "",
                         Location = "US",
                         ShippingPrice = fo.DeliveryInformation ?? "",
-                        Price =fo.Price.Value.Amount.ToString(),
+                        Price = fo.Price.Value.Amount.ToString(),
                     });
                 }
 
@@ -204,6 +160,34 @@ public class AmazonAccess : IAmazonAccess
         return result;
     }
 
+    public async Task<Result<List<AmazonLookup>, Exception>> GetLookupsFor(string isbn)
+    {
+        if (_accessToken == null)
+        {
+            var ex = new Exception("_accessToken was found null");
+            return ex;
+        }
+
+        var result = new List<AmazonLookup>();
+        var lookup = await getLookupFor(isbn);
+
+        if (lookup.Error is not null)
+        {
+            result.Add(new AmazonLookup
+            {
+                ISBN13 = isbn,
+                LastUsed = DateTime.Now,
+                Error = lookup.Error.Message
+            });
+        }
+        else
+        {
+            lookup.Value?.ForEach(result.Add);
+        }
+
+        return result;
+    }
+
     private async Task<Result<List<AmazonLookup>, Exception>> getLookupFor(string isbn)
     {
         var result = new List<AmazonLookup>();
@@ -211,13 +195,14 @@ public class AmazonAccess : IAmazonAccess
         {
             var path = "/products/2020-08-26/products";
             var query = $"?locale=en_US&productRegion=US&facets=OFFERS&keywords={isbn}";
-            var client = new RestClient(new RestClientOptions(_config.BaseUrl)
+            var baseUrl = _config.GetSection("amazon")["baseUrl"]!;
+            var client = new RestClient(new RestClientOptions(baseUrl)
             {
                 MaxTimeout = -1,
             });
             var request = new RestRequest($"{path}{query}", Method.Get);
             request.AddHeader("x-amz-access-token", _accessToken!);
-            request.AddHeader("x-amz-user-email", _email);
+            request.AddHeader("x-amz-user-email", _config.GetSection("email").Value!);
             var response = await client.ExecuteAsync(request);
             if (!response.IsSuccessStatusCode)
             {

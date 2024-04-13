@@ -4,7 +4,7 @@ using System.Data;
 namespace BookPricesApp.Core.Engine;
 public interface IExchangeEngine
 {
-    Result<int, Exception> Run(List<string> isbnList);
+    Result<Success, Exception> Run(List<string> isbnList);
 }
 
 public class EngineProvider

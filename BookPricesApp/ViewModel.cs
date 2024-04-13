@@ -7,10 +7,9 @@ using BookPricesApp.Core.Engine;
 using BookPricesApp.Core.Access.Amazon;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Utils;
-using BookPricesApp.Core.Access.FlatFile;
-using Newtonsoft.Json;
-using BookPricesApp.Domain;
 using BookPricesApp.Core.Access.DB;
+using Microsoft.Extensions.Configuration;
+
 
 namespace BookPricesApp.GUI;
 public class ViewModel
@@ -19,36 +18,36 @@ public class ViewModel
     private ServiceProvider? _serviceProvider;
     private BookExchange _activeExchange = BookExchange.Amazon;
     private EventBus _bus = new();
-    private Config _config = new();
-    private DBAccess _db = new();
+    private DBAccess _db;
+    private IConfiguration _config;
     public ViewModel(List<SelectGroup> selectGroup)
     {
         _selectGroup = selectGroup;
 
-        var path = $"{Directory.GetCurrentDirectory()}\\Config.json";
-        var json = File.ReadAllText(path);
+        var builder = new ConfigurationBuilder()
+            .SetBasePath(Directory.GetCurrentDirectory())
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
-        if (string.IsNullOrEmpty(json))
+        _config = builder.Build();
+        
+        var dbResult = new DBAccess(_config).InitDB();
+        if (dbResult.Error is not null)
         {
-            var msg = "Config file was not found or was empyt.";
-            MessageBox.Show(msg);
-            return;
+            var messageTrace = dbResult.Error.ToMessageTrace();
+            var message = $"Unable to init DBAccess: {messageTrace}";
+            MessageBox.Show(message);
+            Environment.Exit(1);
         }
-
-        _config = JsonConvert.DeserializeObject<Config>(json)!;
-        _db.InitDB();
+        _db = dbResult.Value!;
 
         var services = new ServiceCollection();
-
         services.AddSingleton(_bus);
         services.AddSingleton(_config);
         services.AddSingleton(_db);
-        services.AddSingleton<IFlatFileAccess, FlatFileAccess>();
         services.AddSingleton<IAppManager, AppManager>();
         services.AddSingleton<AmazonEngine>();
         services.AddSingleton<EngineProvider>();
         services.AddSingleton<AmazonAccess>();
-
         _serviceProvider = services.BuildServiceProvider();
 
         setupEventBus();
@@ -220,5 +219,10 @@ public class ViewModel
             _errodModel.AppendError(e.Message);
             _errodModel.Call(m => m.ShowDialog());
         }
+    }
+
+    public string GetVersion()
+    {
+        return _config.GetSection("version").Value ?? "could not get version";
     }
 }

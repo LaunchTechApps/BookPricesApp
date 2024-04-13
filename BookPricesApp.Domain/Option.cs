@@ -21,3 +21,8 @@ public readonly struct Result<TValue, TError>
     public static implicit operator Result<TValue, TError>(TValue value) => new(value);
     public static implicit operator Result<TValue, TError>(TError error) => new(error);
 }
+
+public class Success 
+{
+    public static Success Result = new();
+}

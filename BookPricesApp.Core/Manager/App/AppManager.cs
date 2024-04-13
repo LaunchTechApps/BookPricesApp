@@ -1,11 +1,10 @@
 ﻿using BookPricesApp.Core.Access;
 using BookPricesApp.Core.Access.DB;
-using BookPricesApp.Core.Access.FlatFile;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Engine;
 using BookPricesApp.Core.Utils;
-using BookPricesApp.Domain;
+using Microsoft.Extensions.Configuration;
 
 namespace BookPricesApp.Core.Manager.App;
 
@@ -18,21 +17,18 @@ public class AppManager : IAppManager
 {
     private EngineProvider _engineProvider { get; set; }
     private EventBus _bus;
-    private Config _config;
-    private IFlatFileAccess _flatFileAccess;
+    private IConfiguration _config;
     private DBAccess _db;
     public AppManager(
         EngineProvider engineProvider,
         DBAccess db,
-        EventBus bus, 
-        Config config,
-        IFlatFileAccess flatFileAccess)
+        EventBus bus,
+        IConfiguration config)
     {
         _engineProvider = engineProvider;
         _bus = bus;
         _db = db;
         _config = config;
-        _flatFileAccess = flatFileAccess;
     }
     public void SubmitMainEvent(BookExchange exchange, string isbnFilePath)
     {

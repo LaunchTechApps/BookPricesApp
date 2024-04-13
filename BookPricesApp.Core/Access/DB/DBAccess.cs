@@ -4,25 +4,35 @@ using BookPricesApp.Core.Utils;
 using BookPricesApp.Domain.Files;
 using Dapper;
 using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace BookPricesApp.Core.Access.DB;
 public class DBAccess
 {
-    private string _cs => "Server=localhost\\SQLEXPRESS01;Database=master;Trusted_Connection=True;";
-    public Result<int, Exception> InsertAmazonLookup(List<AmazonLookup> list)
+    private IConfiguration _config;
+    private SqlConnection _connection 
+    {
+        get
+        {
+            var cs = _config.GetConnectionString("sqlExpress")!;
+            var con = new SqlConnection(cs);
+            return con;
+        }
+    }
+    public DBAccess(IConfiguration config)
+    {
+        _config = config;
+    }
+
+    public Result<int, Exception> InsertAmazonLookup(AmazonLookup lookup)
     {
         try
         {
             string insertQuery = @"INSERT INTO AmazonLookup (ISBN13, ASIN, LastUsed, Title, URL, Error) 
                     VALUES (@ISBN13, @ASIN, @LastUsed, @Title, @URL, @Error)";
 
-            using var con = new SqlConnection(_cs);
-            con.Open();
-            foreach (var item in list)
-            {
-                con.Execute(insertQuery, item);
-            }
-            con.Close();
+            using var con = _connection;
+            con.Execute(insertQuery, lookup);
         }
         catch (Exception ex)
         {
@@ -36,11 +46,10 @@ public class DBAccess
         try
         {
             string selectQuery = @"SELECT * FROM AmazonLookup";
-            using var con = new SqlConnection(_cs);
-            con.Open();
-            var lookupData = con.Query<AmazonLookup>(selectQuery).ToList();
-            con.Close();
-            return lookupData;
+            using var con = _connection;
+            var data = con.Query<AmazonLookup>(selectQuery).ToList();
+            data = data ?? new List<AmazonLookup>();
+            return data;
         }
         catch (Exception ex)
         {
@@ -48,40 +57,36 @@ public class DBAccess
         }
     }
 
-    public Result<int, Exception> ExecuteQuery(string query)
+    public Result<Success, Exception> ExecuteQuery(string query)
     {
         try
         {
-            using var con = new SqlConnection(_cs);
-            con.Open();
+            using var con = _connection;
             con.Execute(query);
-            con.Close();
         }
         catch (Exception ex)
         {
             return ex;
         }
-        return 0;
+        return Success.Result;
     }
 
-    public Result<int, Exception> SaveIsbnFilePath(BookExchange exchange, string path)
+    public Result<Success, Exception> SaveIsbnFilePath(BookExchange exchange, string path)
     {
         try
         {
             string insertQuery = @"INSERT INTO IsbnFilePaths (Exchange, FilePath) 
                     VALUES (@Exchange, @FilePath)";
 
-            using var con = new SqlConnection(_cs);
-            con.Open();
+            using var con = _connection;
             var item = new { Exchange = $"{exchange}", FilePath = path };
             con.Execute(insertQuery, item);
-            con.Close();
         }
         catch (Exception ex)
         {
             return ex;
         }
-        return 0;
+        return Success.Result;
     }
 
     public Result<string, Exception> GetIsbnFilePath(BookExchange exchange)
@@ -90,12 +95,9 @@ public class DBAccess
         {
             string query = @"SELECT FilePath FROM IsbnFilePaths
                             WHERE Exchange = @Exchange";
-            using var con = new SqlConnection(_cs);
-            con.Open();
             var item = new { Exchange = $"{exchange}" };
-            con.Execute(query, item);
+            using var con = _connection;
             var path = con.Query<string>(query, item).FirstOrDefault();
-            con.Close();
             return path ?? "";
         }
         catch (Exception ex)
@@ -104,29 +106,23 @@ public class DBAccess
         }
     }
 
-    public Result<int, Exception> InsertAmazonOutput(List<ExportModel> list)
+    public Result<Success, Exception> InsertAmazonOutput(ExportModel data)
     {
         try
         {
-            string insertQuery = @"INSERT INTO Output 
+            string insertQuery = @"INSERT INTO AmazonBookData 
             (ISBN, ItemId, Title, Seller, Location, ShippingPrice, Price, Condition, ItemUrl, Source) 
                 VALUES 
             (@ISBN, @ItemId, @Title, @Seller, @Location, @ShippingPrice, @Price, @Condition, @ItemUrl, @Source)";
-
-            using var con = new SqlConnection(_cs);
-            con.Open();
-            foreach (var item in list)
-            {
-                con.Execute(insertQuery, item);
-            }
-            con.Close();
+            using var con = _connection;
+            con.Execute(insertQuery, data);
         }
         catch (Exception ex)
         {
             return ex;
         }
 
-        return 0;
+        return Success.Result;
     }
 
     public Result<List<ExportModel>, Exception> GetExportFor(BookExchange exchange)
@@ -137,14 +133,12 @@ public class DBAccess
             {
                 case BookExchange.Amazon:
                     {
-                        string query = @"SELECT * FROM Output";
-                        using var con = new SqlConnection(_cs);
-                        con.Open();
+                        string query = @"SELECT * FROM AmazonBookData";
                         var item = new { Exchange = $"{exchange}" };
-                        con.Execute(query, item);
-                        var path = con.Query<ExportModel>(query, item).ToList();
-                        con.Close();
-                        return path;
+                        using var con = _connection;
+                        var data = con.Query<ExportModel>(query, item).ToList();
+                        data = data ?? new List<ExportModel>();
+                        return data;
                     }
                 case BookExchange.Ebay:
                     throw new NotImplementedException("Ebay export not implemented");
@@ -157,28 +151,22 @@ public class DBAccess
             return ex;
         }
     }
-    public Result<int, Exception> InitDB()
+    public Result<DBAccess, Exception> InitDB()
     {
         try
         {
             var tables = new Migrations();
-
-            using var con = new SqlConnection(_cs);
-            con.Open();
-
+            using var con = _connection;
             foreach (var query in tables.CreateTableArray)
             {
-                using var cmd = new SqlCommand(query, con);
-                cmd.ExecuteNonQuery();
+                con.Execute(query);
             }
-
-            con.Close();
         }
         catch (Exception ex)
         {
             return ex;
         }
 
-        return 0;
+        return this;
     }
 }

@@ -4,9 +4,6 @@ using BookPricesApp.GUI.Models;
 using BookPricesApp.GUI.Utils;
 
 namespace BookPrices;
-// TODO: No more exporting - delete the MiniExcel library
-// TODO: Remove all Exchange Data from the Output table that we are running instead of dropping the table.
-// TOOD: Create an amazon table that replaces the output table - each exchange will get its own table
 public partial class MainForm : Form
 {
     private ViewModel _vm;
@@ -41,7 +38,7 @@ public partial class MainForm : Form
              }
         );
 
-        version_lbl.Text = "0.0.0";
+        version_lbl.Text = _vm.GetVersion();
         version_lbl.Refresh();
 
         _vm.SetActiveTab(BookExchange.Amazon);

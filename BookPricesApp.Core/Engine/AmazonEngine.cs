@@ -1,6 +1,5 @@
 ﻿using BookPricesApp.Core.Access.Amazon;
 using BookPricesApp.Core.Access.DB;
-using BookPricesApp.Core.Access.FlatFile;
 using BookPricesApp.Core.Domain;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Domain.Types;
@@ -20,32 +19,32 @@ public enum EngineState
 
 public class AmazonEngine : IExchangeEngine
 {
+    private bool _needToStopThread => _engineState == EngineState.Stopping;
     private EventBus _bus;
     private EventInterval _interval = new EventInterval();
-    private IFlatFileAccess _flatFileAccess;
     private EngineState _engineState = EngineState.NotRunning;
     private AmazonAccess _amazonAccess;
     private DBAccess _db;
 
+    private Thread? _thread;
+
     public AmazonEngine(
         EventBus bus, 
         AmazonAccess amazonAccess, 
-        IFlatFileAccess flatFileAccess,
         DBAccess db)
     {
         _bus = bus;
         _amazonAccess = amazonAccess;
-        _flatFileAccess = flatFileAccess;
         _db = db;
     }
 
-    public Result<int, Exception> Run(List<string> isbnList)
+    public Result<Success, Exception> Run(List<string> isbnList)
     {
         try
         {
             if (!_interval.CanProceed()) 
             { 
-                return new(); 
+                return Success.Result; 
             }
 
             switch (_engineState)
@@ -56,7 +55,8 @@ public class AmazonEngine : IExchangeEngine
                     break;
                 case EngineState.NotRunning:
                     _engineState = EngineState.Running;
-                    new Thread(() => _ = run(isbnList)).Start();
+                    _thread = new Thread(() => _ = run(isbnList));
+                    _thread.Start();
                     break;
                 case EngineState.Stopping:
                     // TODO: do we need to do anything here?
@@ -69,120 +69,142 @@ public class AmazonEngine : IExchangeEngine
         {
             return ex;
         }
-        return 0;
+        return Success.Result;
     }
 
     private async Task run(List<string> isbnList)
     {
-        _bus.Publish(new StartEvent { Exchange = BookExchange.Amazon });
-        publishNewStatus("Getting Amazon Lookups 1/2");
+        await _amazonAccess.StartRefreshTokenInterval();
 
-        var lookupResult = _db.GetAmazonLookup();
-        if (lookupResult.Error != null)
+        var lookupResult = await getAmazonLookupData(isbnList);
+        if (lookupResult.Error is not null)
         {
             publishErrorAndStop(lookupResult.Error);
             return;
         }
+        var lookups = lookupResult.Value!;
 
-        var lookups = lookupResult.Value != null ? 
-            lookupResult.Value : new List<AmazonLookup>();
+        if (_needToStopThread)
+        {
+            stopThread();
+            return;
+        }
         
-
-        var noLookup = new List<string>();
+        var importResult = await importNewAmazonBookDataFrom(lookups);
+        
+        if (importResult.Error is not null)
         {
-            var lookupDictionary = lookups
-                .Select(l => l.ISBN13)
-                .Distinct()
-                .ToDictionary(key => key, value => true);
-
-            foreach (var book in isbnList)
-            {
-                if (!lookupDictionary.ContainsKey(book))
-                {
-                    noLookup.Add(book);
-                }
-            }
-        }
-
-        await _amazonAccess.SetRefresToken();
-        var newLookupsResult = await _amazonAccess.GetLookupsFor(noLookup);
-
-        if (newLookupsResult.Error != null)
-        {
-            publishErrorAndStop(newLookupsResult.Error);
+            publishErrorAndStop(importResult.Error);
             return;
         }
-
-        var newLookups = newLookupsResult.Value != null ?
-            newLookupsResult.Value : new List<AmazonLookup>();
-
-        if (newLookupsResult.Value == null)
+        
+        if (_needToStopThread)
         {
-            var msg = "newLookupsResult.Value was found null";
-            var ex = new Exception(msg);
-            publishErrorAndStop(ex);
-            return;
-        }
-
-        var combined = new List<AmazonLookup>();
-        combined.AddRange(lookups);
-        combined.AddRange(newLookupsResult.Value);
-
-        _db.InsertAmazonLookup(newLookupsResult.Value);
-
-        publishNewStatus("Getting Amazon Book Prices 2/2");
-        var outputList = await _amazonAccess.GetDataByLookup(combined);
-
-        if (outputList.Error != null) 
-        {
-            publishErrorAndStop(outputList.Error);
-            return;
-        }
-        else if (outputList.Value != null)
-        {
-            // TODO: if any of the below methods error, they need to be handled
-            _db.ExecuteQuery("DROP TABLE IF EXISTS [Output]");
-            _db.ExecuteQuery(Migrations.CreateOutputTable);
-            _db.InsertAmazonOutput(outputList.Value);
-        }
-        else if (outputList.Value == null)
-        {
-            var msg = "outputList.Value was found null and did not error";
-            var ex = new Exception(msg);
-            publishErrorAndStop(ex);
-            return;
-        }
-
-        publishNewStatus("Exporting");
-        var test = _db.GetExportFor(BookExchange.Amazon);
-        if (test.Error != null)
-        {
-            publishErrorAndStop(test.Error);
-            return;
-        }
-        if (test.Value == null)
-        {
-            publishErrorAndStop(new Exception("export value was found null"));
-            return;
-        }
-
-        _flatFileAccess.CreateNewExport();
-        var outputResult = _flatFileAccess.OutputAppend(test.Value);
-        if (outputResult.Error != null)
-        {
-            publishErrorAndStop(outputResult.Error);
+            stopThread();
             return;
         }
 
         _bus.Publish(new StopEvent { Exchange = BookExchange.Amazon });
         _engineState = EngineState.NotRunning;
 
-        
-
         publishNewStatus("Success!");
     }
 
+    private void stopThread()
+    {
+        _bus.Publish(new ProgressEvent { Percent = 0, Exchange = BookExchange.Amazon });
+        _bus.Publish(new StopEvent { Exchange = BookExchange.Amazon });
+        _engineState = EngineState.NotRunning;
+        publishNewStatus("Process was stopped");
+    }
 
+    private async Task<Result<Success, Exception>> importNewAmazonBookDataFrom(List<AmazonLookup> lookups)
+    {
+        publishNewStatus("Getting Amazon Book Prices 2/2");
+
+        _db.ExecuteQuery("TRUNCATE TABLE [AmazonBookData]");
+
+        var progress = new ProgressCounter(lookups.Count);
+        foreach (var lookup in lookups)
+        {
+            if (_needToStopThread) { break; }
+            var dataResult = await _amazonAccess.GetDataByLookup(lookup);
+            if (dataResult.Error is not null)
+            {
+                // TODO: handle exception
+            }
+            var data = dataResult.Value!;
+            data.ForEach(d => _db.InsertAmazonOutput(d));
+            _bus.Publish(new ProgressEvent
+            {
+                Percent = progress.Increment(),
+                Exchange = BookExchange.Amazon
+            });
+        }
+        return Success.Result;
+    }
+
+    private async Task<Result<List<AmazonLookup>, Exception>> getAmazonLookupData(List<string> isbnList)
+    {
+        try
+        {
+            _bus.Publish(new StartEvent { Exchange = BookExchange.Amazon });
+            publishNewStatus("Getting Amazon Lookups 1/2");
+
+            var oldLookupResult = _db.GetAmazonLookup();
+            if (oldLookupResult.Error != null)
+            {
+                return oldLookupResult.Error;
+            }
+
+            var oldLookups = oldLookupResult.Value!
+                .Where(l => isbnList.Contains(l.ISBN13))
+                .ToList();
+
+            var noLookup = new List<string>();
+            {
+                var lookupDictionary = oldLookups
+                    .Select(l => l.ISBN13)
+                    .Distinct()
+                    .ToDictionary(key => key, value => true);
+
+                foreach (var book in isbnList)
+                {
+                    if (!lookupDictionary.ContainsKey(book))
+                    {
+                        noLookup.Add(book);
+                    }
+                }
+            }
+
+            var newLookups = new List<AmazonLookup>();
+            var progress = new ProgressCounter(isbnList.Count);
+            foreach (var lookup in noLookup)
+            {
+                if (_needToStopThread) { break; }
+                var newLookupsResult = await _amazonAccess.GetLookupsFor(lookup);
+                _bus.Publish(new ProgressEvent
+                {
+                    Percent = progress.Increment(),
+                    Exchange = BookExchange.Amazon
+                });
+
+                if (newLookupsResult.Error is not null)
+                {
+                    return newLookupsResult.Error;
+                }
+                var lookups = newLookupsResult.Value!;
+                lookups.ForEach(l => _db.InsertAmazonLookup(l));
+                newLookups.AddRange(lookups);
+            }
+
+            return oldLookups.Plus(newLookups);
+        }
+        catch (Exception ex)
+        {
+            return ex;
+        }
+    }
 
     private void publishErrorAndStop(Exception ex)
     {

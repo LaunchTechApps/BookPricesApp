@@ -30,6 +30,7 @@ partial class MainForm
     {
         System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
         amazon_pnl = new Panel();
+        amazon_status_lbl = new Label();
         amazon_main_btn = new Button();
         amazon_text_box = new TextBox();
         amazon_select_btn = new Button();
@@ -45,7 +46,6 @@ partial class MainForm
         ebay_progress = new ProgressBar();
         version_lbl = new Label();
         filePicker = new OpenFileDialog();
-        amazon_status_lbl = new Label();
         amazon_pnl.SuspendLayout();
         ebay_pnl.SuspendLayout();
         SuspendLayout();
@@ -63,6 +63,16 @@ partial class MainForm
         amazon_pnl.Name = "amazon_pnl";
         amazon_pnl.Size = new Size(492, 519);
         amazon_pnl.TabIndex = 6;
+        // 
+        // amazon_status_lbl
+        // 
+        amazon_status_lbl.AutoSize = true;
+        amazon_status_lbl.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+        amazon_status_lbl.Location = new Point(124, 77);
+        amazon_status_lbl.Name = "amazon_status_lbl";
+        amazon_status_lbl.Size = new Size(17, 17);
+        amazon_status_lbl.TabIndex = 15;
+        amazon_status_lbl.Text = "...";
         // 
         // amazon_main_btn
         // 
@@ -201,16 +211,6 @@ partial class MainForm
         version_lbl.Size = new Size(16, 15);
         version_lbl.TabIndex = 10;
         version_lbl.Text = "...";
-        // 
-        // amazon_status_lbl
-        // 
-        amazon_status_lbl.AutoSize = true;
-        amazon_status_lbl.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
-        amazon_status_lbl.Location = new Point(124, 77);
-        amazon_status_lbl.Name = "amazon_status_lbl";
-        amazon_status_lbl.Size = new Size(17, 17);
-        amazon_status_lbl.TabIndex = 15;
-        amazon_status_lbl.Text = "...";
         // 
         // MainForm
         // 

@@ -3,9 +3,9 @@
 internal class Migrations
 {
     public static string CreateOutputTable = @"
-            IF OBJECT_ID('Output', 'U') IS NULL
+            IF OBJECT_ID('AmazonBookData', 'U') IS NULL
                 BEGIN
-                    CREATE TABLE Output (
+                    CREATE TABLE AmazonBookData (
                         ISBN VARCHAR(255) NOT NULL,
                         ItemId VARCHAR(255) NOT NULL,
                         Title VARCHAR(255),
