@@ -24,4 +24,13 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Data\test.offer.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Data\test.keyword-search.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

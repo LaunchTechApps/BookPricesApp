@@ -30,14 +30,14 @@ public class ViewModel
 
         _config = builder.Build();
         
-        var dbResult = new DBAccess(_config).InitDB();
+        var dbResult = new DBAccess(_config, _bus).InitDB();
         if (dbResult.DidError)
         {
             var message = $"Unable to init DBAccess: {dbResult.Error}";
             MessageBox.Show(message);
             Environment.Exit(1);
         }
-        _db = dbResult.Value!;
+        _db = dbResult.Value;
 
         var services = new ServiceCollection();
         services.AddSingleton(_bus);
@@ -193,15 +193,16 @@ public class ViewModel
             MessageBoxQueue.Add(e.Message);
         });
 
-        _bus?.OnEvent((ErrorEvent e) =>
+        _bus?.OnEvent((Error e) =>
         {
             handelErrorEvent(e);
         });
     }
 
     private ErrorModal _errodModel = new ErrorModal();
-    private void handelErrorEvent(ErrorEvent e)
+    private void handelErrorEvent(Error e)
     {
+        var errorMessage = e.ToString();
 
         if (_errodModel.IsDisposed)
         {
@@ -210,12 +211,12 @@ public class ViewModel
 
         if (_errodModel.Created)
         {
-            _errodModel.AppendError(e.Message);
+            _errodModel.AppendError(errorMessage);
         }
         else
         {
             _errodModel.ClearError();
-            _errodModel.AppendError(e.Message);
+            _errodModel.AppendError(errorMessage);
             _errodModel.Call(m => m.ShowDialog());
         }
     }

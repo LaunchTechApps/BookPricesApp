@@ -35,8 +35,3 @@ public class AlertEvent
         Message = message;
     }
 }
-
-public class ErrorEvent
-{
-    public string Message { get; set; } = string.Empty;
-}

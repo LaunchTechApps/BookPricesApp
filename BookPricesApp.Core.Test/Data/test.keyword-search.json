@@ -1,0 +1,127 @@
+{
+  "matchingProductCount": 1,
+  "searchRefinements": [
+    {
+      "selectionType": null,
+      "displayValue": "Department",
+      "refinementValues": [
+        {
+          "displayName": "Books",
+          "searchRefinementValue": "search-alias#stripbooks"
+        }
+      ]
+    },
+    {
+      "selectionType": "MultiSelectOR",
+      "displayValue": "Company policies",
+      "refinementValues": []
+    },
+    {
+      "selectionType": "InsteadSelect",
+      "displayValue": "Delivery Day",
+      "refinementValues": []
+    },
+    {
+      "selectionType": null,
+      "displayValue": "Availability",
+      "refinementValues": [
+        {
+          "displayName": "2",
+          "searchRefinementValue": "availability#2"
+        }
+      ]
+    },
+    {
+      "selectionType": "MultiSelectOR",
+      "displayValue": "Prime Campus",
+      "refinementValues": []
+    },
+    {
+      "selectionType": "MultiSelectOR",
+      "displayValue": "Prime Free Same-Day",
+      "refinementValues": []
+    },
+    {
+      "selectionType": "MultiSelectOR",
+      "displayValue": "Prime One-Day",
+      "refinementValues": []
+    },
+    {
+      "selectionType": null,
+      "displayValue": "Prime Delivery",
+      "refinementValues": []
+    },
+    {
+      "selectionType": null,
+      "displayValue": "dds_huffman",
+      "refinementValues": []
+    }
+  ],
+  "refinements": {
+    "categories": [
+      {
+        "displayName": "Books",
+        "id": "BOOKS"
+      }
+    ],
+    "subCategories": [],
+    "availabilityOptions": [
+      {
+        "displayName": "2",
+        "id": "2"
+      }
+    ],
+    "deliveryDayOptions": [],
+    "eligibleForFreeShippingOptions": [],
+    "primeEligible": []
+  },
+  "numberOfPages": 1,
+  "products": [
+    {
+      "asin": "0000248029",
+      "asinType": "STANDARD",
+      "signedProductId": "amzn1.business.asin.3N5JLGASHUS4CUSISDLWI2LRMFZG423ZORUGOZLEG5ZGMY3BONQ6Z7IDNUIFTJ56RPLCN6RFXR4RNIFT4XTCBET2I7UQOXXBYEGOBFPBCKVFTOGRS6W3276SHDGNZMEORD2YXA2RRG4N76W4XSWP7QF6K3DTMD44F2NLZRS7G2HBVUYGZLFQ",
+      "includedDataTypes": {
+        "OFFERS": []
+      },
+      "features": [],
+      "editorialReviews": [],
+      "taxonomies": [
+        {
+          "taxonomyCode": "55101500",
+          "title": "Printed publications",
+          "type": "UNSPSC"
+        }
+      ],
+      "title": "Advanced Trauma Operative Management (ATOM)",
+      "url": "https://www.amazon.com/dp/0000248029?ref_=ab_psdp",
+      "format": null,
+      "bookInformation": {
+        "isbn": {
+          "isbn10": null,
+          "isbn13": null
+        },
+        "publicationDate": null,
+        "publishedLanguage": null
+      },
+      "byLine": [],
+      "mediaInformation": {
+        "editions": [],
+        "mediaFormats": []
+      },
+      "productOverview": {},
+      "productDetails": {},
+      "productVariations": {
+        "dimensions": [],
+        "variations": []
+      },
+      "customerReviewsSummary": {
+        "numberOfReviews": null,
+        "starRating": null
+      },
+      "productDescription": null,
+      "upcValues": [],
+      "eanValues": []
+    }
+  ]
+}

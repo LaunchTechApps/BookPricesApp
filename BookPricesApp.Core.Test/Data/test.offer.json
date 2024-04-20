@@ -1,0 +1,496 @@
+{
+  "offerCount": 9,
+  "numberOfPages": 1,
+  "featuredOffer": {
+    "availability": "In Stock.",
+    "buyingGuidance": "UNKNOWN",
+    "buyingRestrictions": [],
+    "fulfillmentType": "AMAZON_FULFILLMENT",
+    "merchant": {
+      "merchantId": null,
+      "name": "FastShip-CustomerFocus",
+      "meanFeedbackRating": null,
+      "totalFeedbackCount": null
+    },
+    "offerId": "ma%2FcrjjWx8%2BztWXAyupNa3i1ortePsfS%2FlZv5sEYufbuH0Cq0KS%2BBMwDtho08TsnsK0%2BcbACk4li6X2L1gw2BydUWiaLq0SXr%2BlztlQzJpy%2BXI4y0Z94aMyq1Jj23yfXiCj4QlfTKtMCBmEYZzGQDot1NESHQKnvYhC4WDBZHvLbnQvQAGyT45fCWfUHw1li",
+    "price": {
+      "value": {
+        "amount": 64.99,
+        "currencyCode": "USD"
+      },
+      "formattedPrice": null,
+      "priceType": "USED"
+    },
+    "badges": [],
+    "quantityInStock": null,
+    "listPrice": {
+      "value": null,
+      "formattedPrice": null,
+      "priceType": null
+    },
+    "productCondition": "USED",
+    "productConditionNote": "Ex-library with usual stamps/stickers/marks/pocket. Ships direct from Amazon!",
+    "condition": {
+      "conditionValue": "USED",
+      "conditionNote": "Ex-library with usual stamps/stickers/marks/pocket. Ships direct from Amazon!",
+      "subCondition": "ACCEPTABLE"
+    },
+    "quantityLimits": {
+      "maxQuantity": 1,
+      "minQuantity": 1
+    },
+    "quantityPrice": {
+      "quantityPriceTiers": []
+    },
+    "taxExclusivePrice": {
+      "taxExclusiveAmount": null,
+      "displayString": "",
+      "formattedPrice": "",
+      "label": ""
+    },
+    "deliveryInformation": "FREE delivery Wednesday, April 24. Order within 16 hrs 3 mins"
+  },
+  "offers": [
+    {
+      "availability": "In Stock.",
+      "buyingGuidance": "UNKNOWN",
+      "buyingRestrictions": [],
+      "fulfillmentType": "MERCHANT_FULFILLMENT",
+      "merchant": {
+        "merchantId": null,
+        "name": "papercavalier  💂",
+        "meanFeedbackRating": null,
+        "totalFeedbackCount": null
+      },
+      "offerId": "ma%2FcrjjWx89xYOYLGTACvo%2Bt4CrSC7byC%2B0bpL2Pdg7u%2BfDL54bqAEsu80AX0FWwqO9TzxV4%2FvUWC9q8wKxXZw70VMt%2FtDavhWyDaWLGvOsQV1roTRl8PDti0b39neOvddiwvV5mI4BwInnhSo0urA%3D%3D",
+      "price": {
+        "value": {
+          "amount": 87.6,
+          "currencyCode": "USD"
+        },
+        "formattedPrice": null,
+        "priceType": "USED"
+      },
+      "badges": [],
+      "quantityInStock": null,
+      "listPrice": {
+        "value": null,
+        "formattedPrice": null,
+        "priceType": null
+      },
+      "productCondition": "USED",
+      "productConditionNote": "Gently used. We ship worldwide.",
+      "condition": {
+        "conditionValue": "USED",
+        "conditionNote": "Gently used. We ship worldwide.",
+        "subCondition": "VERY_GOOD"
+      },
+      "quantityLimits": {
+        "maxQuantity": 1,
+        "minQuantity": 1
+      },
+      "quantityPrice": {
+        "quantityPriceTiers": []
+      },
+      "taxExclusivePrice": {
+        "taxExclusiveAmount": null,
+        "displayString": "",
+        "formattedPrice": "",
+        "label": ""
+      },
+      "deliveryInformation": "$3.99 delivery May 10 - 28"
+    },
+    {
+      "availability": "In Stock.",
+      "buyingGuidance": "UNKNOWN",
+      "buyingRestrictions": [],
+      "fulfillmentType": "MERCHANT_FULFILLMENT",
+      "merchant": {
+        "merchantId": null,
+        "name": "the_book_community",
+        "meanFeedbackRating": null,
+        "totalFeedbackCount": null
+      },
+      "offerId": "ma%2FcrjjWx89xYOYLGTACvo%2Bt4CrSC7byKU3cdDrmK0I45FIZYBnOqgL0jBjScQ63m9ngEYNLxCwsggPuqSvmf5eFbQ9TMmNjQioqSNot5CcEqYVbJlkQWlWuDzJFd1LUtHAH1Rcc1J8KPL3pJUQ4Z5KiS5eSQq9F",
+      "price": {
+        "value": {
+          "amount": 91.6,
+          "currencyCode": "USD"
+        },
+        "formattedPrice": null,
+        "priceType": "USED"
+      },
+      "badges": [],
+      "quantityInStock": null,
+      "listPrice": {
+        "value": null,
+        "formattedPrice": null,
+        "priceType": null
+      },
+      "productCondition": "USED",
+      "productConditionNote": "Customer oriented seller. Packaged carefully and shipped promptly. Delivery in 8-14 business days.",
+      "condition": {
+        "conditionValue": "USED",
+        "conditionNote": "Customer oriented seller. Packaged carefully and shipped promptly. Delivery in 8-14 business days.",
+        "subCondition": "VERY_GOOD"
+      },
+      "quantityLimits": {
+        "maxQuantity": 1,
+        "minQuantity": 1
+      },
+      "quantityPrice": {
+        "quantityPriceTiers": []
+      },
+      "taxExclusivePrice": {
+        "taxExclusiveAmount": null,
+        "displayString": "",
+        "formattedPrice": "",
+        "label": ""
+      },
+      "deliveryInformation": "FREE delivery April 30 - May 6"
+    },
+    {
+      "availability": "In Stock.",
+      "buyingGuidance": "UNKNOWN",
+      "buyingRestrictions": [],
+      "fulfillmentType": "MERCHANT_FULFILLMENT",
+      "merchant": {
+        "merchantId": null,
+        "name": "Serendipity UnLtd",
+        "meanFeedbackRating": null,
+        "totalFeedbackCount": null
+      },
+      "offerId": "ma%2FcrjjWx89xYOYLGTACvo%2Bt4CrSC7by7yqqB8ALrewlYOtL8qRBzMyOzzQ3zug6ZVJGghfjS4aF6x64uFSZN6Jc6OcQw6WYjNqoectKMNMrGqXLRh%2B42s09%2BN%2F90wJ0dayo%2FbRNl4thEHHuCK%2BJvnTTcjAGQc8B",
+      "price": {
+        "value": {
+          "amount": 91.62,
+          "currencyCode": "USD"
+        },
+        "formattedPrice": null,
+        "priceType": "USED"
+      },
+      "badges": [],
+      "quantityInStock": null,
+      "listPrice": {
+        "value": null,
+        "formattedPrice": null,
+        "priceType": null
+      },
+      "productCondition": "USED",
+      "productConditionNote": "Order inquiries handled promptly.",
+      "condition": {
+        "conditionValue": "USED",
+        "conditionNote": "Order inquiries handled promptly.",
+        "subCondition": "GOOD"
+      },
+      "quantityLimits": {
+        "maxQuantity": 1,
+        "minQuantity": 1
+      },
+      "quantityPrice": {
+        "quantityPriceTiers": []
+      },
+      "taxExclusivePrice": {
+        "taxExclusiveAmount": null,
+        "displayString": "",
+        "formattedPrice": "",
+        "label": ""
+      },
+      "deliveryInformation": "FREE delivery May 2 - 8"
+    },
+    {
+      "availability": "Usually ships within 7 to 8 days",
+      "buyingGuidance": "UNKNOWN",
+      "buyingRestrictions": [],
+      "fulfillmentType": "MERCHANT_FULFILLMENT",
+      "merchant": {
+        "merchantId": null,
+        "name": "SoCal Enchanted",
+        "meanFeedbackRating": null,
+        "totalFeedbackCount": null
+      },
+      "offerId": "ma%2FcrjjWx89xYOYLGTACvo%2Bt4CrSC7byHs1rwolyTH8KN%2B8HWNl2ttD6fI%2FSCp%2FsscB0szmXpQWfSJi696ycd5XVra2lUA0iogF11QS61vfv2bJl8PcLejy3NhC0n4VupU7cr0KGR3i%2Fgr%2FlC15QgHpZ39oRXZeq",
+      "price": {
+        "value": {
+          "amount": 133.85,
+          "currencyCode": "USD"
+        },
+        "formattedPrice": null,
+        "priceType": "USED"
+      },
+      "badges": [],
+      "quantityInStock": null,
+      "listPrice": {
+        "value": null,
+        "formattedPrice": null,
+        "priceType": null
+      },
+      "productCondition": "USED",
+      "productConditionNote": "",
+      "condition": {
+        "conditionValue": "USED",
+        "conditionNote": "",
+        "subCondition": "VERY_GOOD"
+      },
+      "quantityLimits": {
+        "maxQuantity": 1,
+        "minQuantity": 1
+      },
+      "quantityPrice": {
+        "quantityPriceTiers": []
+      },
+      "taxExclusivePrice": {
+        "taxExclusiveAmount": null,
+        "displayString": "",
+        "formattedPrice": "",
+        "label": ""
+      },
+      "deliveryInformation": "$3.49 delivery May 10 - 13"
+    },
+    {
+      "availability": "Usually ships within 7 to 8 days",
+      "buyingGuidance": "UNKNOWN",
+      "buyingRestrictions": [],
+      "fulfillmentType": "MERCHANT_FULFILLMENT",
+      "merchant": {
+        "merchantId": null,
+        "name": "CalMaz Books",
+        "meanFeedbackRating": null,
+        "totalFeedbackCount": null
+      },
+      "offerId": "ma%2FcrjjWx89xYOYLGTACvo%2Bt4CrSC7byfE%2Fvo8dq1xr5fxGhZRUcHgIN4YmTKoWi9iPtNXABB%2FfbH7wY%2BquKahyGCV5rHeOaSPDoS7%2FozHvTCtZEq%2BPEarbQhv3QskSlq8RHNwHNnHpMQBKnzObx7Q%3D%3D",
+      "price": {
+        "value": {
+          "amount": 133.91,
+          "currencyCode": "USD"
+        },
+        "formattedPrice": null,
+        "priceType": "USED"
+      },
+      "badges": [],
+      "quantityInStock": null,
+      "listPrice": {
+        "value": null,
+        "formattedPrice": null,
+        "priceType": null
+      },
+      "productCondition": "USED",
+      "productConditionNote": "",
+      "condition": {
+        "conditionValue": "USED",
+        "conditionNote": "",
+        "subCondition": "VERY_GOOD"
+      },
+      "quantityLimits": {
+        "maxQuantity": 1,
+        "minQuantity": 1
+      },
+      "quantityPrice": {
+        "quantityPriceTiers": []
+      },
+      "taxExclusivePrice": {
+        "taxExclusiveAmount": null,
+        "displayString": "",
+        "formattedPrice": "",
+        "label": ""
+      },
+      "deliveryInformation": "$3.99 delivery May 13 - 14"
+    },
+    {
+      "availability": "",
+      "buyingGuidance": "UNKNOWN",
+      "buyingRestrictions": [],
+      "fulfillmentType": "AMAZON_FULFILLMENT",
+      "merchant": {
+        "merchantId": null,
+        "name": "Gtradesmart",
+        "meanFeedbackRating": null,
+        "totalFeedbackCount": null
+      },
+      "offerId": "ma%2FcrjjWx89xYOYLGTACvo%2Bt4CrSC7byGNPJSG7y6BZsEB7y7q5p2rRfsT%2BgkR4r%2BmGPO8sBznqmkUmiqpWii7nyjzPsOhU3c114DBUsIVcR90oaEHa1KSX9X3F71NV%2BzPS4MG%2FxE5UVw0%2BM1NAV73wcMmrPbA64",
+      "price": {
+        "value": {
+          "amount": 199.99,
+          "currencyCode": "USD"
+        },
+        "formattedPrice": null,
+        "priceType": "USED"
+      },
+      "badges": [],
+      "quantityInStock": null,
+      "listPrice": {
+        "value": null,
+        "formattedPrice": null,
+        "priceType": null
+      },
+      "productCondition": "USED",
+      "productConditionNote": "Expect to have some wear or markings from consistent use. Ships directly from amazon.",
+      "condition": {
+        "conditionValue": "USED",
+        "conditionNote": "Expect to have some wear or markings from consistent use. Ships directly from amazon.",
+        "subCondition": "GOOD"
+      },
+      "quantityLimits": {
+        "maxQuantity": 1,
+        "minQuantity": 1
+      },
+      "quantityPrice": {
+        "quantityPriceTiers": []
+      },
+      "taxExclusivePrice": {
+        "taxExclusiveAmount": null,
+        "displayString": "",
+        "formattedPrice": "",
+        "label": ""
+      },
+      "deliveryInformation": ""
+    },
+    {
+      "availability": "Usually ships within 4 to 5 weeks",
+      "buyingGuidance": "UNKNOWN",
+      "buyingRestrictions": [],
+      "fulfillmentType": "MERCHANT_FULFILLMENT",
+      "merchant": {
+        "merchantId": null,
+        "name": "Books In Demand",
+        "meanFeedbackRating": null,
+        "totalFeedbackCount": null
+      },
+      "offerId": "ma%2FcrjjWx89xYOYLGTACvo%2Bt4CrSC7byoJ8chgLTTiOKQ1aFyrG5%2FQo%2BYyE8rPS2Pc7KUIrFCJU0mVdNVdy9PHJjveXzk5POXW4d8%2BI8IXF4ujoeaSTCzhNMBwpUh0AMNOvhNtDbeDzp5zglbpqKsLJJaVPw4Mpj",
+      "price": {
+        "value": {
+          "amount": 306.39,
+          "currencyCode": "USD"
+        },
+        "formattedPrice": null,
+        "priceType": "USED"
+      },
+      "badges": [],
+      "quantityInStock": null,
+      "listPrice": {
+        "value": null,
+        "formattedPrice": null,
+        "priceType": null
+      },
+      "productCondition": "USED",
+      "productConditionNote": "Item in Acceptable condition. It is a solid, readable, and usable copy, but might include extensive wear or damage. Please note extended handling time.",
+      "condition": {
+        "conditionValue": "USED",
+        "conditionNote": "Item in Acceptable condition. It is a solid, readable, and usable copy, but might include extensive wear or damage. Please note extended handling time.",
+        "subCondition": "ACCEPTABLE"
+      },
+      "quantityLimits": {
+        "maxQuantity": 1,
+        "minQuantity": 1
+      },
+      "quantityPrice": {
+        "quantityPriceTiers": []
+      },
+      "taxExclusivePrice": {
+        "taxExclusiveAmount": null,
+        "displayString": "",
+        "formattedPrice": "",
+        "label": ""
+      },
+      "deliveryInformation": "FREE delivery June 10 - 14"
+    },
+    {
+      "availability": "Usually ships within 9 to 10 days",
+      "buyingGuidance": "UNKNOWN",
+      "buyingRestrictions": [],
+      "fulfillmentType": "MERCHANT_FULFILLMENT",
+      "merchant": {
+        "merchantId": null,
+        "name": "FastShip-CustomerFocus",
+        "meanFeedbackRating": null,
+        "totalFeedbackCount": null
+      },
+      "offerId": "ma%2FcrjjWx89xYOYLGTACvo%2Bt4CrSC7byV8BF3i5N7KydKkAevcPyA8UKaXyNZMSQDeR6NsDeX3yQVqpv6FUjd3OW3jtGC4Q1GR6XE83YiSmc%2BoP49KjBzr2WSHG%2FqLlBLs5pJ2YfQ%2FfF88mAl6s82m5BMJTSM4CG",
+      "price": {
+        "value": {
+          "amount": 398.77,
+          "currencyCode": "USD"
+        },
+        "formattedPrice": null,
+        "priceType": "USED"
+      },
+      "badges": [],
+      "quantityInStock": null,
+      "listPrice": {
+        "value": null,
+        "formattedPrice": null,
+        "priceType": null
+      },
+      "productCondition": "USED",
+      "productConditionNote": "Ex-library worn with usual stamps / stickers / notes",
+      "condition": {
+        "conditionValue": "USED",
+        "conditionNote": "Ex-library worn with usual stamps / stickers / notes",
+        "subCondition": "ACCEPTABLE"
+      },
+      "quantityLimits": {
+        "maxQuantity": 1,
+        "minQuantity": 1
+      },
+      "quantityPrice": {
+        "quantityPriceTiers": []
+      },
+      "taxExclusivePrice": {
+        "taxExclusiveAmount": null,
+        "displayString": "",
+        "formattedPrice": "",
+        "label": ""
+      },
+      "deliveryInformation": "$3.99 delivery May 9 - 10"
+    }
+  ],
+  "filterGroups": [
+    {
+      "displayName": "Delivery",
+      "filters": [
+        {
+          "id": "PRIME_ELIGIBLE",
+          "displayName": "Prime"
+        },
+        {
+          "id": "FREE_SHIPPING",
+          "displayName": "Free delivery"
+        }
+      ]
+    },
+    {
+      "displayName": "Business Discounts",
+      "filters": [
+        {
+          "id": "QUANTITY_DISCOUNTS",
+          "displayName": "Quantity discounts"
+        },
+        {
+          "id": "PROGRESSIVE_DISCOUNTS",
+          "displayName": "Progressive Discounts"
+        }
+      ]
+    },
+    {
+      "displayName": "Condition",
+      "filters": [
+        {
+          "id": "USED_LIKE_NEW",
+          "displayName": "Used - Like New"
+        },
+        {
+          "id": "USED_VERY_GOOD",
+          "displayName": "Used - Very Good"
+        },
+        {
+          "id": "USED_GOOD",
+          "displayName": "Used - Good"
+        },
+        {
+          "id": "USED_ACCEPTABLE",
+          "displayName": "Used - Acceptable"
+        }
+      ]
+    }
+  ]
+}

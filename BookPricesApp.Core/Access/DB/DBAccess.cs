@@ -5,6 +5,8 @@ using Dapper;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using BookPricesApp.Domain;
+using Newtonsoft.Json.Linq;
+using BookPricesApp.Core.Domain.Events;
 
 namespace BookPricesApp.Core.Access.DB;
 public class DBAccess
@@ -19,9 +21,13 @@ public class DBAccess
             return con;
         }
     }
-    public DBAccess(IConfiguration config)
+
+    private EventBus _bus;
+
+    public DBAccess(IConfiguration config, EventBus bus)
     {
         _config = config;
+        _bus = bus;
     }
 
     public TResult<TVoid> UpsertAmazonLookup(AmazonLookup lookup)
@@ -173,12 +179,18 @@ public class DBAccess
     {
         try
         {
+            if (_config.GetBoolean("dropTableSchemas"))
+            {
+                dropTableSchemas();
+            }
+
             var tables = new Migrations();
             using var con = _connection;
             foreach (var query in tables.StartupScripts)
             {
                 con.Execute(query);
             }
+
         }
         catch (Exception ex)
         {
@@ -186,5 +198,46 @@ public class DBAccess
         }
 
         return this;
+    }
+
+    private void dropTableSchemas()
+    {
+        try
+        {
+            var appsettingsPath = $"{Directory.GetCurrentDirectory()}\\appsettings.json";
+            var json = File.ReadAllText(appsettingsPath);
+            var appsettings = JObject.Parse(json);
+            appsettings["dropTableSchemas"] = false;
+            var format = Newtonsoft.Json.Formatting.Indented;
+            var newAppSettings = appsettings.ToString(format);
+            File.WriteAllText(appsettingsPath, newAppSettings);
+
+            var tables = new string[] 
+            { 
+                "AmazonBookData", 
+                "AmazonLookup", 
+                "IsbnFilePaths" 
+            };
+
+            foreach (var table in tables)
+            {
+                ExecuteQuery($"DROP TABLE [{table}]");
+            }
+
+
+            new Thread(() =>
+            {
+                Thread.Sleep(Duration.Seconds(1));
+                var droppedTables = string.Join(", ", tables);
+                var message = $"Recreated Tables: {droppedTables}";
+                _bus.Publish(new AlertEvent(message));
+            }).Start();
+            
+        }
+        catch (Exception ex)
+        {
+            var error = Error.From(ex);
+            _bus.Publish(error);
+        }
     }
 }

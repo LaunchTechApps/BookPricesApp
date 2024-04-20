@@ -193,8 +193,7 @@ public class AmazonEngine : IExchangeEngine
 
                 if (newLookupsResult.DidError)
                 {
-                    var message = $"{lookup}: {newLookupsResult.Error}";
-                    _bus.Publish(new ErrorEvent { Message = message });
+                    _bus.Publish(Error.Create($"{lookup}: {newLookupsResult.Error}"));
                     continue;
                 }
                 var lookups = newLookupsResult.Value!;
@@ -214,7 +213,7 @@ public class AmazonEngine : IExchangeEngine
 
     private void publishErrorAndStop(Error error)
     {
-        _bus.Publish(new ErrorEvent { Message = error.ToString() });
+        _bus.Publish(error);
         _bus.Publish(new StopEvent { Exchange = BookExchange.Amazon });
         publishNewStatus("...");
         _engineState = EngineState.NotRunning;

@@ -75,10 +75,7 @@ public class AmazonAccess : IAmazonAccess
 
             if (!response.IsSuccessStatusCode)
             {
-                _bus?.Publish(new ErrorEvent
-                {
-                    Message = response.ErrorMessage ?? "no error message given"
-                });
+                _bus?.Publish(Error.Create(response.ErrorMessage ?? "no error message given"));
             }
             else if (response.Content != null)
             {

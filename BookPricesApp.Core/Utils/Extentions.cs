@@ -1,4 +1,6 @@
-﻿namespace BookPricesApp.Core.Utils;
+﻿using Microsoft.Extensions.Configuration;
+
+namespace BookPricesApp.Core.Utils;
 public static class Extentions
 {
     public static string ToMessageTrace(this Exception ex)
@@ -12,5 +14,16 @@ public static class Extentions
         combined.AddRange(list);
         combined.AddRange(toAdd);
         return combined;
+    }
+
+    public static bool GetBoolean(this IConfiguration config, string key)
+    {
+        var stringValue = config.GetSection(key).Value;
+        bool boolValue;
+        if (!bool.TryParse(stringValue, out boolValue))
+        {
+            return false;
+        }
+        return boolValue;
     }
 }
