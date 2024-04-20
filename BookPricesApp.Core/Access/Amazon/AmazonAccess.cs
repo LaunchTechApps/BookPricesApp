@@ -1,12 +1,14 @@
 ﻿using BookPricesApp.Core.Access.Amazon.Models;
-using BookPricesApp.Core.Domain;
+using BookPricesApp.Core.Access.Contract;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Utils;
 using BookPricesApp.Domain.Files;
 using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static Newtonsoft.Json.JsonConvert;
 using RestSharp;
+using BookPricesApp.Domain;
+using BookPricesApp.Domain.Export;
 
 namespace BookPricesApp.Core.Access.Amazon;
 
@@ -16,6 +18,7 @@ public class AmazonAccess : IAmazonAccess
     private IConfiguration _config;
     private EventBus _bus;
     private string? _accessToken;
+    private AmazonModelFactory _exportFactory = new();
 
     public AmazonAccess(IConfiguration config, EventBus bus)
     {
@@ -24,7 +27,7 @@ public class AmazonAccess : IAmazonAccess
     }
 
     private bool _runningRefreshToken = false;
-    public async Task<Result<Success, Exception>> StartRefreshTokenInterval()
+    public async Task<TResult<TVoid>> StartRefreshTokenInterval()
     {
         try
         {
@@ -47,12 +50,12 @@ public class AmazonAccess : IAmazonAccess
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
-        return Success.Result;
+        return TResult.Void;
     }
 
-    private async Task<Result<int, Exception>> setRefresToken()
+    private async Task<TResult<TVoid>> setRefresToken()
     {
         try
         {
@@ -85,12 +88,12 @@ public class AmazonAccess : IAmazonAccess
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
-        return 0;
+        return TResult.Void;
     }
 
-    public async Task<Result<List<ExportModel>, Exception>> GetDataByLookup(AmazonLookup lookup)
+    public async Task<TResult<List<ExportModel>>> GetDataByLookup(AmazonLookup lookup)
     {
         var result = new List<ExportModel>();
         try
@@ -108,87 +111,59 @@ public class AmazonAccess : IAmazonAccess
             var response = await client.ExecuteAsync(request);
             if (!response.IsSuccessStatusCode)
             {
-                return new Exception(response.ErrorMessage);
+                return AmazonAccessError.BadRequest("AmazonAccess.GetDataByLookup", response);
             }
             else if (response.Content == null)
             {
-                var message = "response.Content in AmazonAccess.GetDataByKeyWords was found null";
-                return new Exception(message);
+                return AmazonAccessError.NullContect("AmazonAccess.GetDataByLookup");
             }
             else
             {
-                var content = JsonConvert.DeserializeObject<ProductOffers>(response.Content);
-                var fo = content?.FeaturedOffer;
-                if (fo != null)
+                var content = DeserializeObject<ProductOffers>(response.Content);
+                var modelResult = _exportFactory.CreateExport(new AmazonExportProps
                 {
-                    result.Add(new ExportModel
-                    {
-                        ISBN = lookup.ISBN13,
-                        ItemId = lookup.ASIN ?? "",
-                        Title = lookup.Title ?? "",
-                        ItemUrl = lookup.URL ?? "",
-                        Condition = $"{fo.Condition.ConditionValue}-{fo.Condition.SubCondition}",
-                        Seller = fo.Merchant.Name ?? "",
-                        Location = "US",
-                        ShippingPrice = fo.DeliveryInformation ?? "",
-                        Price = fo.Price.Value.Amount.ToString(),
-                    });
-                }
-
-                foreach (var item in content?.Offers ?? Array.Empty<Offer>())
-                {
-                    result.Add(new ExportModel
-                    {
-                        ISBN = lookup.ISBN13,
-                        ItemId = lookup.ASIN ?? "",
-                        Title = lookup.Title ?? "",
-                        ItemUrl = lookup.URL ?? "",
-                        Condition = $"{item.Condition.ConditionValue}-{item.Condition.SubCondition}",
-                        Seller = item.Merchant.Name ?? "",
-                        Location = "US",
-                        ShippingPrice = item.DeliveryInformation ?? "",
-                        Price = item.Price.Value.Amount.ToString(),
-                    });
-                }
+                    Lookup = lookup,
+                    Offers = content
+                });
+               result.AddRange(modelResult.Value);
             }
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
 
         return result;
     }
 
-    public async Task<Result<List<AmazonLookup>, Exception>> GetLookupsFor(string isbn)
+    public async Task<TResult<List<AmazonLookup>>> GetLookupsFor(string isbn)
     {
         if (_accessToken == null)
         {
-            var ex = new Exception("_accessToken was found null");
-            return ex;
+            return AmazonAccessError.NullAccessToken();
         }
 
         var result = new List<AmazonLookup>();
-        var lookup = await getLookupFor(isbn);
+        var lookupResult = await getLookupFor(isbn);
 
-        if (lookup.Error is not null)
+        if (lookupResult.DidError)
         {
             result.Add(new AmazonLookup
             {
                 ISBN13 = isbn,
                 LastUsed = DateTime.Now,
-                Error = lookup.Error.Message
+                Error = lookupResult.Error.Message
             });
         }
         else
         {
-            lookup.Value?.ForEach(result.Add);
+            lookupResult.Value?.ForEach(result.Add);
         }
 
         return result;
     }
 
-    private async Task<Result<List<AmazonLookup>, Exception>> getLookupFor(string isbn)
+    private async Task<TResult<List<AmazonLookup>>> getLookupFor(string isbn)
     {
         var result = new List<AmazonLookup>();
         try
@@ -206,32 +181,26 @@ public class AmazonAccess : IAmazonAccess
             var response = await client.ExecuteAsync(request);
             if (!response.IsSuccessStatusCode)
             {
-                return new Exception(response.ErrorMessage);
+                return AmazonAccessError.BadRequest("AmazonAccess.getLookupFor", response);
             }
             else if (response.Content == null)
             {
-                var message = "response.Content in AmazonAccess.GetDataByKeyWords was found null";
-                return new Exception(message);
+                return AmazonAccessError.NullContect("AmazonAccess.getLookupFor");
             }
             else
             {
-                var content = JsonConvert.DeserializeObject<ProductListing>(response.Content);
-                foreach (var item in content?.Products ?? Array.Empty<Product>())
+                var content = DeserializeObject<ProductListing>(response.Content);
+                var modelsResult = _exportFactory.CreateLookup(new AmazonLookupProps
                 {
-                    result.Add(new AmazonLookup
-                    {
-                        ISBN13 = isbn,
-                        ASIN = item.Asin,
-                        Title = item.Title,
-                        URL = item.Url,
-                        LastUsed = DateTime.Now,
-                    });
-                }
+                    Listing = content,
+                    ISBN = isbn,
+                });
+                result.AddRange(modelsResult.Value);
             }
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
 
         return result;

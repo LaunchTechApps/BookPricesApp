@@ -141,7 +141,7 @@ partial class MainForm
         ebay_tab.Padding = new Padding(3);
         ebay_tab.Size = new Size(70, 23);
         ebay_tab.TabIndex = 9;
-        ebay_tab.Text = "     Ebay     ";
+        ebay_tab.Text = "     eBay     ";
         ebay_tab.Click += ebay_tab_Click;
         // 
         // ebay_title
@@ -152,7 +152,7 @@ partial class MainForm
         ebay_title.Name = "ebay_title";
         ebay_title.Size = new Size(54, 25);
         ebay_title.TabIndex = 0;
-        ebay_title.Text = "Ebay";
+        ebay_title.Text = "eBay";
         // 
         // ebay_pnl
         // 
@@ -217,11 +217,11 @@ partial class MainForm
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(584, 636);
-        Controls.Add(amazon_pnl);
         Controls.Add(version_lbl);
         Controls.Add(ebay_tab);
         Controls.Add(amazon_tab);
         Controls.Add(ebay_pnl);
+        Controls.Add(amazon_pnl);
         Icon = (Icon)resources.GetObject("$this.Icon");
         MaximizeBox = false;
         MaximumSize = new Size(600, 675);

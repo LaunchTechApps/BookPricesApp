@@ -31,10 +31,9 @@ public class ViewModel
         _config = builder.Build();
         
         var dbResult = new DBAccess(_config).InitDB();
-        if (dbResult.Error is not null)
+        if (dbResult.DidError)
         {
-            var messageTrace = dbResult.Error.ToMessageTrace();
-            var message = $"Unable to init DBAccess: {messageTrace}";
+            var message = $"Unable to init DBAccess: {dbResult.Error}";
             MessageBox.Show(message);
             Environment.Exit(1);
         }

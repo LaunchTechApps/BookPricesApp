@@ -38,13 +38,13 @@ public class AmazonEngine : IExchangeEngine
         _db = db;
     }
 
-    public Result<Success, Exception> Run(List<string> isbnList)
+    public TResult<TVoid> Run(List<string> isbnList)
     {
         try
         {
             if (!_interval.CanProceed()) 
             { 
-                return Success.Result; 
+                return TResult.Void; 
             }
 
             switch (_engineState)
@@ -67,9 +67,9 @@ public class AmazonEngine : IExchangeEngine
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
-        return Success.Result;
+        return TResult.Void;
     }
 
     private async Task run(List<string> isbnList)
@@ -118,7 +118,7 @@ public class AmazonEngine : IExchangeEngine
         publishNewStatus("Process was stopped");
     }
 
-    private async Task<Result<Success, Exception>> importNewAmazonBookDataFrom(List<AmazonLookup> lookups)
+    private async Task<TResult<TVoid>> importNewAmazonBookDataFrom(List<AmazonLookup> lookups)
     {
         publishNewStatus("Getting Amazon Book Prices 2/2");
 
@@ -129,9 +129,10 @@ public class AmazonEngine : IExchangeEngine
         {
             if (_needToStopThread) { break; }
             var dataResult = await _amazonAccess.GetDataByLookup(lookup);
-            if (dataResult.Error is not null)
+            if (dataResult.DidError)
             {
                 // TODO: handle exception
+                continue;
             }
             var data = dataResult.Value!;
             data.ForEach(d => _db.InsertAmazonOutput(d));
@@ -141,10 +142,10 @@ public class AmazonEngine : IExchangeEngine
                 Exchange = BookExchange.Amazon
             });
         }
-        return Success.Result;
+        return TResult.Void;
     }
 
-    private async Task<Result<List<AmazonLookup>, Exception>> getAmazonLookupData(List<string> isbnList)
+    private async Task<TResult<List<AmazonLookup>>> getAmazonLookupData(List<string> isbnList)
     {
         try
         {
@@ -164,6 +165,7 @@ public class AmazonEngine : IExchangeEngine
             var noLookup = new List<string>();
             {
                 var lookupDictionary = oldLookups
+                    .Where(l => l.ASIN is not null)
                     .Select(l => l.ISBN13)
                     .Distinct()
                     .ToDictionary(key => key, value => true);
@@ -189,26 +191,30 @@ public class AmazonEngine : IExchangeEngine
                     Exchange = BookExchange.Amazon
                 });
 
-                if (newLookupsResult.Error is not null)
+                if (newLookupsResult.DidError)
                 {
-                    return newLookupsResult.Error;
+                    var message = $"{lookup}: {newLookupsResult.Error}";
+                    _bus.Publish(new ErrorEvent { Message = message });
+                    continue;
                 }
                 var lookups = newLookupsResult.Value!;
-                lookups.ForEach(l => _db.InsertAmazonLookup(l));
+                lookups.ForEach(l => _db.UpsertAmazonLookup(l));
                 newLookups.AddRange(lookups);
             }
 
-            return oldLookups.Plus(newLookups);
+            return oldLookups.Plus(newLookups)
+                .Where(l => l.ASIN is not null)
+                .ToList();
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
     }
 
-    private void publishErrorAndStop(Exception ex)
+    private void publishErrorAndStop(Error error)
     {
-        _bus.Publish(new ErrorEvent { Message = ex.ToErrorMessage() });
+        _bus.Publish(new ErrorEvent { Message = error.ToString() });
         _bus.Publish(new StopEvent { Exchange = BookExchange.Amazon });
         publishNewStatus("...");
         _engineState = EngineState.NotRunning;

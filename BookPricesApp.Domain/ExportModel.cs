@@ -4,17 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookPricesApp.Core.Domain;
+namespace BookPricesApp.Domain;
 public class ExportModel
 {
     public string ISBN { get; set; } = string.Empty;
-    public string ItemId { get; set; } = string.Empty;
-    public string Title { get; set; } = string.Empty;
-    public string Seller { get; set; } = string.Empty;
-    public string Location { get; set; } = string.Empty;
-    public string ShippingPrice { get; set; } = string.Empty;
-    public string Price { get; set; } = string.Empty;
-    public string Condition { get; set; } = string.Empty;
-    public string ItemUrl { get; set; } = string.Empty;
-    public string Source { get; set; } = string.Empty;
+    public string? ItemId { get; set; }
+    public string? Title { get; set; }
+    public string? Seller { get; set; }
+    public string? Location { get; set; }
+    public string? ShippingPrice { get; set; }
+    public string? Price { get; set; }
+    public string? Condition { get; set; }
+    public string? ItemUrl { get; set; }
+    public string? Source { get; set; }
+    public string? Error { get; set; }
 }

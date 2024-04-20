@@ -1,10 +1,10 @@
 ﻿using BookPricesApp.Core.Domain.Types;
-using BookPricesApp.Core.Domain;
 using BookPricesApp.Core.Utils;
 using BookPricesApp.Domain.Files;
 using Dapper;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
+using BookPricesApp.Domain;
 
 namespace BookPricesApp.Core.Access.DB;
 public class DBAccess
@@ -24,24 +24,40 @@ public class DBAccess
         _config = config;
     }
 
-    public Result<int, Exception> InsertAmazonLookup(AmazonLookup lookup)
+    public TResult<TVoid> UpsertAmazonLookup(AmazonLookup lookup)
     {
         try
         {
-            string insertQuery = @"INSERT INTO AmazonLookup (ISBN13, ASIN, LastUsed, Title, URL, Error) 
+            var query = "SELECT * FROM AmazonLookup WHERE ISBN13 = @ISBN13";
+            using var con = _connection;
+            var oldLookup = con.Query<AmazonLookup>(query, lookup).FirstOrDefault();
+            if (oldLookup is not null)
+            {
+                query = @"UPDATE AmazonLookup 
+                            SET 
+                                ASIN = @ASIN, LastUsed = @LastUsed, 
+                                @Title = Title, URL = @URL, Error = @Error 
+                            WHERE
+                                ISBN13 = @ISBN13";
+
+                con.Execute(query, lookup);
+            }
+            else
+            {
+                query = @"INSERT INTO AmazonLookup (ISBN13, ASIN, LastUsed, Title, URL, Error) 
                     VALUES (@ISBN13, @ASIN, @LastUsed, @Title, @URL, @Error)";
 
-            using var con = _connection;
-            con.Execute(insertQuery, lookup);
+                con.Execute(query, lookup);
+            }
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
-        return 0;
+        return TResult.Void;
     }
 
-    public Result<List<AmazonLookup>, Exception> GetAmazonLookup()
+    public TResult<List<AmazonLookup>> GetAmazonLookup()
     {
         try
         {
@@ -53,11 +69,11 @@ public class DBAccess
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
     }
 
-    public Result<Success, Exception> ExecuteQuery(string query)
+    public TResult<TVoid> ExecuteQuery(string query)
     {
         try
         {
@@ -66,12 +82,12 @@ public class DBAccess
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
-        return Success.Result;
+        return TResult.Void;
     }
 
-    public Result<Success, Exception> SaveIsbnFilePath(BookExchange exchange, string path)
+    public TResult<TVoid> SaveIsbnFilePath(BookExchange exchange, string path)
     {
         try
         {
@@ -84,12 +100,12 @@ public class DBAccess
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
-        return Success.Result;
+        return TResult.Void;
     }
 
-    public Result<string, Exception> GetIsbnFilePath(BookExchange exchange)
+    public TResult<string> GetIsbnFilePath(BookExchange exchange)
     {
         try
         {
@@ -102,30 +118,32 @@ public class DBAccess
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
     }
 
-    public Result<Success, Exception> InsertAmazonOutput(ExportModel data)
+    public TResult<TVoid> InsertAmazonOutput(ExportModel data)
     {
         try
         {
             string insertQuery = @"INSERT INTO AmazonBookData 
-            (ISBN, ItemId, Title, Seller, Location, ShippingPrice, Price, Condition, ItemUrl, Source) 
+            (ISBN, ItemId, Title, Seller, Location, ShippingPrice, Price, 
+            Condition, ItemUrl, Source, Error) 
                 VALUES 
-            (@ISBN, @ItemId, @Title, @Seller, @Location, @ShippingPrice, @Price, @Condition, @ItemUrl, @Source)";
+            (@ISBN, @ItemId, @Title, @Seller, @Location, @ShippingPrice, 
+            @Price, @Condition, @ItemUrl, @Source, @Error)";
             using var con = _connection;
             con.Execute(insertQuery, data);
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
 
-        return Success.Result;
+        return TResult.Void;
     }
 
-    public Result<List<ExportModel>, Exception> GetExportFor(BookExchange exchange)
+    public TResult<List<ExportModel>> GetExportFor(BookExchange exchange)
     {
         try
         {
@@ -148,23 +166,23 @@ public class DBAccess
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
     }
-    public Result<DBAccess, Exception> InitDB()
+    public TResult<DBAccess> InitDB()
     {
         try
         {
             var tables = new Migrations();
             using var con = _connection;
-            foreach (var query in tables.CreateTableArray)
+            foreach (var query in tables.StartupScripts)
             {
                 con.Execute(query);
             }
         }
         catch (Exception ex)
         {
-            return ex;
+            return Error.From(ex);
         }
 
         return this;

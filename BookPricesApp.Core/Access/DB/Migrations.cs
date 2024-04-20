@@ -2,20 +2,21 @@
 
 internal class Migrations
 {
-    public static string CreateOutputTable = @"
+    private static string _createOutputTable = @"
             IF OBJECT_ID('AmazonBookData', 'U') IS NULL
                 BEGIN
                     CREATE TABLE AmazonBookData (
                         ISBN VARCHAR(255) NOT NULL,
-                        ItemId VARCHAR(255) NOT NULL,
+                        ItemId VARCHAR(255),
                         Title VARCHAR(255),
                         Seller VARCHAR(255),
                         Location VARCHAR(255),
                         ShippingPrice VARCHAR(MAX),
-                        Price MONEY NOT NULL,
+                        Price MONEY,
                         Condition VARCHAR(255),
                         ItemUrl VARCHAR(255),
-                        Source VARCHAR(255)
+                        Source VARCHAR(255),
+                        Error VARCHAR(MAX)
                     );
                 END";
     private string _createAmazonLookup = @"
@@ -23,7 +24,7 @@ internal class Migrations
                BEGIN
                    CREATE TABLE AmazonLookup (
                         ISBN13 VARCHAR(255) NOT NULL UNIQUE,
-                        ASIN VARCHAR(255) NOT NULL UNIQUE,
+                        ASIN VARCHAR(255),
                         Title VARCHAR(255),
                         URL VARCHAR(MAX),
                         LastUsed DATETIME,
@@ -38,11 +39,16 @@ internal class Migrations
                         FilePath VARCHAR(MAX) NOT NULL
                     );
                 END";
+    private string _deleteOldLookups = @"
+                DELETE FROM AmazonLookup
+                WHERE LastUsed < DATEADD(day, -90, GETDATE());
+            ";
 
-    public string[] CreateTableArray => new string[]
+    public string[] StartupScripts => new string[]
     {
-        CreateOutputTable,
+        _createOutputTable,
         _createAmazonLookup,
-        _createIsbnFilePath
+        _createIsbnFilePath,
+        _deleteOldLookups
     };
 }
