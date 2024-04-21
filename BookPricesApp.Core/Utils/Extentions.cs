@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using RestSharp;
 
 namespace BookPricesApp.Core.Utils;
 public static class Extentions

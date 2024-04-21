@@ -46,6 +46,7 @@ partial class MainForm
         ebay_progress = new ProgressBar();
         version_lbl = new Label();
         filePicker = new OpenFileDialog();
+        ebay_status_lbl = new Label();
         amazon_pnl.SuspendLayout();
         ebay_pnl.SuspendLayout();
         SuspendLayout();
@@ -157,6 +158,7 @@ partial class MainForm
         // ebay_pnl
         // 
         ebay_pnl.BorderStyle = BorderStyle.FixedSingle;
+        ebay_pnl.Controls.Add(ebay_status_lbl);
         ebay_pnl.Controls.Add(ebay_main_btn);
         ebay_pnl.Controls.Add(ebay_text_box);
         ebay_pnl.Controls.Add(ebay_select_btn);
@@ -212,6 +214,16 @@ partial class MainForm
         version_lbl.TabIndex = 10;
         version_lbl.Text = "...";
         // 
+        // ebay_status_lbl
+        // 
+        ebay_status_lbl.AutoSize = true;
+        ebay_status_lbl.Font = new Font("Segoe UI", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+        ebay_status_lbl.Location = new Point(124, 77);
+        ebay_status_lbl.Name = "ebay_status_lbl";
+        ebay_status_lbl.Size = new Size(17, 17);
+        ebay_status_lbl.TabIndex = 19;
+        ebay_status_lbl.Text = "...";
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
@@ -240,12 +252,10 @@ partial class MainForm
     private Label version_lbl;
     private Label amazon_tab;
     private Panel amazon_pnl;
-    private Label label3;
     private Label ebay_tab;
     private Label amazon_title;
     private Label ebay_title;
     private Panel ebay_pnl;
-    private Label label2;
     private ProgressBar ebay_progress;
     private ProgressBar amazon_progress;
     private OpenFileDialog filePicker;
@@ -256,4 +266,5 @@ partial class MainForm
     private TextBox ebay_text_box;
     private Button ebay_select_btn;
     private Label amazon_status_lbl;
+    private Label ebay_status_lbl;
 }

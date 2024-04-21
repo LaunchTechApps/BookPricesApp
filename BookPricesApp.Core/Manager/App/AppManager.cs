@@ -1,5 +1,5 @@
-﻿using BookPricesApp.Core.Access;
-using BookPricesApp.Core.Access.DB;
+﻿using BookPricesApp.Core.Access.DB;
+using BookPricesApp.Core.Domain;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Engine;
@@ -50,19 +50,18 @@ public class AppManager : IAppManager
             return;
         }
 
-        switch (exchange)
+        var savedIsbnFileResult = _db.UpsertIsbnFilePath(exchange, isbnFilePath);
+        if (savedIsbnFileResult.DidError)
         {
-            case BookExchange.Amazon:
-                _db.SaveIsbnFilePath(BookExchange.Amazon, isbnFilePath);
-                _engineProvider.Amazon.Run(isbnList);
-                break;
-            case BookExchange.Ebay:
-                // TODO: save isbn path here
-                _bus.Publish(new AlertEvent($"Ebay not implemented yet"));
-                break;
-            default:
-                _bus.Publish(new AlertEvent($"Unknown book exchange: {exchange}"));
-                break;
+            _bus.Publish(savedIsbnFileResult.Error);
         }
+
+        var exchangeEngineResult = _engineProvider.GetExchange(exchange);
+        if (exchangeEngineResult.DidError)
+        {
+            _bus.Publish(exchangeEngineResult.Error);
+            return;
+        }
+        exchangeEngineResult.Value.Run(isbnList);
     }
 }

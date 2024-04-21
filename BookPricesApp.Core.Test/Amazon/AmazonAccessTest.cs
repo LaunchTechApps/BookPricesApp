@@ -1,8 +1,7 @@
-using BookPricesApp.Domain.Export;
+﻿using BookPricesApp.Core.Access.Amazon.Models;
 
-namespace BookPricesApp.Core.Test;
-
-public class ExportFactoryTest
+namespace BookPricesApp.Core.Test.Amazon;
+public class AmazonAccessTest
 {
     [Fact]
     public void When_We_Have_Correct_Data_No_Errors_Should_Occur()

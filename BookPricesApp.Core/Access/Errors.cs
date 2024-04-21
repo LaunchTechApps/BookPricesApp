@@ -1,8 +1,12 @@
 ﻿using BookPricesApp.Core.Utils;
 using RestSharp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BookPricesApp.Core.Access.Contract;
-
+namespace BookPricesApp.Core.Access;
 public static class AmazonAccessError
 {
     public static Error NullContect(string code)
@@ -23,3 +27,11 @@ public static class AmazonAccessError
         return Error.Create("_accessToken was found null");
     }
 }
+
+public static class EBayAccessError
+{
+    public static Error RateLimit => Error.Create("EbayAccess", "Rate limit exceeded");
+    public static Error EmptyApiKeys => Error.Create("EbayAccess", "api key list is empty");
+    public static Error RantOutOfKeys => Error.Create("EbayAccess", "ran out of api keys");
+}
+

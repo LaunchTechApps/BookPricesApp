@@ -1,8 +1,8 @@
 ﻿using BookPricesApp.Core.Access.Amazon;
 using BookPricesApp.Core.Access.DB;
-using BookPricesApp.Core.Domain;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Domain.Types;
+using BookPricesApp.Core.Engine.Contract;
 using BookPricesApp.Core.Engine.Models;
 using BookPricesApp.Core.Utils;
 using BookPricesApp.Domain.Files;
@@ -58,9 +58,7 @@ public class AmazonEngine : IExchangeEngine
                     _thread = new Thread(() => _ = run(isbnList));
                     _thread.Start();
                     break;
-                case EngineState.Stopping:
-                    // TODO: do we need to do anything here?
-                    break;
+                case EngineState.Stopping: break;
                 default:
                     break;
             }
@@ -74,40 +72,47 @@ public class AmazonEngine : IExchangeEngine
 
     private async Task run(List<string> isbnList)
     {
-        await _amazonAccess.StartRefreshTokenInterval();
-
-        var lookupResult = await getAmazonLookupData(isbnList);
-        if (lookupResult.Error is not null)
+        try
         {
-            publishErrorAndStop(lookupResult.Error);
-            return;
-        }
-        var lookups = lookupResult.Value!;
+            await _amazonAccess.StartRefreshTokenInterval();
 
-        if (_needToStopThread)
-        {
-            stopThread();
-            return;
-        }
-        
-        var importResult = await importNewAmazonBookDataFrom(lookups);
-        
-        if (importResult.Error is not null)
-        {
-            publishErrorAndStop(importResult.Error);
-            return;
-        }
-        
-        if (_needToStopThread)
-        {
-            stopThread();
-            return;
-        }
+            var lookupResult = await getAmazonLookupData(isbnList);
+            if (lookupResult.Error is not null)
+            {
+                publishErrorAndStop(lookupResult.Error);
+                return;
+            }
+            var lookups = lookupResult.Value!;
 
-        _bus.Publish(new StopEvent { Exchange = BookExchange.Amazon });
-        _engineState = EngineState.NotRunning;
+            if (_needToStopThread)
+            {
+                stopThread();
+                return;
+            }
 
-        publishNewStatus("Success!");
+            var importResult = await importNewAmazonBookDataFrom(lookups);
+
+            if (importResult.Error is not null)
+            {
+                publishErrorAndStop(importResult.Error);
+                return;
+            }
+
+            if (_needToStopThread)
+            {
+                stopThread();
+                return;
+            }
+
+            _bus.Publish(new StopEvent { Exchange = BookExchange.Amazon });
+            _engineState = EngineState.NotRunning;
+
+            publishNewStatus("Success!");
+        }
+        catch (Exception ex)
+        {
+            publishErrorAndStop(Error.From(ex));
+        }
     }
 
     private void stopThread()
@@ -120,22 +125,21 @@ public class AmazonEngine : IExchangeEngine
 
     private async Task<TResult<TVoid>> importNewAmazonBookDataFrom(List<AmazonLookup> lookups)
     {
-        publishNewStatus("Getting Amazon Book Prices 2/2");
-
+        publishNewStatus("Getting Amazon Book Data 2/2");
         _db.ExecuteQuery("TRUNCATE TABLE [AmazonBookData]");
-
+        
         var progress = new ProgressCounter(lookups.Count);
+        
         foreach (var lookup in lookups)
         {
             if (_needToStopThread) { break; }
-            var dataResult = await _amazonAccess.GetDataByLookup(lookup);
-            if (dataResult.DidError)
+            var exportDataResult = await _amazonAccess.GetDataByLookup(lookup);
+            if (exportDataResult.DidError)
             {
-                // TODO: handle exception
-                continue;
+                publishErrorAndStop(exportDataResult.Error);
+                return exportDataResult.Error;
             }
-            var data = dataResult.Value!;
-            data.ForEach(d => _db.InsertAmazonOutput(d));
+            exportDataResult.Value.ForEach(d => _db.InsertBookData(d));
             _bus.Publish(new ProgressEvent
             {
                 Percent = progress.Increment(),

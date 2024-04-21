@@ -1,8 +1,9 @@
 ﻿using BookPricesApp.Core.Access.Amazon.Models;
 using BookPricesApp.Core.Utils;
+using BookPricesApp.Domain;
 using BookPricesApp.Domain.Files;
 
-namespace BookPricesApp.Domain.Export;
+namespace BookPricesApp.Core.Access.Amazon.Models;
 
 public class AmazonExportProps
 {
@@ -33,11 +34,11 @@ public class AmazonModelFactory
                     ItemId = props.Lookup.ASIN ?? "",
                     Title = props.Lookup.Title ?? "",
                     ItemUrl = props.Lookup.URL ?? "",
-                    Condition = $"{fo.Condition.ConditionValue}-{fo.Condition.SubCondition}",
-                    Seller = fo.Merchant.Name ?? "",
+                    Condition = $"{fo?.Condition?.ConditionValue}-{fo?.Condition?.SubCondition}",
+                    Seller = fo?.Merchant?.Name ?? "",
                     Location = "US",
-                    ShippingPrice = fo.DeliveryInformation ?? "",
-                    Price = fo.Price.Value.Amount.ToString(),
+                    ShippingPrice = fo?.DeliveryInformation ?? "",
+                    Price = fo?.Price?.Value?.Amount.ToString(),
                     Source = "Amazon",
                 });
                 offerCount++;
@@ -51,11 +52,11 @@ public class AmazonModelFactory
                     ItemId = props.Lookup.ASIN ?? "",
                     Title = props.Lookup.Title ?? "",
                     ItemUrl = props.Lookup.URL ?? "",
-                    Condition = $"{item.Condition.ConditionValue}-{item.Condition.SubCondition}",
-                    Seller = item.Merchant.Name ?? "",
+                    Condition = $"{item?.Condition?.ConditionValue}-{item?.Condition?.SubCondition}",
+                    Seller = item?.Merchant?.Name ?? "",
                     Location = "US",
-                    ShippingPrice = item.DeliveryInformation ?? "",
-                    Price = item.Price.Value.Amount.ToString(),
+                    ShippingPrice = item?.DeliveryInformation ?? "",
+                    Price = item?.Price?.Value?.Amount.ToString(),
                     Source = "Amazon",
                 });
                 offerCount++;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookPricesApp.Core.Access;
+namespace BookPricesApp.Core.Domain;
 public class ISBNValidation
 {
     public static bool IsValidISBN(string isbn)

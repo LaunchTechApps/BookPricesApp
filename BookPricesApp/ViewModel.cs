@@ -9,9 +9,10 @@ using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Utils;
 using BookPricesApp.Core.Access.DB;
 using Microsoft.Extensions.Configuration;
-
+using BookPricesApp.Core.Access.Ebay;
 
 namespace BookPricesApp.GUI;
+
 public class ViewModel
 {
     private List<SelectGroup> _selectGroup = new();
@@ -24,12 +25,11 @@ public class ViewModel
     {
         _selectGroup = selectGroup;
 
-        var builder = new ConfigurationBuilder()
+        _config = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .Build();
 
-        _config = builder.Build();
-        
         var dbResult = new DBAccess(_config, _bus).InitDB();
         if (dbResult.DidError)
         {
@@ -40,13 +40,17 @@ public class ViewModel
         _db = dbResult.Value;
 
         var services = new ServiceCollection();
+
         services.AddSingleton(_bus);
         services.AddSingleton(_config);
         services.AddSingleton(_db);
         services.AddSingleton<IAppManager, AppManager>();
         services.AddSingleton<AmazonEngine>();
+        services.AddSingleton<EbayEngine>();
         services.AddSingleton<EngineProvider>();
         services.AddSingleton<AmazonAccess>();
+        services.AddSingleton<EbayAccess>();
+
         _serviceProvider = services.BuildServiceProvider();
 
         setupEventBus();
@@ -105,7 +109,8 @@ public class ViewModel
             isbnFilePath = group.SelectTextBox?.Text.Trim() ?? "";
         }
 
-        _serviceProvider?.GetService<IAppManager>()?.SubmitMainEvent(_activeExchange, isbnFilePath);
+        var appManager = _serviceProvider?.GetService<IAppManager>();
+        appManager?.SubmitMainEvent(_activeExchange, isbnFilePath);
     }
 
     private void setupSavedFilePaths()
@@ -118,7 +123,6 @@ public class ViewModel
                 amazonGroup.SelectTextBox.Text = _db.GetIsbnFilePath(BookExchange.Amazon).Value;
                 amazonGroup.SelectTextBox.Refresh();
             }
-            return;
         }
 
         var ebayGroup = _selectGroup.FirstOrDefault(g => g.Exchange == BookExchange.Ebay);
@@ -129,7 +133,6 @@ public class ViewModel
                 ebayGroup.SelectTextBox.Text = _db.GetIsbnFilePath(BookExchange.Ebay).Value;
                 ebayGroup.SelectTextBox.Refresh();
             }
-            return;
         }
     }
 

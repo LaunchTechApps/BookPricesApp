@@ -1,6 +1,4 @@
 ﻿using BookPricesApp.Core.Access.Amazon.Models;
-using BookPricesApp.Core.Access.Contract;
-using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Utils;
 using BookPricesApp.Domain.Files;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +6,6 @@ using Newtonsoft.Json.Linq;
 using static Newtonsoft.Json.JsonConvert;
 using RestSharp;
 using BookPricesApp.Domain;
-using BookPricesApp.Domain.Export;
 
 namespace BookPricesApp.Core.Access.Amazon;
 

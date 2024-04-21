@@ -1,0 +1,4617 @@
+{
+  "findItemsByKeywordsResponse": [
+    {
+      "ack": [
+        "Success"
+      ],
+      "version": [
+        "1.13.0"
+      ],
+      "timestamp": [
+        "2024-04-20T20:15:36.454Z"
+      ],
+      "searchResult": [
+        {
+          "@count": "34",
+          "item": [
+            {
+              "itemId": [
+                "204732777791"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone [Harry Potter 1]"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/YiAAAOSwbCVgnVGD/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-/204732777791"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "982**"
+              ],
+              "location": [
+                "Lynden,WA,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "3"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.1"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.1"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P17DT20H2M36S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-04-08T16:18:12.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-08T16:18:12.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ],
+                  "watchCount": [
+                    "1"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "364739891247"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone [Harry Potter 1]"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/YiAAAOSwbCVgnVGD/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-/364739891247"
+              ],
+              "charityId": [
+                "42891"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "971**"
+              ],
+              "location": [
+                "Hillsboro,OR,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "true"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.6"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.6"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P26DT21H23M50S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-02-17T18:39:26.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-17T17:39:26.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "235504361214"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Potter 1) Rowling, J. Hardco..."
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/H-UAAOSwfO1mDXQQ/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-Rowling-J-Hardco-/235504361214"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "207**"
+              ],
+              "location": [
+                "Laurel,MD,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.01"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.01"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P12DT19H1M52S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-04-03T15:17:28.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-03T15:17:28.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "386895626920"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Potter 1)"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/vBEAAOSwRuBmCEhU/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-/386895626920"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "false"
+              ],
+              "postalCode": [
+                "840**"
+              ],
+              "location": [
+                "Orem,UT,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "2"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "8.98"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "8.98"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P9DT20H55M54S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-03-30T17:11:30.000Z"
+                  ],
+                  "endTime": [
+                    "2024-04-30T17:11:30.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "false"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "6000"
+                  ],
+                  "conditionDisplayName": [
+                    "Acceptable"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "285822680195"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Potter 1)"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/qLMAAOSwgvVmI-Pl/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-/285822680195"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "951**"
+              ],
+              "location": [
+                "San Jose,CA,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "2"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "8.41"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "8.41"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P29DT19H28M53S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-04-20T15:44:29.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-20T15:44:29.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "395319003171"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone : Harri Potter a Maen Yr"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "subtitle": [
+                "Free US Delivery | ISBN:1408855895"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/BlEAAOSwgoJmEDbQ/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harri-Potter-Maen-Yr-/395319003171"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "895**"
+              ],
+              "location": [
+                "Reno,NV,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "2"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "10.15"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "10.15"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P14DT21H20M36S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-04-05T17:36:12.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-05T17:36:12.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "235492988839"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone [Harry Potter 1]"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/YiAAAOSwbCVgnVGD/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-/235492988839"
+              ],
+              "charityId": [
+                "3662"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "981**"
+              ],
+              "location": [
+                "Seattle,WA,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "true"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "2"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.35"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.35"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P5DT23H28M49S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-03-26T19:44:25.000Z"
+                  ],
+                  "endTime": [
+                    "2024-04-26T19:44:25.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "384322210052"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone, Hardcover by Rowling, J. K., Brand ..."
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/TvQAAOSwHWhhEpAA/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Hardcover-Rowling-J-K-Brand-/384322210052"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "207**"
+              ],
+              "location": [
+                "Jessup,MD,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "10"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "23.55"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "23.55"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P19DT18H25M26S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2021-08-10T14:41:02.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-10T14:41:02.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ],
+                  "watchCount": [
+                    "6"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "1000"
+                  ],
+                  "conditionDisplayName": [
+                    "Brand New"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "256249146432"
+              ],
+              "title": [
+                "Harry Potter and the Philosophers Stone - Hardcover By Booby Brown - GOOD"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/EScAAOSwwWplI1ZW/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Hardcover-Booby-Brown-GOOD-/256249146432"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "605**"
+              ],
+              "location": [
+                "Montgomery,IL,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "true"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.55"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.55"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P18DT5H7M37S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2023-10-09T01:23:13.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-09T01:23:13.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "true"
+              ]
+            },
+            {
+              "itemId": [
+                "285313418699"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone by J. K. Rowling: Used"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/Ue8AAOSwsR5kem9P/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-J-K-Rowling-Used-/285313418699"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "894**"
+              ],
+              "location": [
+                "Sparks,NV,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "2"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "10.93"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "10.93"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P12DT2H22M30S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2023-06-02T22:38:06.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-02T22:38:06.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "395171278566"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone by J.K. Rowling (English) Hardcover Boo"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/l88AAOSwsKZmI5l3/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-J-K-Rowling-English-Hardcover-Boo-/395171278566"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "T2S1X1"
+              ],
+              "location": [
+                "Canada"
+              ],
+              "country": [
+                "CA"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "23.54"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "23.54"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P10DT5H52M1S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-01-31T03:07:37.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-01T02:07:37.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "1000"
+                  ],
+                  "conditionDisplayName": [
+                    "Brand New"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "166691342145"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Potter 1), Rowling, J. K., Very "
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/YiAAAOSwbCVgnVGD/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-Rowling-J-K-Very-/166691342145"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "752**"
+              ],
+              "location": [
+                "Dallas,TX,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "13.48"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "13.48"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P13DT19H52M11S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-04-04T16:07:47.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-04T16:07:47.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "4000"
+                  ],
+                  "conditionDisplayName": [
+                    "Very Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "303967697848"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Potter 1) by Rowling, J.K. Book"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "subtitle": [
+                "FREE US DELIVERY | ISBN: 1408855895 | Quality Books"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/zjkAAOSwIV1gfm4K/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-Rowling-J-K-Book-/303967697848"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "location": [
+                "USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "7"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "10.58"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "10.58"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P29DT9H45M4S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2021-04-20T06:00:40.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-20T06:00:40.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ],
+                  "watchCount": [
+                    "3"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "discountPriceInfo": [
+                {
+                  "originalRetailPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "20.54"
+                    }
+                  ],
+                  "pricingTreatment": [
+                    "STP"
+                  ],
+                  "soldOnEbay": [
+                    "false"
+                  ],
+                  "soldOffEbay": [
+                    "false"
+                  ]
+                }
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "364622775761"
+              ],
+              "title": [
+                "J. K. Rowling Harry Potter and the Philosopher's Stone (Hardback) (UK IMPORT)"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "subtitle": [
+                "Another great item from Rarewaves | Free delivery!"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/GzoAAOSwVAlmHrLD/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/J-K-Rowling-Harry-Potter-and-Philosophers-Stone-Hardback-UK-IMPORT-/364622775761"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "false"
+              ],
+              "location": [
+                "United Kingdom"
+              ],
+              "country": [
+                "GB"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "4"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "23.88"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "23.88"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P18DT23H51M6S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2023-12-09T21:06:42.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-09T20:06:42.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ],
+                  "watchCount": [
+                    "1"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "1000"
+                  ],
+                  "conditionDisplayName": [
+                    "Brand New"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "354896590773"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone Hardcover Book JK Rowling(Bloomsbury)"
+              ],
+              "globalId": [
+                "EBAY-ENCA"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/rsIAAOSwyC9kpK9N/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Hardcover-Book-JK-Rowling-Bloomsbury-/354896590773"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "false"
+              ],
+              "postalCode": [
+                "B2H5Z3"
+              ],
+              "location": [
+                "Canada"
+              ],
+              "country": [
+                "CA"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "13.11"
+                    }
+                  ],
+                  "shippingType": [
+                    "Flat"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "true"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "CAD",
+                      "__value__": "18.78"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "13.68"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P15DT17H59M28S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2023-07-06T14:15:04.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-06T14:15:04.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "4000"
+                  ],
+                  "conditionDisplayName": [
+                    "Very Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "296168838683"
+              ],
+              "title": [
+                "J.K. Rowling-Harry Potter and the Philosopher's Stone - RARE UK Hardback"
+              ],
+              "globalId": [
+                "EBAY-AU"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/fCwAAOSwnidgBD8E/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/J-K-Rowling-Harry-Potter-and-Philosophers-Stone-RARE-UK-Hardback-/296168838683"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "208989157"
+                }
+              ],
+              "autoPay": [
+                "false"
+              ],
+              "postalCode": [
+                "4350"
+              ],
+              "location": [
+                "Australia"
+              ],
+              "country": [
+                "AU"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "19.27"
+                    }
+                  ],
+                  "shippingType": [
+                    "Flat"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "3"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "AUD",
+                      "__value__": "25.0"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "16.06"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P25DT18H40M1S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "true"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-01-16T13:55:37.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-16T14:55:37.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "false"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "4000"
+                  ],
+                  "conditionDisplayName": [
+                    "Very Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "125798659784"
+              ],
+              "title": [
+                "J.k Rowling Harry Potter and the Philosopher's Stone Book HARRY POTTER Book PB"
+              ],
+              "globalId": [
+                "EBAY-AU"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/32sAAOSwjChhwrtB/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/J-k-Rowling-Harry-Potter-and-Philosophers-Stone-Book-HARRY-POTTER-Book-PB-/125798659784"
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "5000"
+              ],
+              "location": [
+                "Australia"
+              ],
+              "country": [
+                "AU"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "7.7"
+                    }
+                  ],
+                  "shippingType": [
+                    "Flat"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "true"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "0"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "AUD",
+                      "__value__": "20.79"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "13.35"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P11DT10H35M41S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "true"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2023-03-02T05:51:17.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-02T06:51:17.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ],
+                  "watchCount": [
+                    "1"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "galleryPlusPictureURL": [
+                "https://galleryplus.ebayimg.com/ws/web/125798659784_1_4_1.jpg"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "225917079276"
+              ],
+              "title": [
+                "Harry Potter and the Prisoner Of Azkaban By J K Rowling P/B Book"
+              ],
+              "globalId": [
+                "EBAY-AU"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/Uj0AAOSw~Qdle7Jn/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Prisoner-Azkaban-J-K-Rowling-P-B-Book-/225917079276"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "208923941"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "4455"
+              ],
+              "location": [
+                "Australia"
+              ],
+              "country": [
+                "AU"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "25.53"
+                    }
+                  ],
+                  "shippingType": [
+                    "FlatDomesticCalculatedInternational"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "AUD",
+                      "__value__": "22.5"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "14.45"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P28DT17H44M24S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "true"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2023-12-19T13:00:00.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-19T14:00:00.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "6000"
+                  ],
+                  "conditionDisplayName": [
+                    "Acceptable"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "204732438225"
+              ],
+              "title": [
+                "Harry Potter 1 and the Philosopher's Stone by Rowling, Joanne K."
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/W1UAAOSwaDVmE-fK/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-1-and-Philosophers-Stone-Rowling-Joanne-K-/204732438225"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "2036"
+              ],
+              "location": [
+                "Australia"
+              ],
+              "country": [
+                "AU"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "5"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "24.74"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "24.74"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P17DT16H32M30S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-04-08T12:48:06.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-08T12:48:06.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "1000"
+                  ],
+                  "conditionDisplayName": [
+                    "Brand New"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "discountPriceInfo": [
+                {
+                  "originalRetailPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "40.99"
+                    }
+                  ],
+                  "pricingTreatment": [
+                    "STP"
+                  ],
+                  "soldOnEbay": [
+                    "false"
+                  ],
+                  "soldOffEbay": [
+                    "false"
+                  ]
+                }
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "156035817923"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone by J.K. Rowling (English) Hardcover Boo"
+              ],
+              "globalId": [
+                "EBAY-AU"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/5LwAAOSwOaJmE2uu/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-J-K-Rowling-English-Hardcover-Boo-/156035817923"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "208989157"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "3029"
+              ],
+              "location": [
+                "Australia"
+              ],
+              "country": [
+                "AU"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.86"
+                    }
+                  ],
+                  "shippingType": [
+                    "Flat"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "10"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "AUD",
+                      "__value__": "29.73"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "19.09"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P9DT7H58M23S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-01-31T03:13:59.000Z"
+                  ],
+                  "endTime": [
+                    "2024-04-30T04:13:59.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "galleryPlusPictureURL": [
+                "https://galleryplus.ebayimg.com/ws/web/156035817923_1_1_1.jpg"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "1000"
+                  ],
+                  "conditionDisplayName": [
+                    "Brand New"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "295200609168"
+              ],
+              "title": [
+                "NEW BOOK Harry Potter and the Philosopher's Stone by Rowling,J.K. (2014)"
+              ],
+              "globalId": [
+                "EBAY-AU"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/9fwAAOSw33tgl0Vp/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/NEW-BOOK-Harry-Potter-and-Philosophers-Stone-Rowling-J-K-2014-/295200609168"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "208989157"
+                }
+              ],
+              "autoPay": [
+                "false"
+              ],
+              "location": [
+                "Australia"
+              ],
+              "country": [
+                "AU"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "25.66"
+                    }
+                  ],
+                  "shippingType": [
+                    "Flat"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "10"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "AUD",
+                      "__value__": "31.66"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "20.33"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P14DT11H36M42S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2022-09-05T07:52:18.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-05T07:52:18.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "galleryPlusPictureURL": [
+                "https://galleryplus.ebayimg.com/ws/web/295200609168_1_10_1.jpg"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "1000"
+                  ],
+                  "conditionDisplayName": [
+                    "Brand New"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "195859167406"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Potter 1) by Rowling, J."
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "subtitle": [
+                "by Rowling, J. | HC | Good"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/YiAAAOSwbCVgnVGD/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-Rowling-J-/195859167406"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "605**"
+              ],
+              "location": [
+                "Aurora,IL,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "true"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "8.66"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "8.66"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P13DT22H11M54S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2023-07-04T18:27:30.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-04T18:27:30.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "true"
+              ]
+            },
+            {
+              "itemId": [
+                "386895556034"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Potter 1)"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/BBIAAOSwrIpmCEFJ/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-/386895556034"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "false"
+              ],
+              "postalCode": [
+                "840**"
+              ],
+              "location": [
+                "Orem,UT,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "2"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.28"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.28"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P9DT20H24M49S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-03-30T16:40:25.000Z"
+                  ],
+                  "endTime": [
+                    "2024-04-30T16:40:25.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "false"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "4000"
+                  ],
+                  "conditionDisplayName": [
+                    "Very Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "393533958555"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Potter 1).by Rowling New, "
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/ZJQAAOSwMbxhJ6dm/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-by-Rowling-New-/393533958555"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "location": [
+                "USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "5"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "29.02"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "29.02"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P5DT18H22M51S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2021-08-26T14:38:27.000Z"
+                  ],
+                  "endTime": [
+                    "2024-04-26T14:38:27.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "1000"
+                  ],
+                  "conditionDisplayName": [
+                    "Brand New"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "382717213260"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone, Hardcover by Rowling, J. K., Like N..."
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/z2wAAOSwUjVcNPG1/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Hardcover-Rowling-J-K-Like-N-/382717213260"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "207**"
+              ],
+              "location": [
+                "Jessup,MD,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "10"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "23.54"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "23.54"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P17DT21H38M1S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2019-01-08T18:53:37.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-08T17:53:37.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ],
+                  "watchCount": [
+                    "16"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "2750"
+                  ],
+                  "conditionDisplayName": [
+                    "Like New"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "392596214270"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone By ROWLING J.K."
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/orQAAOSw6dtd-2I-/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-ROWLING-J-K-/392596214270"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "paymentMethod": [
+                "PayPal"
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "location": [
+                "USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "2"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "10.96"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "10.96"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P28DT14H27M8S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2019-12-19T11:42:44.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-19T10:42:44.000Z"
+                  ],
+                  "listingType": [
+                    "StoreInventory"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "4000"
+                  ],
+                  "conditionDisplayName": [
+                    "Very Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "125798659790"
+              ],
+              "title": [
+                "J.K ROWLING Harry Potter and the Philosophers Stone Book Harry Potter Book 2014"
+              ],
+              "globalId": [
+                "EBAY-AU"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/gAUAAOSw7Udh4MJI/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/J-K-ROWLING-Harry-Potter-and-Philosophers-Stone-Book-Harry-Potter-Book-2014-/125798659790"
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "5000"
+              ],
+              "location": [
+                "Australia"
+              ],
+              "country": [
+                "AU"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "14.27"
+                    }
+                  ],
+                  "shippingType": [
+                    "Flat"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "true"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "0"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "AUD",
+                      "__value__": "20.79"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "13.35"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P11DT10H35M41S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "true"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2023-03-02T05:51:17.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-02T06:51:17.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ],
+                  "watchCount": [
+                    "1"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "galleryPlusPictureURL": [
+                "https://galleryplus.ebayimg.com/ws/web/125798659790_1_6_1.jpg"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "284942497319"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone by J. K. Rowling: New"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/9yYAAOSwEiRjBfiu/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-J-K-Rowling-New-/284942497319"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "894**"
+              ],
+              "location": [
+                "Sparks,NV,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "2"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "30.92"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "30.92"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P3DT13H53M7S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2022-08-24T10:08:43.000Z"
+                  ],
+                  "endTime": [
+                    "2024-04-24T10:08:43.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "1000"
+                  ],
+                  "conditionDisplayName": [
+                    "Brand New"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "276050868501"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's St..., Rowling, J.K."
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/lNgAAOSwJ4JlBgjE/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-St-Rowling-J-K-/276050868501"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "location": [
+                "USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingServiceCost": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "0.0"
+                    }
+                  ],
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.69"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.69"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P25DT23H37M36S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2023-09-16T19:53:12.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-16T19:53:12.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "391974801118"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry P... by Rowling, J.K. 1408855895"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "subtitle": [
+                "FREE US DELIVERY | ISBN: 1408855895 | Quality Books"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/SPIAAOSwb71epob5/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-P-Rowling-J-K-1408855895-/391974801118"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "location": [
+                "USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "4"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "15.22"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "15.22"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P13DT8H32M14S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2018-02-04T05:47:50.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-04T04:47:50.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ],
+                  "watchCount": [
+                    "12"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "4000"
+                  ],
+                  "conditionDisplayName": [
+                    "Very Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "discountPriceInfo": [
+                {
+                  "originalRetailPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "18.58"
+                    }
+                  ],
+                  "pricingTreatment": [
+                    "STP"
+                  ],
+                  "soldOnEbay": [
+                    "false"
+                  ],
+                  "soldOffEbay": [
+                    "false"
+                  ]
+                }
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            },
+            {
+              "itemId": [
+                "276325791834"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone - Hardcover By Booby Brown - VERY GOOD"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/G7YAAOSweRRlxR7E/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Hardcover-Booby-Brown-VERY-GOOD-/276325791834"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "605**"
+              ],
+              "location": [
+                "Montgomery,IL,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "true"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.65"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "9.65"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P17DT21H14M43S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2024-02-08T18:30:19.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-08T17:30:19.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "4000"
+                  ],
+                  "conditionDisplayName": [
+                    "Very Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "true"
+              ]
+            },
+            {
+              "itemId": [
+                "374304872048"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Potter 1) by Rowling, J."
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "subtitle": [
+                "by Rowling, J. | HC | Acceptable"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/YiAAAOSwbCVgnVGD/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-Rowling-J-/374304872048"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "605**"
+              ],
+              "location": [
+                "Aurora,IL,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "true"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "7.81"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "7.81"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P23DT15H21M9S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2022-10-14T11:36:45.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-14T11:36:45.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "6000"
+                  ],
+                  "conditionDisplayName": [
+                    "Acceptable"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "true"
+              ]
+            },
+            {
+              "itemId": [
+                "374945951805"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Potter 1) by Rowling, J."
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "subtitle": [
+                "by Rowling, J. | HC | Good"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "29792"
+                  ],
+                  "categoryName": [
+                    "Audiobooks"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/YiAAAOSwbCVgnVGD/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Potter-1-Rowling-J-/374945951805"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "postalCode": [
+                "605**"
+              ],
+              "location": [
+                "Aurora,IL,USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "true"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "1"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "11.59"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "11.59"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P2DT4H5M53S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2023-09-23T00:21:29.000Z"
+                  ],
+                  "endTime": [
+                    "2024-04-23T00:21:29.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "5000"
+                  ],
+                  "conditionDisplayName": [
+                    "Good"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "true"
+              ]
+            },
+            {
+              "itemId": [
+                "304549421505"
+              ],
+              "title": [
+                "Harry Potter and the Philosopher's Stone (Harry Pot... by Rowling, J.K. Hardback"
+              ],
+              "globalId": [
+                "EBAY-US"
+              ],
+              "subtitle": [
+                "FREE US DELIVERY | ISBN: 1408855895 | Quality Books"
+              ],
+              "primaryCategory": [
+                {
+                  "categoryId": [
+                    "261186"
+                  ],
+                  "categoryName": [
+                    "Books"
+                  ]
+                }
+              ],
+              "galleryURL": [
+                "https://i.ebayimg.com/thumbs/images/g/5gYAAOSwZ61ivs~8/s-l140.jpg"
+              ],
+              "viewItemURL": [
+                "https://www.ebay.com/itm/Harry-Potter-and-Philosophers-Stone-Harry-Pot-Rowling-J-K-Hardback-/304549421505"
+              ],
+              "productId": [
+                {
+                  "@type": "ReferenceID",
+                  "__value__": "222185265"
+                }
+              ],
+              "autoPay": [
+                "true"
+              ],
+              "location": [
+                "USA"
+              ],
+              "country": [
+                "US"
+              ],
+              "shippingInfo": [
+                {
+                  "shippingType": [
+                    "Free"
+                  ],
+                  "shipToLocations": [
+                    "Worldwide"
+                  ],
+                  "expeditedShipping": [
+                    "false"
+                  ],
+                  "oneDayShippingAvailable": [
+                    "false"
+                  ],
+                  "handlingTime": [
+                    "4"
+                  ]
+                }
+              ],
+              "sellingStatus": [
+                {
+                  "currentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "11.96"
+                    }
+                  ],
+                  "convertedCurrentPrice": [
+                    {
+                      "@currencyId": "USD",
+                      "__value__": "11.96"
+                    }
+                  ],
+                  "sellingState": [
+                    "Active"
+                  ],
+                  "timeLeft": [
+                    "P10DT14H28M34S"
+                  ]
+                }
+              ],
+              "listingInfo": [
+                {
+                  "bestOfferEnabled": [
+                    "false"
+                  ],
+                  "buyItNowAvailable": [
+                    "false"
+                  ],
+                  "startTime": [
+                    "2022-07-01T10:44:10.000Z"
+                  ],
+                  "endTime": [
+                    "2024-05-01T10:44:10.000Z"
+                  ],
+                  "listingType": [
+                    "FixedPrice"
+                  ],
+                  "gift": [
+                    "false"
+                  ]
+                }
+              ],
+              "returnsAccepted": [
+                "true"
+              ],
+              "condition": [
+                {
+                  "conditionId": [
+                    "2750"
+                  ],
+                  "conditionDisplayName": [
+                    "Like New"
+                  ]
+                }
+              ],
+              "isMultiVariationListing": [
+                "false"
+              ],
+              "topRatedListing": [
+                "false"
+              ]
+            }
+          ]
+        }
+      ],
+      "paginationOutput": [
+        {
+          "pageNumber": [
+            "1"
+          ],
+          "entriesPerPage": [
+            "100"
+          ],
+          "totalPages": [
+            "1"
+          ],
+          "totalEntries": [
+            "34"
+          ]
+        }
+      ],
+      "itemSearchURL": [
+        "https://www.ebay.com/sch/i.html?_nkw=1408855895&_ddo=1&_ipg=100&_pgn=1"
+      ]
+    }
+  ]
+}

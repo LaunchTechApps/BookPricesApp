@@ -1,7 +1,6 @@
 using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.GUI;
 using BookPricesApp.GUI.Models;
-using BookPricesApp.GUI.Utils;
 
 namespace BookPrices;
 public partial class MainForm : Form
@@ -33,6 +32,7 @@ public partial class MainForm : Form
                      ProgressBar = ebay_progress,
                      MainButton = ebay_main_btn,
                      Panel = ebay_pnl,
+                     StatusLabel = ebay_status_lbl,
                      Tab = ebay_tab,
                  }
              }
@@ -46,30 +46,31 @@ public partial class MainForm : Form
 
     private void BookPrices_Load(object sender, EventArgs e) { }
 
-
     private void amazon_main_btn_Click(object sender, EventArgs e)
     {
         _vm.SubmitMainButton();
     }
+
     private void amazon_select_btn_Click(object sender, EventArgs e)
     {
         _vm.FilePickerSelect(filePicker);
     }
+    
     private void amazon_tab_Click(object sender, EventArgs e)
     {
         _vm.SetActiveTab(BookExchange.Amazon);
     }
 
-
     private void ebay_main_btn_Click(object sender, EventArgs e)
     {
-        MessageBoxQueue.Add("Coming soon!");
-        //_displayManager.SubmitMainButton();
+        _vm.SubmitMainButton();
     }
+    
     private void ebay_select_btn_Click(object sender, EventArgs e)
     {
         _vm.FilePickerSelect(filePicker);
     }
+    
     private void ebay_tab_Click(object sender, EventArgs e)
     {
         _vm.SetActiveTab(BookExchange.Ebay);

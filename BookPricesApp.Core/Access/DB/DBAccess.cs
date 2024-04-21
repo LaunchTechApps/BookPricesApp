@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using BookPricesApp.Domain;
 using Newtonsoft.Json.Linq;
 using BookPricesApp.Core.Domain.Events;
+using System.Linq;
 
 namespace BookPricesApp.Core.Access.DB;
 public class DBAccess
@@ -93,16 +94,26 @@ public class DBAccess
         return TResult.Void;
     }
 
-    public TResult<TVoid> SaveIsbnFilePath(BookExchange exchange, string path)
+    public TResult<TVoid> UpsertIsbnFilePath(BookExchange exchange, string path)
     {
         try
         {
-            string insertQuery = @"INSERT INTO IsbnFilePaths (Exchange, FilePath) 
+            var query = $"SELECT * FROM IsbnFilePaths WHERE Exchange = '{exchange}'";
+            using var con = _connection;
+            var oldLookup = con.Query<AmazonLookup>(query).FirstOrDefault();
+            if (oldLookup is not null)
+            {
+                query = @$"UPDATE IsbnFilePaths SET FilePath = '{path}' WHERE Exchange = '{exchange}'";
+                con.Execute(query);
+            }
+            else
+            {
+                query = @"INSERT INTO IsbnFilePaths (Exchange, FilePath) 
                     VALUES (@Exchange, @FilePath)";
 
-            using var con = _connection;
-            var item = new { Exchange = $"{exchange}", FilePath = path };
-            con.Execute(insertQuery, item);
+                var item = new { Exchange = $"{exchange}", FilePath = path };
+                con.Execute(query, item);
+            }
         }
         catch (Exception ex)
         {
@@ -128,18 +139,23 @@ public class DBAccess
         }
     }
 
-    public TResult<TVoid> InsertAmazonOutput(ExportModel data)
+    public TResult<TVoid> InsertBookData(ExportModel data)
     {
         try
         {
-            string insertQuery = @"INSERT INTO AmazonBookData 
+            if (string.IsNullOrEmpty(data.Source))
+            {
+                return Error.Create("DBAccess.InsertBookData", "Source found empty");
+            }
+
+            var query = @$"INSERT INTO [{data.Source}BookData]
             (ISBN, ItemId, Title, Seller, Location, ShippingPrice, Price, 
             Condition, ItemUrl, Source, Error) 
                 VALUES 
             (@ISBN, @ItemId, @Title, @Seller, @Location, @ShippingPrice, 
             @Price, @Condition, @ItemUrl, @Source, @Error)";
             using var con = _connection;
-            con.Execute(insertQuery, data);
+            con.Execute(query, data);
         }
         catch (Exception ex)
         {
@@ -212,18 +228,20 @@ public class DBAccess
             var newAppSettings = appsettings.ToString(format);
             File.WriteAllText(appsettingsPath, newAppSettings);
 
-            var tables = new string[] 
+            var tables = new List<string> 
             { 
-                "AmazonBookData", 
+                "AmazonBookData",
+                "EBayBookData",
                 "AmazonLookup", 
-                "IsbnFilePaths" 
+                "IsbnFilePaths",
             };
+            tables.ForEach(t => ExecuteQuery($"DROP TABLE [{t}]"));
 
-            foreach (var table in tables)
+            var views = new List<string>
             {
-                ExecuteQuery($"DROP TABLE [{table}]");
-            }
-
+                "VW_CombinedBookData"
+            };
+            views.ForEach(v => ExecuteQuery($"DROP VIEW [{v}]"));
 
             new Thread(() =>
             {
