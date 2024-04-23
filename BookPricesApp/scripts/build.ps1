@@ -1,38 +1,42 @@
-﻿function DeleteBuildDirectory {
+﻿param(
+    [string]$v
+)
+
+if ($v -eq $null) {
+    Write-Host "Version is not provided."
+    exit 1
+} else {
+    Write-Host "building $v"
+}
+
+function DeleteBuildDirectory {
     $directoryPath = ".\bin\Release\net6.0-windows\win-x64"
 
 	if (Test-Path -Path $directoryPath -PathType Container) {
         Remove-Item -Path $directoryPath -Recurse -Force
-        Write-Host "win-64 deleted"
+        Write-Host "win-64 dir deleted"
     } else {
-        Write-Host "win-64 does not exist."
+        Write-Host "win-64 dir does not exist."
     }
 }
 
-function SetShortcut {
-    param ( [string]$SourceExe, [string]$DestinationPath )
-    $WshShell = New-Object -comObject WScript.Shell
-    $Shortcut = $WshShell.CreateShortcut($DestinationPath)
-    $Shortcut.TargetPath = $SourceExe
-    $Shortcut.Save()
-}
+function CreateAppDirectory {
+    $containerPath = ".\bin\App"
+    $appPath = ".\bin\App\$v"
 
-function CreateShortcut {
-    $currentDirectory = Get-Location
-    $exePath = "$currentDirectory\bin\App\BookPrices\BookPricesApp.GUI.exe"
-    $shortcutPath = "$currentDirectory\bin\App\BookPrices.lnk"
-
-    $WshShell = New-Object -comObject WScript.Shell
-    $Shortcut = $WshShell.CreateShortcut($shortcutPath)
-    $Shortcut.TargetPath = $exePath
-    $Shortcut.Save()
-
-    Write-Host "Created Shortcut"
+	if (Test-Path -Path $containerPath -PathType Container) {
+        Remove-Item -Path $containerPath -Recurse -Force
+        Write-Host "app directory deleted"
+    } else {
+        Write-Host "app directory does not exist."
+    }
+    Write-Host "creating $appPath"
+    mkdir $appPath
 }
 
 function MoveContentToAppFolder {
     $sourceDir = ".\bin\Release\net6.0-windows\win-x64\publish"
-    $destinationDir = ".\bin\App\BookPrices"
+    $destinationDir = ".\bin\App\$v"
 
     $items = Get-ChildItem -Path $sourceDir
 
@@ -41,26 +45,22 @@ function MoveContentToAppFolder {
     }
 }
 
-function CreateAppDirectory {
-    $containerPath = ".\bin\App"
-    $appPath = ".\bin\App\BookPrices"
+function ZipVersion {
+    Write-Host "zipping folder $v"
+    Compress-Archive -Path ".\bin\App\$v" -DestinationPath ".\bin\App\$v.zip"
+}
 
-	if (Test-Path -Path $containerPath -PathType Container) {
-        Remove-Item -Path $containerPath -Recurse -Force
-        Write-Host "app directory deleted"
-    } else {
-        Write-Host "app directory does not exist."
-    }
-
-    mkdir $appPath
+function UploadToS3 {
+    Write-Host "uploading to s3"
+    & aws s3 cp ".\bin\App\$v.zip" "s3://book-prices-app/$v.zip" --profile bookapp
 }
 
 DeleteBuildDirectory
 CreateAppDirectory
 
-
-Write-Host "buildign app"
+Write-Host "building app"
 dotnet publish -r win-x64 -c Release
 
-# CreateShortcut
 MoveContentToAppFolder
+ZipVersion
+UploadToS3
