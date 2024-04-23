@@ -163,7 +163,7 @@ public class AmazonAccess : IAmazonAccess
         try
         {
             var path = "/products/2020-08-26/products";
-            var query = $"?locale=en_US&productRegion=US&facets=OFFERS&keywords={isbn}";
+            var query = $"?locale=en_US&productRegion=US&facets=OFFERS&keywords=isbn13+{isbn}";
             var baseUrl = _config.GetSection("amazon")["baseUrl"]!;
             var client = new RestClient(new RestClientOptions(baseUrl)
             {

@@ -25,8 +25,7 @@ public class EbayModelFactory
             var keyWordResults = props?.KeyWordResponse?.FindItemsByKeywordsResponse?
                 .FirstOrDefault()?.SearchResult?
                 .FirstOrDefault()?.Item?
-                .Where(i => i?.PrimaryCategory?.FirstOrDefault()?.CategoryId?.FirstOrDefault() == "261186" ||
-                            i?.PrimaryCategory?.FirstOrDefault()?.CategoryId?.FirstOrDefault()?.ToLower() == "books")
+                .Where(i => isABook(i))
                 .Where(i => i?.ListingInfo?.FirstOrDefault()?.ListingType?.FirstOrDefault()?.ToLower() == "fixedprice")
                 .ToArray();
 
@@ -76,5 +75,35 @@ public class EbayModelFactory
             });
             return result;
         }
+    }
+
+    private bool isABook(Item i)
+    {
+        var primaryCategory = i?.PrimaryCategory?.FirstOrDefault();
+        if (primaryCategory is null)
+        {
+            return false;
+        }
+        
+        var categoryId = primaryCategory?.CategoryId?.FirstOrDefault() ?? "";
+        categoryId = categoryId.Trim();
+        if (new List<string> { "1105", "261186" }.Contains(categoryId))
+        {
+            return true;
+        }
+        
+        var categoryName = primaryCategory?.CategoryName?.FirstOrDefault();
+        categoryName = categoryName?.Trim().ToLower() ?? "";
+        if (new List<string> { "books", "textbooks" }.Contains(categoryName))
+        {
+            return true;
+        }
+
+        if (categoryName.Contains("book") && !categoryName.Contains("audio"))
+        {
+            return true;
+        }
+
+        return false;
     }
 }

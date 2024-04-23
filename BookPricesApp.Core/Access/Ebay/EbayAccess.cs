@@ -4,19 +4,19 @@ using Microsoft.Extensions.Configuration;
 using RestSharp;
 using static Newtonsoft.Json.JsonConvert;
 using BookPricesApp.Core.Access.Ebay.Contract;
+using BookPricesApp.Core.Access.Ebay.Models;
 
 namespace BookPricesApp.Core.Access.Ebay;
 public class EbayAccess
 {
     private IConfiguration _config;
-    private EventBus _bus;
+    private ApiKeysModel _apiKeyModel;
     private string? _apiKey;
     private EbayModelFactory _modelFactory;
 
-    public EbayAccess(IConfiguration config, EventBus bus)
+    public EbayAccess(IConfiguration config)
     {
         _config = config;
-        _bus = bus;
 
         _config.GetSection("ebay:apiKeys")
             .GetChildren()
@@ -24,12 +24,15 @@ public class EbayAccess
             .Where(key => !string.IsNullOrEmpty(key))
             .ToArray();
 
-        _modelFactory = new EbayModelFactory();
-    }
+        _apiKeyModel = new ApiKeysModel(_config);
+        var apiKeyResult = _apiKeyModel.GetNextApiKey();
 
-    public void SetApiKey(string? apiKey)
-    {
-        _apiKey = apiKey;
+        if (!apiKeyResult.DidError)
+        {
+            _apiKey = apiKeyResult.Value;
+        }
+
+        _modelFactory = new EbayModelFactory();
     }
 
     public async Task<TResult<List<ExportModel>>> GetExportDataSingle(string isbn)
@@ -58,7 +61,14 @@ public class EbayAccess
             var response = await client.ExecuteAsync(request);
             if (rateLimitExceeded(response))
             {
-                return EBayAccessError.RateLimit;
+                var apiKeyResult = _apiKeyModel.GetNextApiKey();
+                if (apiKeyResult.DidError)
+                {
+                    return EBayAccessError.RateLimit;
+                }
+                _apiKey = apiKeyResult.Value;
+                // a little recursion. couldn't think of a better way cept maybe a GOTO statement?
+                return await GetExportDataSingle(isbn);
             }
             else if (!response.IsSuccessStatusCode)
             {

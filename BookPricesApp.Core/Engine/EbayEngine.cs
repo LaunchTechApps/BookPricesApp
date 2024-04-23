@@ -1,14 +1,12 @@
 ﻿using BookPricesApp.Core.Access;
 using BookPricesApp.Core.Access.DB;
 using BookPricesApp.Core.Access.Ebay;
-using BookPricesApp.Core.Access.Ebay.Models;
 using BookPricesApp.Core.Domain.Events;
 using BookPricesApp.Core.Domain.Types;
 using BookPricesApp.Core.Engine.Contract;
 using BookPricesApp.Core.Engine.Models;
 using BookPricesApp.Core.Utils;
 using BookPricesApp.Domain;
-using Microsoft.Extensions.Configuration;
 
 namespace BookPricesApp.Core.Engine;
 public class EbayEngine : IExchangeEngine
@@ -20,17 +18,13 @@ public class EbayEngine : IExchangeEngine
     private EngineState _engineState = EngineState.NotRunning;
     private EbayAccess _ebayAccess;
     private DBAccess _db;
-    private ApiKeysModel? _apiKeyModel;
-    private IConfiguration _config;
 
     private Thread? _thread;
 
-    public EbayEngine(IConfiguration config,
-        EventBus bus,
+    public EbayEngine(EventBus bus,
         EbayAccess ebayAccess,
         DBAccess db)
     {
-        _config = config;
         _bus = bus;
         _ebayAccess = ebayAccess;
         _db = db;
@@ -51,19 +45,8 @@ public class EbayEngine : IExchangeEngine
                     _bus.Publish(new StopRequestEvent { Exchange = BookExchange.Ebay });
                     break;
                 case EngineState.NotRunning:
-                    _apiKeyModel = new ApiKeysModel(_config);
-                    var apiKeyResult = _apiKeyModel.GetNextApiKey();
-                    if (apiKeyResult.DidError)
-                    {
-                        publishErrorAndStop(apiKeyResult.Error);
-                        return apiKeyResult.Error;
-                    }
-
-                    _ebayAccess.SetApiKey(apiKeyResult.Value);
-                    
                     _thread = new Thread(() => _ = run(isbnList));
                     _thread.Start();
-                    
                     _engineState = EngineState.Running;
                     break;
                 case EngineState.Stopping: break;
@@ -88,22 +71,14 @@ public class EbayEngine : IExchangeEngine
 
             var progress = new ProgressCounter(isbnList.Count);
 
-            for (var i = 0; i < isbnList.Count; i++)
+            foreach (var isbn in isbnList)
             {
-                var isbn = isbnList[i];
                 if (_needToStopThread) { break; }
                 var exportDataResult = await _ebayAccess.GetExportDataSingle(isbn);
                 if (rateLimitExceeded(exportDataResult))
                 {
-                    var nextApiKey = _apiKeyModel!.GetNextApiKey();
-                    if (nextApiKey.DidError)
-                    {
-                        publishErrorAndStop(nextApiKey.Error);
-                        return;
-                    }
-                    _ebayAccess.SetApiKey(nextApiKey.Value);
-                    i--;
-                    continue;
+                    publishErrorAndStop(exportDataResult.Error);
+                    return;
                 }
                 
                 if (exportDataResult.DidError)
@@ -155,7 +130,6 @@ public class EbayEngine : IExchangeEngine
         _bus.Publish(new ProgressEvent { Percent = 0, Exchange = BookExchange.Ebay });
         _bus.Publish(new StopEvent { Exchange = BookExchange.Ebay });
         _engineState = EngineState.NotRunning;
-        publishNewStatus("Process was stopped");
     }
 
     private void publishErrorAndStop(Error error)

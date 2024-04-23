@@ -37,13 +37,12 @@ public class EbayAccessTest
     [Fact]
     public async Task When_Accessing_Ebay_Data_No_Errors_Occur()
     {
-        var ebayAccess = new EbayAccess(_config, _bus);
+        var ebayAccess = new EbayAccess(_config);
         var apiKey = _config.GetSection("ebay:apiKeys")
             .GetChildren()
             .Select(c => c.Value?.Trim() ?? "")
             .Where(key => !string.IsNullOrEmpty(key))
             .FirstOrDefault();
-        ebayAccess.SetApiKey(apiKey);
 
         var result = await ebayAccess.GetExportDataSingle("1408855895");
         
