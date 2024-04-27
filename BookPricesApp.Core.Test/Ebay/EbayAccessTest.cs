@@ -1,5 +1,4 @@
-﻿using BookPricesApp.Core.Access;
-using BookPricesApp.Core.Access.Ebay;
+﻿using BookPricesApp.Core.Access.Ebay;
 using BookPricesApp.Core.Access.Ebay.Models;
 using BookPricesApp.Core.Utils;
 using Microsoft.Extensions.Configuration;

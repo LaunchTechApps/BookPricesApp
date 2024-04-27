@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookPricesApp.Core", "BookP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookPricesApp.Domain", "BookPricesApp.Domain\BookPricesApp.Domain.csproj", "{0181F9F2-C5E6-4146-8611-7FCE1C3F7A5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookPricesApp.Core.Test", "BookPricesApp.Core.Test\BookPricesApp.Core.Test.csproj", "{8BCE5A12-BB10-425F-82B8-ECE0899A19F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookPricesApp.Core.Test", "BookPricesApp.Core.Test\BookPricesApp.Core.Test.csproj", "{8BCE5A12-BB10-425F-82B8-ECE0899A19F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

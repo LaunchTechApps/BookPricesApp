@@ -1,7 +1,12 @@
-﻿namespace BookPricesApp.Core.Access.Ebay.Contract;
+﻿namespace BookPricesApp.Core.Access.Ebay.Models;
 public class EbayKeyWordResponse
 {
     public FindItemsByKeywordsResponse[]? FindItemsByKeywordsResponse { get; set; }
+}
+
+public class EbayProductResponse
+{
+    public FindItemsByProductResponse[]? FindItemsByProductResponse { get; set; }
 }
 
 public class FindItemsByKeywordsResponse
@@ -12,6 +17,16 @@ public class FindItemsByKeywordsResponse
     public SearchResult[]? SearchResult { get; set; }
     public PaginationOutput[]? PaginationOutput { get; set; }
     public string[]? ItemSearchUrl { get; set; }
+}
+
+public class FindItemsByProductResponse
+{
+    public string[]? Ack { get; set; }
+    public string[]? Version { get; set; }
+    public DateTime[]? Timestamp { get; set; }
+    public SearchResult[]? SearchResult { get; set; }
+    public PaginationOutput[]? PaginationOutput { get; set; }
+    public string[]? ItemSearchURL { get; set; }
 }
 
 public class SearchResult
@@ -34,6 +49,7 @@ public class Item
     public string[]? Country { get; set; }
     public ShippingInfo[]? ShippingInfo { get; set; }
     public SellingStatus[]? SellingStatus { get; set; }
+    public SellerInfo[]? SellerInfo { get; set; }
     public ListingInfo[]? ListingInfo { get; set; }
     public string[]? ReturnsAccepted { get; set; }
     public Condition[]? Condition { get; set; }
@@ -75,6 +91,15 @@ public class SellingStatus
     public string[]? BidCount { get; set; }
     public string[]? SellingState { get; set; }
     public string[]? TimeLeft { get; set; }
+}
+
+public class SellerInfo
+{
+    public string[]? SellerUserName { get; set; }
+    public string[]? FeedbackScore { get; set; }
+    public string[]? PositiveFeedbackPercent { get; set; }
+    public string[]? FeedbackRatingStar { get; set; }
+    public string[]? TopRatedSeller { get; set; }
 }
 
 public class CurrentPrice
