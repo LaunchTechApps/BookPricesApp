@@ -98,11 +98,11 @@ function ValidateVersionUpdate {
     $newPatch = [int]$newComponents[2]
     $newVersionValue = $newMajor + $newMinor + $newPatch
     
-    if ($newVersionValue -gt $oldVersionValue) {
-        echo "New version looks good: $newVersion"
-    } else {
+    if ($newVersionValue -lt $oldVersionValue) {
         echo "Invalid version update. New version should be an increase of one in major, minor, or patch."
         exit 1
+    } else {
+        echo "New version looks good: $newVersion"
     }
 }
 

@@ -35,11 +35,15 @@ function Download-Version {
     $desktopPath = [Environment]::GetFolderPath("Desktop")
     $bucketPath = "aws s3 cp s3://book-prices-app/$hv"
     Invoke-Expression "$bucketPath $desktopPath\$hv --profile $awsProfile"
+    echo "new version downloaded at: $desktopPath\$hv"
+    sleep 5
 }
 
 function Main {
+    echo "Getting BookPricesApp Highest Version"
     $highestVersion = Get-HighestVersion
-    echo "`nHighest version: $highestVersion"
+    echo "Highest version found: $highestVersion"
+    echo "`Downloading version: $highestVersion"
     Download-Version $highestVersion
 }
 
