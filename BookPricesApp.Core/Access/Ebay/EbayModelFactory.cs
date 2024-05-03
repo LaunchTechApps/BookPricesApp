@@ -28,7 +28,6 @@ public class EbayModelFactory
                 .Where(i => isABook(i))
                 .Where(i => i?.ListingInfo?.FirstOrDefault()?.ListingType?.FirstOrDefault()?.ToLower() == "fixedprice")
                 .ToArray();
-
             if (keyWordResults is null)
             {
                 result.Add(new ExportModel
@@ -53,9 +52,9 @@ public class EbayModelFactory
                     Seller = listing?.SellerInfo?.FirstOrDefault()?.SellerUserName?.FirstOrDefault() ?? "no seller found",
                     Location = listing?.Location?.FirstOrDefault() ?? "",
                     ShippingPrice =
-                        listing?.ShippingInfo?.FirstOrDefault()?.ShippingServiceCost?.FirstOrDefault()?.__value__ + " " +
+                        (listing?.ShippingInfo?.FirstOrDefault()?.ShippingServiceCost?.FirstOrDefault()?.__value__ + " " +
                         listing?.ShippingInfo?.FirstOrDefault()?.ShippingServiceCost?.FirstOrDefault()?.CurrencyId + " " +
-                        listing?.ShippingInfo?.FirstOrDefault()?.ShippingType?.FirstOrDefault(),
+                        listing?.ShippingInfo?.FirstOrDefault()?.ShippingType?.FirstOrDefault()).CleanOrZero(),
                     Price = listing?.SellingStatus?.FirstOrDefault()?.ConvertedCurrentPrice?.FirstOrDefault()?.__value__,
                     Source = "eBay",
                 };
@@ -113,9 +112,9 @@ public class EbayModelFactory
                     Seller = listing?.SellerInfo?.FirstOrDefault()?.SellerUserName?.FirstOrDefault() ?? "no seller found",
                     Location = listing?.Location?.FirstOrDefault() ?? "",
                     ShippingPrice =
-                        listing?.ShippingInfo?.FirstOrDefault()?.ShippingServiceCost?.FirstOrDefault()?.__value__ + " " +
+                        (listing?.ShippingInfo?.FirstOrDefault()?.ShippingServiceCost?.FirstOrDefault()?.__value__ + " " +
                         listing?.ShippingInfo?.FirstOrDefault()?.ShippingServiceCost?.FirstOrDefault()?.CurrencyId + " " +
-                        listing?.ShippingInfo?.FirstOrDefault()?.ShippingType?.FirstOrDefault(),
+                        listing?.ShippingInfo?.FirstOrDefault()?.ShippingType?.FirstOrDefault()).CleanOrZero(),
                     Price = listing?.SellingStatus?.FirstOrDefault()?.ConvertedCurrentPrice?.FirstOrDefault()?.__value__,
                     Source = "eBay",
                 };

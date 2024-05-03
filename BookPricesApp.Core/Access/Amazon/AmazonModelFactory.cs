@@ -1,5 +1,4 @@
-﻿using BookPricesApp.Core.Access.Amazon.Models;
-using BookPricesApp.Core.Utils;
+﻿using BookPricesApp.Core.Utils;
 using BookPricesApp.Domain;
 using BookPricesApp.Domain.Files;
 
@@ -37,7 +36,7 @@ public class AmazonModelFactory
                     Condition = $"{fo?.Condition?.ConditionValue}-{fo?.Condition?.SubCondition}",
                     Seller = fo?.Merchant?.Name ?? "",
                     Location = "US",
-                    ShippingPrice = fo?.DeliveryInformation ?? "",
+                    ShippingPrice = (fo?.DeliveryInformation ?? "").CleanOrZero(),
                     Price = fo?.Price?.Value?.Amount.ToString(),
                     Source = "Amazon",
                 });
@@ -55,7 +54,7 @@ public class AmazonModelFactory
                     Condition = $"{item?.Condition?.ConditionValue}-{item?.Condition?.SubCondition}",
                     Seller = item?.Merchant?.Name ?? "",
                     Location = "US",
-                    ShippingPrice = item?.DeliveryInformation ?? "",
+                    ShippingPrice = (item?.DeliveryInformation ?? "").CleanOrZero(),
                     Price = item?.Price?.Value?.Amount.ToString(),
                     Source = "Amazon",
                 });
