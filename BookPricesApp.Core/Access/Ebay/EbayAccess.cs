@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using RestSharp;
 using static Newtonsoft.Json.JsonConvert;
 using BookPricesApp.Core.Access.Ebay.Models;
+using Newtonsoft.Json.Linq;
 
 namespace BookPricesApp.Core.Access.Ebay;
 public class EbayAccess
@@ -46,20 +47,38 @@ public class EbayAccess
             var options = new RestClientOptions(baseUrl);
             var client = new RestClient(new RestClientOptions(baseUrl));
             
-            var request = new RestRequest(resource, Method.Get);
-            
-            request.AddQueryParameter("OPERATION-NAME", "findItemsByProduct");
-            request.AddQueryParameter("SERVICE-VERSION", "1.0.0");
-            request.AddQueryParameter("SECURITY-APPNAME", _apiKey);
-            request.AddQueryParameter("RESPONSE-DATA-FORMAT", "JSON");
-            request.AddQueryParameter("REST-PAYLOAD", "");
-            request.AddQueryParameter("paginationInput.entriesPerPage", "20");
-            request.AddQueryParameter("productId.@type", "ISBN");
-            request.AddQueryParameter("productId", isbn);
-            request.AddQueryParameter("outputSelector", "SellerInfo");
+            var request = new RestRequest(resource, Method.Post);
+
+            request.AddQueryParameter("Response-Data-Format", "json");
+            request.AddQueryParameter("Request-Data-Format", "json");
 
             request.AddHeader("X-EBAY-SOA-SECURITY-APPNAME", _apiKey);
-            request.AddHeader("X-EBAY-SOA-OPERATION-NAME", "findItemsByProduct");
+            request.AddHeader("X-EBAY-SOA-OPERATION-NAME", "findItemsByKeywords");
+            request.AddHeader("Content-Type", "application/json");
+
+            var jOject = new JObject(
+                    new JProperty("@xmlns", "http://www.ebay.com/marketplace/search/v1/services"),
+                    new JProperty("keywords", isbn),
+                    new JProperty("itemFilter", 
+                        new JArray 
+                        { 
+                            new JObject(
+                                    new JProperty("name", "MinQuantity"),
+                                    new JProperty("value", "1")
+                                ),
+                            new JObject(
+                                    new JProperty("name", "HideDuplicateItems"),
+                                    new JProperty("value", "true")
+                                )
+                        }),
+                    new JProperty("outputSelector", "SellerInfo"),
+                    new JProperty("paginationInput", new JObject(
+                            new JProperty("entriesPerPage", 110),
+                            new JProperty("pageNumber", 1)
+                        ))
+                ).ToString(Newtonsoft.Json.Formatting.None);
+
+            request.AddStringBody(jOject, DataFormat.Json);
 
             var response = await client.ExecuteAsync(request);
             if (rateLimitExceeded(response))
@@ -85,11 +104,11 @@ public class EbayAccess
             }
             else
             {
-                var content = DeserializeObject<EbayProductResponse>(response.Content);
-                var exports = _modelFactory.CreateExportFrom(new EbayProductResponseProps
+                var content = DeserializeObject<EbayKeyWordResponse>(response.Content);
+                var exports = _modelFactory.CreateExportFrom(new EbayKeywordResponseProps
                 {
-                    ISBN = isbn,
-                    KeyWordResponse = content
+                    KeyWordResponse = content,
+                    ISBN = isbn
                 });
                 result.AddRange(exports);
             }

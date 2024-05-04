@@ -27,17 +27,7 @@ public class EbayModelFactory
                 .FirstOrDefault()?.Item?
                 .Where(i => isABook(i))
                 .Where(i => i?.ListingInfo?.FirstOrDefault()?.ListingType?.FirstOrDefault()?.ToLower() == "fixedprice")
-                .ToArray();
-            if (keyWordResults is null)
-            {
-                result.Add(new ExportModel
-                {
-                    ISBN = props!.ISBN,
-                    Source = "eBay",
-                    Error = "No offers found"
-                });
-                return result;
-            }
+                .ToArray() ?? Array.Empty<Item>();
 
             foreach (var listing in keyWordResults)
             {
@@ -60,6 +50,17 @@ public class EbayModelFactory
                 };
                 model.ShippingPrice = model.ShippingPrice.Trim();
                 result.Add(model);
+            }
+
+            if (result.Count == 0)
+            {
+                result.Add(new ExportModel
+                {
+                    ISBN = props!.ISBN,
+                    Source = "eBay",
+                    Error = "No offers found"
+                });
+                return result;
             }
 
             return result;
@@ -122,6 +123,17 @@ public class EbayModelFactory
                 result.Add(model);
             }
 
+            if (result.Count == 0)
+            {
+                result.Add(new ExportModel
+                {
+                    ISBN = props!.ISBN,
+                    Source = "eBay",
+                    Error = "No offers found"
+                });
+                return result;
+            }
+
             return result;
         }
         catch (Exception ex)
@@ -138,31 +150,32 @@ public class EbayModelFactory
 
     private bool isABook(Item i)
     {
-        var primaryCategory = i?.PrimaryCategory?.FirstOrDefault();
-        if (primaryCategory is null)
-        {
-            return false;
-        }
+        return true;
+        //var primaryCategory = i?.PrimaryCategory?.FirstOrDefault();
+        //if (primaryCategory is null)
+        //{
+        //    return false;
+        //}
         
-        var categoryId = primaryCategory?.CategoryId?.FirstOrDefault() ?? "";
-        categoryId = categoryId.Trim();
-        if (new List<string> { "1105", "261186", "171223" }.Contains(categoryId))
-        {
-            return true;
-        }
+        //var categoryId = primaryCategory?.CategoryId?.FirstOrDefault() ?? "";
+        //categoryId = categoryId.Trim();
+        //if (new List<string> { "1105", "261186", "171223" }.Contains(categoryId))
+        //{
+        //    return true;
+        //}
         
-        var categoryName = primaryCategory?.CategoryName?.FirstOrDefault();
-        categoryName = categoryName?.Trim().ToLower() ?? "";
-        if (new List<string> { "books", "textbooks", "study guides" }.Contains(categoryName))
-        {
-            return true;
-        }
+        //var categoryName = primaryCategory?.CategoryName?.FirstOrDefault();
+        //categoryName = categoryName?.Trim().ToLower() ?? "";
+        //if (new List<string> { "books", "textbooks", "study guides" }.Contains(categoryName))
+        //{
+        //    return true;
+        //}
 
-        if (categoryName.Contains("book") && !categoryName.Contains("audio"))
-        {
-            return true;
-        }
+        //if (categoryName.Contains("book") && !categoryName.Contains("audio"))
+        //{
+        //    return true;
+        //}
 
-        return false;
+        //return false;
     }
 }

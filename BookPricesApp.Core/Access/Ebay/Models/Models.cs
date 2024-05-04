@@ -9,6 +9,7 @@ public class EbayProductResponse
     public FindItemsByProductResponse[]? FindItemsByProductResponse { get; set; }
 }
 
+
 public class FindItemsByKeywordsResponse
 {
     public string[]? Ack { get; set; }
